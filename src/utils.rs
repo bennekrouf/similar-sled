@@ -1,30 +1,30 @@
 use sled::{Db, IVec};
 use bincode;
 
-use crate::models::Chapter;
+use crate::models::{Chapter, Verse};
 
-pub fn get_chapter_name(db: &Db, chapter_no: u8) -> sled::Result<Option<String>> {
-    let key = chapter_no.to_be_bytes().to_vec();
-    match db.get(&key)? {
-        Some(value) => {
-            let chapter: Chapter = bincode::deserialize(&value).expect("Failed to deserialize");
-            Ok(Some(chapter.name))
-        },
-        None => Ok(None),
-    }
-}
+// pub fn get_chapter_name(db: &Db, chapter_no: u8) -> sled::Result<Option<String>> {
+//     let key = chapter_no.to_be_bytes().to_vec();
+//     match db.get(&key)? {
+//         Some(value) => {
+//             let chapter: Chapter = bincode::deserialize(&value).expect("Failed to deserialize");
+//             Ok(Some(chapter.name))
+//         },
+//         None => Ok(None),
+//     }
+// }
 
-pub fn display(value: &Option<sled::IVec>) {
-    if let Some(v) = value {
-        if let Ok(s) = std::str::from_utf8(v) {
-            println!("Value: {}", s);
-        } else {
-            println!("Invalid UTF-8 sequence");
-        }
-    } else {
-        println!("No value found");
-    }
-}
+// pub fn display(value: &Option<sled::IVec>) {
+//     if let Some(v) = value {
+//         if let Ok(s) = std::str::from_utf8(v) {
+//             println!("Value: {}", s);
+//         } else {
+//             println!("Invalid UTF-8 sequence");
+//         }
+//     } else {
+//         println!("No value found");
+//     }
+// }
 
 pub fn count(db: &sled::Db) {
     let count = db.iter().keys().count();
@@ -35,4 +35,10 @@ pub fn insert_chapter(db: &Db, chapter: &Chapter) -> sled::Result<Option<IVec>> 
     let key = chapter.no.to_be_bytes().to_vec();
     let value = bincode::serialize(chapter).expect("Failed to serialize");
     db.insert(key, value)
+}
+
+pub fn insert_verse(db: &Db, verse: &Verse) -> sled::Result<Option<IVec>> {
+    let key = format!("{}-{}", verse.chapter, verse.ayat);
+    db.insert(&key, verse.text.as_str())
+//    db.insert(&key, verse.text)
 }
