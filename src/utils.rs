@@ -1,8 +1,8 @@
 use sled::{Db, IVec};
 use bincode;
-use serde_json;
-use crate::models::{Chapter, Verse, Similar};
-use std::borrow::Cow;
+// use serde_json;
+use crate::models::{Chapter, Verse};
+// use std::borrow::Cow;
 
 pub fn count(db: &sled::Db) {
     let count = db.iter().keys().count();
