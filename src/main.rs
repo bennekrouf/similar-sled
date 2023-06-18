@@ -29,7 +29,7 @@ fn rocket() -> Rocket {
         let new_rocket = rocket.manage(database);
         Ok(new_rocket)
     }))
-    .mount("/", routes![get::get_verse])
+    .mount("/", routes![get::get_verse, get::get_similar])
 }
 
 
