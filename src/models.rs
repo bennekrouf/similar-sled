@@ -1,4 +1,5 @@
 use serde::{Serialize, Deserialize};
+use sled::Db;
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Chapter {
@@ -17,4 +18,10 @@ pub struct Verse {
 pub struct Similar {
     pub text: String,
     pub verses: Vec<Verse>,
+}
+
+pub struct Database {
+    pub chapter_db: Db,
+    pub verse_db: Db,
+    pub similar_db: Db,
 }

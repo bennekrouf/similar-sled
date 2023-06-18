@@ -8,12 +8,7 @@ mod init_db;
 use rocket::{get, routes, Rocket, State};
 use rocket::fairing::AdHoc;
 use rocket_contrib::json::Json;
-
-struct Database {
-    chapter_db: Db,
-    verse_db: Db,
-    similar_db: Db,
-}
+mod get;
 
 fn rocket() -> Rocket {
     rocket::ignite()
@@ -22,7 +17,7 @@ fn rocket() -> Rocket {
         let verse_db = sled::open("db/verse_db").expect("Failed to open verse database");
         let similar_db = sled::open("db/similar_db").expect("Failed to open similar database");
 
-        let database = Database {
+        let database = models::Database {
             chapter_db,
             verse_db,
             similar_db,
@@ -34,23 +29,10 @@ fn rocket() -> Rocket {
         let new_rocket = rocket.manage(database);
         Ok(new_rocket)
     }))
-    .mount("/", routes![get_verse])
+    .mount("/", routes![get::get_verse])
 }
 
-#[get("/verse/<chapter_no>")]
-fn get_verse(chapter_no: u8, dbs: State<Database>) -> Json<serde_json::Value> {
-    let chapter = utils::get_chapter_name(&dbs.chapter_db, chapter_no).unwrap();
-    let verse = utils::get_verses_by_chapter(&dbs.verse_db, chapter_no).unwrap();
 
-    // Create a JSON value using serde_json
-    let json_value = serde_json::json!({
-        "chapter": chapter,
-        "verse": verse,
-    });
-
-    // Wrap the JSON value in a `Json` struct
-    Json(json_value)
-}
 
 fn main() {
     // let chapter_db: sled::Db = sled::open("db/chapter_db").unwrap();
