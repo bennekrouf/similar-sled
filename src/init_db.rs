@@ -43,7 +43,7 @@ pub fn init_similars(similar_db: &sled::Db, verse_db: &sled::Db) {
 
         let serialized_references = bincode::serialize(&verse_references).unwrap();
         similar_db
-            .insert(similar.similar, serialized_references)
+            .insert(similar.text, serialized_references)
             .expect("Failed to insert similar");
 
 

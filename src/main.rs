@@ -15,12 +15,15 @@ fn main() {
     init_db::init_chapters(&chapter_db);
     init_db::init_similars(&similar_db, &verse_db);
     
-    let dbs = vec![&chapter_db, &verse_db, &similar_db];
+    // let dbs = vec![&chapter_db, &verse_db, &similar_db];
+    let dbs = vec![&similar_db];
 
     for db in dbs {
         utils::count(&db);
         let size = db.size_on_disk().expect("Failed to compute size");
         println!("Size of sled database: {} bytes", size);
-    } 
+    }
 
+    println!("{:?}", utils::get_chapter_name(&chapter_db, 2).unwrap());
+    println!("{:?}", utils::get_verses_by_chapter(&verse_db, 2).unwrap());
 }
