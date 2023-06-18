@@ -1,17 +1,7 @@
 use sled::{Db, IVec};
 use bincode;
-use serde::{Serialize, Deserialize};
 
 use crate::models::Chapter;
-use std::fs::File;
-use std::io::Read;
-
-pub fn load_chapters_from_yaml(file_path: &str) -> Vec<Chapter> {
-    let mut file = File::open(file_path).expect("Unable to open file");
-    let mut contents = String::new();
-    file.read_to_string(&mut contents).expect("Unable to read file");
-    serde_yaml::from_str(&contents).expect("Unable to parse YAML data")
-}
 
 pub fn get_chapter_name(db: &Db, chapter_no: u8) -> sled::Result<Option<String>> {
     let key = chapter_no.to_be_bytes().to_vec();

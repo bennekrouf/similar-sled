@@ -200,3 +200,29 @@
   no: 100
 - name: "Al-Qari'ah"
   no: 101
+- name: 'At-Takathur'
+  no: 102
+- name: 'Al-Asr'
+  no: 103
+- name: 'Al-Humazah'
+  no: 104
+- name: 'Al-Fil'
+  no: 105
+- name: 'Quraish'
+  no: 106
+- name: "Al-Ma'un"
+  no: 107
+- name: 'Al-Kawthar'
+  no: 108
+- name: 'Al-Kafirun'
+  no: 109
+- name: 'An-Nasr'
+  no: 110
+- name: 'Al-Masad'
+  no: 111
+- name: 'Al-Ikhlas'
+  no: 112
+- name: 'Al-Falaq'
+  no: 113
+- name: 'An-Nas'
+  no: 114
