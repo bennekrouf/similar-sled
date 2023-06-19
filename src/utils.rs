@@ -45,3 +45,16 @@ pub fn get_verses_by_chapter(db: &Db, chapter: u8) -> sled::Result<Vec<(String, 
 
     Ok(verses)
 }
+
+pub fn get_verse_by_chapter_and_ayat(db: &Db, chapter: u32, ayat: u32) -> sled::Result<Option<String>> {
+    let key = format!("{}-{}", chapter, ayat);
+    let result = db.get(&key)?;
+    
+    match result {
+        Some(value) => {
+            let verse_text = String::from_utf8_lossy(&value[..]).to_string();
+            Ok(Some(verse_text))
+        }
+        None => Ok(None),
+    }
+}

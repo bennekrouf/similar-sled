@@ -1,13 +1,13 @@
 #![feature(proc_macro_hygiene, decl_macro)]
 
-use sled::Db;
+// use sled::Db;
 mod utils;
 mod models;
 mod init_db;
 
-use rocket::{get, routes, Rocket, State};
+use rocket::{routes, Rocket};
 use rocket::fairing::AdHoc;
-use rocket_contrib::json::Json;
+// use rocket_contrib::json::Json;
 mod get;
 
 fn rocket() -> Rocket {
