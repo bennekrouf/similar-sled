@@ -22,10 +22,10 @@ pub fn get_data_folder_path() -> PathBuf {
     Path::new("/tmp").join(&username).join("dbs")
 }
 
-// pub fn count(db: &sled::Db) {
-//     let count = db.iter().keys().count();
-//     println!("There are {} keys in the database", count);
-// }
+pub fn count(db: &sled::Db) {
+    let count = db.iter().keys().count();
+    println!("There are {} keys in the database", count);
+}
 
 pub fn get_chapter_name(db: &Db, chapter_no: u8) -> sled::Result<Option<String>> {
     let key = chapter_no.to_be_bytes().to_vec();

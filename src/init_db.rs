@@ -29,9 +29,6 @@ pub fn init_all_db(absolute_data_folder_path: &PathBuf) -> Database {
     let chapter_db = sled::open(chapter_db_path).expect("Failed to open chapter database");
     let verse_db = sled::open(verse_db_path).expect("Failed to open verse database");
     let similar_db = sled::open(similar_db_path).expect("Failed to open similar database");
-    chapter_db.flush().unwrap();
-    verse_db.flush().unwrap();
-    similar_db.flush().unwrap();
 
     let database = Database {
         chapter_db,

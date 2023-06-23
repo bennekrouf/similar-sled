@@ -1,23 +1,7 @@
 use rocket::{get, State};
 use rocket_contrib::json::Json;
 use crate::models::{Similar, Verse, Database};
-use crate::init_db::{init_chapters, init_similars};
 use crate::utils;
-
-#[get("/init")]
-pub fn init(database: State<Database>){
-
-    database.chapter_db.flush().unwrap();
-    database.verse_db.flush().unwrap();
-    database.similar_db.flush().unwrap();
-
-    init_chapters(&database.chapter_db);
-    init_similars(&database.similar_db, &database.verse_db);
-
-    // let data_folder_path = utils::get_data_folder_path();
-    // print!("{:?}", data_folder_path);
-    // init_db::init_all_db(&data_folder_path);
-}
 
 #[get("/similars")]
 pub fn get_similars(dbs: State<Database>) -> Json<Vec<Similar>> {
@@ -70,20 +54,4 @@ pub fn get_similars(dbs: State<Database>) -> Json<Vec<Similar>> {
         .collect();
 
     Json(similars)
-}
-
-
-#[get("/verse/<chapter_no>")]
-pub fn get_verse(chapter_no: u8, dbs: State<Database>) -> Json<serde_json::Value> {
-    let chapter = utils::get_chapter_name(&dbs.chapter_db, chapter_no).unwrap();
-    let verse = utils::get_verses_by_chapter(&dbs.verse_db, chapter_no).unwrap();
-
-    // Create a JSON value using serde_json
-    let json_value = serde_json::json!({
-        "chapter": chapter,
-        "verse": verse,
-    });
-
-    // Wrap the JSON value in a `Json` struct
-    Json(json_value)
 }
