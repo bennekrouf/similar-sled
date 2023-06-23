@@ -1,24 +1,31 @@
-use sled::{Db, IVec};
+use sled::Db;
 use bincode;
 // use serde_json;
-use crate::models::{Chapter, Verse};
+use crate::models::Chapter;
 // use std::borrow::Cow;
 
-pub fn count(db: &sled::Db) {
-    let count = db.iter().keys().count();
-    println!("There are {} keys in the database", count);
+use std::path::{Path, PathBuf};
+use users::get_current_username;
+use dirs::home_dir;
+
+pub fn get_data_folder_path() -> PathBuf {
+    let username = get_current_username()
+        .expect("Failed to retrieve current username")
+        .into_string()
+        .expect("Failed to convert username to string");
+
+    if let Some(mut home_path) = home_dir() {
+        home_path.push("dbs");
+        return home_path;
+    }
+
+    Path::new("/tmp").join(&username).join("dbs")
 }
 
-pub fn insert_chapter(db: &Db, chapter: &Chapter) -> sled::Result<Option<IVec>> {
-    let key = chapter.no.to_be_bytes().to_vec();
-    let value = bincode::serialize(chapter).expect("Failed to serialize");
-    db.insert(key, value)
-}
-
-pub fn insert_verse(db: &Db, verse: &Verse) -> sled::Result<Option<IVec>> {
-    let key = format!("{}-{}", verse.chapter, verse.ayat);
-    db.insert(&key, verse.text.as_str())
-}
+// pub fn count(db: &sled::Db) {
+//     let count = db.iter().keys().count();
+//     println!("There are {} keys in the database", count);
+// }
 
 pub fn get_chapter_name(db: &Db, chapter_no: u8) -> sled::Result<Option<String>> {
     let key = chapter_no.to_be_bytes().to_vec();

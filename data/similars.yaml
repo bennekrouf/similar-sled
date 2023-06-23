@@ -18,12 +18,3 @@
     - text: 'قُلْ يَوْمَ ٱلْفَتْحِ لَا يَنفَعُ ٱلَّذِينَ كَفَرُوٓا۟ إِيمَـٰنُهُمْ وَلَا هُمْ يُنظَرُونَ'
       ayat: 29
       chapter: 32
-
-- text: 'SimilarText2'
-  verses:
-    - text: 'Verse4'
-      ayat: 4
-      chapter: 1
-    - text: 'Verse5'
-      ayat: 5
-      chapter: 2
