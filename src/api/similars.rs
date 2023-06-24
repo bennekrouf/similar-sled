@@ -11,7 +11,7 @@ pub fn get_similars(dbs: State<Database>) -> Json<Vec<Similar>> {
         .map(|result| {
             let (key, value) = result.expect("Failed to retrieve similar");
             let key_string = String::from_utf8_lossy(&key).into_owned();
-            println!("Similar: {}", key_string);
+            // println!("Similar: {}", key_string);
             let references: Vec<(u32, u32)> =
                 bincode::deserialize(&value).expect("Failed to deserialize references");
 
@@ -47,10 +47,10 @@ pub fn get_similars(dbs: State<Database>) -> Json<Vec<Similar>> {
                 verses: updated_references,
             }
         })
-        .map(|x| {
-            println!("{:?}", x.verses[0]);
-            x
-        })
+        // .map(|x| {
+        //     println!("{:?}", x.verses[0]);
+        //     x
+        // })
         .collect();
 
     Json(similars)

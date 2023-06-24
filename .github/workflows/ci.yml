@@ -7,19 +7,16 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
       - name: Set up Rust
-        uses: actions-rs/toolchain@v1
+        uses: actions-rs/setup-rust@v1
         with:
-          profile: minimal
+          toolchain: nightly-2022-12-31
 
-      - name: Install dependencies
-        run: cargo update
-
-      - name: Build and run
-        run: cargo run
+      - name: Build and test
+        run: cargo build --verbose && cargo run
