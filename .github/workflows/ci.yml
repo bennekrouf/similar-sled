@@ -1,4 +1,4 @@
-name: CI
+name: Similar CI
 
 on:
   push:
@@ -7,16 +7,17 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-22.04
+    runs-on: debian
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
       - name: Set up Rust
-        uses: actions-rs/setup-rust@v1
-        with:
-          toolchain: nightly-2022-12-31
+        run: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 
-      - name: Build and test
+      - name: Configure PATH environment variable
+        run: echo "PATH=\"$HOME/.cargo/bin:$PATH\"" >> $GITHUB_ENV
+
+      - name: Build and run
         run: cargo build --verbose && cargo run
