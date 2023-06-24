@@ -1,13 +1,19 @@
 #![feature(proc_macro_hygiene, decl_macro)]
-// use sled::Db;
 mod models;
-mod init_db;
+mod init {
+    pub mod all_db;
+    pub mod chapters;
+    pub mod similars;
+    pub mod chapter;
+    pub mod verse;
+    pub mod chapters_from_yaml;
+    pub mod similars_from_yaml;
+}
+
 use api::verse::static_rocket_route_info_for_get_verse;
 use api::similars::static_rocket_route_info_for_get_similars;
 use rocket::{routes, Rocket};
 
-// use rocket::fairing::AdHoc;
-// use rocket_contrib::json::Json;
 mod utils {
     pub mod chapter_name;
     pub mod count;
@@ -22,10 +28,11 @@ mod api {
 }
 
 use crate::utils::data_folder_path;
+use crate::init::all_db;
 
 fn rocket() -> Rocket {
     let data_folder_path = data_folder_path::get();
-    let database = init_db::init_all_db(&data_folder_path);
+    let database = all_db::init(&data_folder_path);
 
     rocket::ignite()
         .manage(database.clone())
