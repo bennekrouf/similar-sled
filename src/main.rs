@@ -32,12 +32,27 @@ mod api {
 
 use crate::utils::data_folder_path;
 use crate::init::all_db;
+use rocket::http::Method;
+use rocket_cors::{AllowedHeaders, AllowedOrigins, Cors, CorsOptions};
 
 fn rocket() -> Rocket {
     let data_folder_path = data_folder_path::get();
     let database = all_db::init(&data_folder_path);
+    let cors = CorsOptions::default()
+    .allowed_origins(AllowedOrigins::all())
+    .allowed_methods(
+        vec![Method::Get, Method::Post, Method::Put, Method::Delete]
+            .into_iter()
+            .map(From::from)
+            .collect(),
+    )
+    .allowed_headers(AllowedHeaders::all())
+    .allow_credentials(true)
+    .to_cors()
+    .expect("Failed to create CORS fairing.");
 
     rocket::ignite()
+        .attach(cors)
         .manage(database.clone())
         .mount("/", routes![get_verse, get_similars, get])
 }
