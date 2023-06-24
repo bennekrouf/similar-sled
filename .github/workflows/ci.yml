@@ -1,4 +1,4 @@
-name: Similar CI
+name: Build and Deploy
 
 on:
   push:
@@ -7,17 +7,21 @@ on:
 
 jobs:
   build:
-    runs-on: debian
+    runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Check out repository
         uses: actions/checkout@v2
 
       - name: Set up Rust
-        run: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+        uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
 
-      - name: Configure PATH environment variable
-        run: echo "PATH=\"$HOME/.cargo/bin:$PATH\"" >> $GITHUB_ENV
-
-      - name: Build and run
-        run: cargo build --verbose && cargo run
+      - name: Build and Deploy
+        run: |
+          cargo build --release
+          rm -rf ../dbs
+          cd target/release
+          ./similars-sled
