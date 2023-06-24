@@ -12,6 +12,7 @@ mod init {
 
 use api::verse::static_rocket_route_info_for_get_verse;
 use api::similars::static_rocket_route_info_for_get_similars;
+use api::count::static_rocket_route_info_for_get;
 use rocket::{routes, Rocket};
 
 mod utils {
@@ -20,11 +21,13 @@ mod utils {
     pub mod data_folder_path;
     pub mod verses_by_chapter;
     pub mod verse_by_chapter_and_ayat;
+    pub mod yml_path;
 }
 
 mod api {
     pub mod similars;
     pub mod verse;
+    pub mod count;
 }
 
 use crate::utils::data_folder_path;
@@ -36,7 +39,7 @@ fn rocket() -> Rocket {
 
     rocket::ignite()
         .manage(database.clone())
-        .mount("/", routes![get_verse, get_similars])
+        .mount("/", routes![get_verse, get_similars, get])
 }
 
 fn main() {
