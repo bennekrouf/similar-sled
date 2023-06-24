@@ -1,7 +1,7 @@
 use rocket::{get, State};
 use rocket_contrib::json::Json;
 use crate::models::{Similar, Verse, Database};
-use crate::utils;
+use crate::utils::verse_by_chapter_and_ayat;
 
 #[get("/similars")]
 pub fn get_similars(dbs: State<Database>) -> Json<Vec<Similar>> {
@@ -24,9 +24,9 @@ pub fn get_similars(dbs: State<Database>) -> Json<Vec<Similar>> {
                     //     .unwrap_or_else(|_| Some(String::from("Default Chapter")))
                     //     .unwrap();
 
-                    let verse_text = match utils::get_verse_by_chapter_and_ayat(
+                    let verse_text = match verse_by_chapter_and_ayat::get(
                         &dbs.verse_db,
-                        reference.0,
+                        chapter_no,
                         ayat,
                     ) {
                         Ok(Some(text)) => text,

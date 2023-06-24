@@ -66,10 +66,6 @@ pub fn init_chapters(db: &sled::Db) {
     }
 }
 
-// pub fn flush_db(db: &sled::Db) {
-//     db.flush().unwrap();
-// }
-
 pub fn init_similars(similar_db: &sled::Db, verse_db: &sled::Db) {
     let similars_yaml = load_similars_from_yaml("data/similars.yaml").expect("Failed to load YAML file");
 

@@ -8,14 +8,23 @@ use rocket::{routes, Rocket};
 
 // use rocket::fairing::AdHoc;
 // use rocket_contrib::json::Json;
-mod utils;
+mod utils {
+    pub mod chapter_name;
+    pub mod count;
+    pub mod data_folder_path;
+    pub mod verses_by_chapter;
+    pub mod verse_by_chapter_and_ayat;
+}
+
 mod api {
     pub mod similars;
     pub mod verse;
 }
 
+use crate::utils::data_folder_path;
+
 fn rocket() -> Rocket {
-    let data_folder_path = utils::get_data_folder_path();
+    let data_folder_path = data_folder_path::get();
     let database = init_db::init_all_db(&data_folder_path);
 
     rocket::ignite()
