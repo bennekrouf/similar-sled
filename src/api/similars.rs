@@ -1,11 +1,24 @@
 use rocket::{get, State};
 use rocket_contrib::json::Json;
-use crate::models::{Similar, Verse, Database};
+use crate::models::{Verse, Database};
 use crate::utils::verse_by_chapter_and_ayat;
+use crate::utils::chapter_name;
+use serde::{Serialize, Deserialize};
+
+#[derive(Serialize, Deserialize, Debug)]
+struct VerseOutput {
+    verse: Verse,
+    sourate: String,
+}
+#[derive(Serialize, Deserialize, Debug)]
+pub struct SimilarOutput {
+    verses: Vec<VerseOutput>,
+    similar: String,
+}
 
 #[get("/similars")]
-pub fn get_similars(dbs: State<Database>) -> Json<Vec<Similar>> {
-    let similars: Vec<Similar> = dbs
+pub fn get_similars(dbs: State<Database>) -> Json<Vec<SimilarOutput>> {
+    let similars: Vec<SimilarOutput> = dbs
         .similar_db
         .iter()
         .map(|result| {
@@ -15,14 +28,14 @@ pub fn get_similars(dbs: State<Database>) -> Json<Vec<Similar>> {
             let references: Vec<(u32, u32)> =
                 bincode::deserialize(&value).expect("Failed to deserialize references");
 
-            let updated_references: Vec<Verse> = references
+            let updated_references: Vec<VerseOutput> = references
                 .iter()
                 .map(|&reference| {
                     let ayat = reference.1;
                     let chapter_no = reference.0;
-                    // let chapter_name = utils::get_chapter_name(&dbs.chapter_db, chapter_no as u8)
-                    //     .unwrap_or_else(|_| Some(String::from("Default Chapter")))
-                    //     .unwrap();
+                    let chapter_name = chapter_name::get(&dbs.chapter_db, chapter_no as u8)
+                        .unwrap_or_else(|_| Some(String::from("Default Chapter")))
+                        .unwrap();
 
                     let verse_text = match verse_by_chapter_and_ayat::get(
                         &dbs.verse_db,
@@ -34,24 +47,24 @@ pub fn get_similars(dbs: State<Database>) -> Json<Vec<Similar>> {
                         Err(_) => String::from("Error retrieving verse"),
                     };
 
-                    Verse {
+                    let the_verse =  Verse {
                         text: verse_text,
-                        ayat,
+                        ayat: ayat,
                         chapter: chapter_no,
+                    };
+
+                    VerseOutput {
+                        verse: the_verse,
+                        sourate: chapter_name, 
                     }
                 })
                 .collect();
 
-            Similar {
-                text: key_string,
+            SimilarOutput {
+                similar: key_string,
                 verses: updated_references,
             }
         })
-        // .map(|x| {
-        //     println!("{:?}", x.verses[0]);
-        //     x
-        // })
         .collect();
-
     Json(similars)
 }

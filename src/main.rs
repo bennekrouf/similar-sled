@@ -33,7 +33,7 @@ mod api {
 use crate::utils::data_folder_path;
 use crate::init::all_db;
 use rocket::http::Method;
-use rocket_cors::{AllowedHeaders, AllowedOrigins, Cors, CorsOptions};
+use rocket_cors::{AllowedHeaders, AllowedOrigins, CorsOptions};
 
 fn rocket() -> Rocket {
     let data_folder_path = data_folder_path::get();
