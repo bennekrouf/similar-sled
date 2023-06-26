@@ -14,7 +14,7 @@ pub fn init(similar_db: &sled::Db, verse_db: &sled::Db, verse_similar_db: &sled:
         .expect("Failed to load YAML file");
 
     for similar in similars_yaml {
-        let similar_text = similar.text.clone();
+        let kalima = similar.kalima.clone();
 
         let verse_references: Vec<(u32, u32)> = similar
             .verses
@@ -24,7 +24,7 @@ pub fn init(similar_db: &sled::Db, verse_db: &sled::Db, verse_similar_db: &sled:
 
         let serialized_references = bincode::serialize(&verse_references).unwrap();
         similar_db
-            .insert(similar_text.clone(), serialized_references)
+            .insert(kalima.clone(), serialized_references)
             .expect("Failed to insert similar");
 
         let verses = similar.verses;
@@ -40,7 +40,7 @@ pub fn init(similar_db: &sled::Db, verse_db: &sled::Db, verse_similar_db: &sled:
                 .unwrap_or_else(Vec::new);
 
             // Add the current Similar key to the list
-            similar_keys.push(similar_text.clone());
+            similar_keys.push(kalima.clone());
 
             // Store the updated list of Similar keys
             let serialized_keys = bincode::serialize(&similar_keys).unwrap();

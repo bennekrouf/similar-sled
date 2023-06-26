@@ -16,7 +16,7 @@ pub struct Verse {
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Similar {
-    pub text: String,
+    pub kalima: String,
     pub verses: Vec<Verse>,
 }
 

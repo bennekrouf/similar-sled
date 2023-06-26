@@ -13,7 +13,7 @@ struct VerseOutput {
 #[derive(Serialize, Deserialize, Debug)]
 pub struct SimilarOutput {
     verses: Vec<VerseOutput>,
-    similar: String,
+    kalima: String,
 }
 
 #[get("/similars")]
@@ -23,7 +23,7 @@ pub fn get_similars(dbs: State<Database>) -> Json<Vec<SimilarOutput>> {
         .iter()
         .map(|result| {
             let (key, value) = result.expect("Failed to retrieve similar");
-            let similar = String::from_utf8_lossy(&key).into_owned();
+            let kalima = String::from_utf8_lossy(&key).into_owned();
             let references: Vec<(u32, u32)> =
                 bincode::deserialize(&value).expect("Failed to deserialize references");
 
@@ -60,7 +60,7 @@ pub fn get_similars(dbs: State<Database>) -> Json<Vec<SimilarOutput>> {
                 .collect();
 
             SimilarOutput {
-                similar,
+                kalima,
                 verses,
             }
         })
