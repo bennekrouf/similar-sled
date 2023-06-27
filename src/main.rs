@@ -3,9 +3,9 @@ mod models;
 mod init {
     pub mod all_db;
     pub mod chapters;
-    pub mod similars;
-    pub mod chapter;
-    pub mod verse;
+}
+
+mod files {
     pub mod chapters_from_yaml;
     pub mod similars_from_yaml;
 }
@@ -28,6 +28,12 @@ mod api {
     pub mod similars;
     pub mod verse;
     pub mod count;
+}
+
+mod db {
+    pub mod chapter;
+    pub mod similar;
+    pub mod verse;
 }
 
 use crate::utils::data_folder_path;
