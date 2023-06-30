@@ -1,7 +1,7 @@
 use std::path::PathBuf;
 use crate::models::Database;
 use crate::init::chapters;
-use crate::db::similar;
+use crate::db::init_similars;
 
 pub fn init(absolute_data_folder_path: &PathBuf) -> Database {
     // Construct the absolute paths to the database files
@@ -24,6 +24,6 @@ pub fn init(absolute_data_folder_path: &PathBuf) -> Database {
     };
 
     chapters::init(&database.chapter_db);
-    similar::init(&database.similar_db, &database.verse_db, &database.verse_similar_db);
+    init_similars::init(&database.similar_db, &database.verse_db, &database.verse_similar_db);
     database
 }

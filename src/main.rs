@@ -10,32 +10,33 @@ mod files {
     pub mod similars_from_yaml;
 }
 
-use api::verse::static_rocket_route_info_for_get_verse;
-use api::similars::static_rocket_route_info_for_get_similars;
+use api::verse_by_chapter::static_rocket_route_info_for_get_verse;
+use api::similars_all::static_rocket_route_info_for_get_similars;
 // use api::count::static_rocket_route_info_for_get;
 use rocket::{routes, Rocket};
 
 mod utils {
-    pub mod chapter_name;
-    pub mod count;
     pub mod data_folder_path;
-    pub mod verses_by_chapter;
-    pub mod all_similars;
-    pub mod verse_by_chapter_and_ayat;
     pub mod yml_path;
     pub mod sort;
 }
 
 mod api {
-    pub mod similars;
-    pub mod verse;
+    pub mod similars_all;
+    pub mod verse_by_chapter;
     pub mod count;
 }
 
 mod db {
-    pub mod chapter;
-    pub mod similar;
-    pub mod verse;
+    pub mod chapter_name;
+    pub mod count;
+    pub mod verses_by_chapter;
+    // pub mod all_similars;
+    pub mod verse_by_chapter_and_ayat;
+    pub mod insert_chapter;
+    pub mod insert_similars;
+    pub mod init_similars;
+    pub mod insert_verse;
 }
 
 use crate::utils::data_folder_path;

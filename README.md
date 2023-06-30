@@ -1,4 +1,4 @@
 
 ````bash
-cargo watch -c -w src -x "run -- data"
+cargo watch -c -w src -x run
 ```
