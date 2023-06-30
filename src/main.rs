@@ -12,7 +12,7 @@ mod files {
 
 use api::verse::static_rocket_route_info_for_get_verse;
 use api::similars::static_rocket_route_info_for_get_similars;
-use api::count::static_rocket_route_info_for_get;
+// use api::count::static_rocket_route_info_for_get;
 use rocket::{routes, Rocket};
 
 mod utils {
@@ -20,8 +20,10 @@ mod utils {
     pub mod count;
     pub mod data_folder_path;
     pub mod verses_by_chapter;
+    pub mod all_similars;
     pub mod verse_by_chapter_and_ayat;
     pub mod yml_path;
+    pub mod sort;
 }
 
 mod api {
@@ -60,7 +62,11 @@ fn rocket() -> Rocket {
     rocket::ignite()
         .attach(cors)
         .manage(database.clone())
-        .mount("/", routes![get_verse, get_similars, get])
+        .mount("/", routes![
+            get_verse,
+            get_similars,
+            // get,
+            ])
 }
 
 fn main() {
