@@ -1,9 +1,5 @@
 #![feature(proc_macro_hygiene, decl_macro)]
 mod models;
-mod init {
-    pub mod all_db;
-    pub mod chapters;
-}
 
 mod files {
     pub mod chapters_from_yaml;
@@ -12,6 +8,7 @@ mod files {
 
 use api::verse_by_chapter::static_rocket_route_info_for_get_verse;
 use api::similars_all::static_rocket_route_info_for_get_similars;
+use api::verse_similar::static_rocket_route_info_for_get_chapter_similars_route;
 // use api::count::static_rocket_route_info_for_get;
 use rocket::{routes, Rocket};
 
@@ -24,6 +21,7 @@ mod utils {
 mod api {
     pub mod similars_all;
     pub mod verse_by_chapter;
+    pub mod verse_similar;
     pub mod count;
 }
 
@@ -33,14 +31,16 @@ mod db {
     pub mod verses_by_chapter;
     // pub mod all_similars;
     pub mod verse_by_chapter_and_ayat;
-    pub mod insert_chapter;
-    pub mod insert_similars;
-    pub mod init_similars;
-    pub mod insert_verse;
+    pub mod chapter_insert;
+    pub mod similars_insert;
+    pub mod similars_init;
+    pub mod verse_insert;
+    pub mod all_db;
+    pub mod chapters;
 }
 
 use crate::utils::data_folder_path;
-use crate::init::all_db;
+use crate::db::all_db;
 use rocket::http::Method;
 use rocket_cors::{AllowedHeaders, AllowedOrigins, CorsOptions};
 
@@ -66,6 +66,7 @@ fn rocket() -> Rocket {
         .mount("/", routes![
             get_verse,
             get_similars,
+            get_chapter_similars_route
             // get,
             ])
 }

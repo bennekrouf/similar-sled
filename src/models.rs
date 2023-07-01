@@ -48,3 +48,13 @@ pub struct SimilarOutput {
     pub verses: Vec<VerseOutput>,
     pub kalima: String,
 }
+#[derive(Serialize, Deserialize, Debug)]
+pub struct VerseSimilarOutput {
+    pub verse: Verse,
+    pub similar_keys: Vec<String>,
+}
+#[derive(Serialize, Deserialize, Debug)]
+pub struct ChapterSimilarOutput {
+    pub chapter: u32,
+    pub similar_keys: Vec<String>,
+}
