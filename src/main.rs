@@ -8,7 +8,7 @@ mod files {
 
 use api::verse_by_chapter::static_rocket_route_info_for_get_verse;
 use api::similars_all::static_rocket_route_info_for_get_similars;
-use api::verse_similar::static_rocket_route_info_for_get_chapter_similars_route;
+use api::verse_similar_by_chapter::static_rocket_route_info_for_get_verse_similar_by_chapter_route;
 // use api::count::static_rocket_route_info_for_get;
 use rocket::{routes, Rocket};
 
@@ -21,19 +21,18 @@ mod utils {
 mod api {
     pub mod similars_all;
     pub mod verse_by_chapter;
-    pub mod verse_similar;
-    pub mod count;
+    pub mod verse_similar_by_chapter;
 }
 
 mod db {
     pub mod chapter_name;
-    pub mod count;
     pub mod verses_by_chapter;
-    // pub mod all_similars;
     pub mod verse_by_chapter_and_ayat;
     pub mod chapter_insert;
+    pub mod similars_all;
     pub mod similars_insert;
     pub mod similars_init;
+    pub mod similar_output_format;
     pub mod verse_insert;
     pub mod all_db;
     pub mod chapters;
@@ -66,8 +65,7 @@ fn rocket() -> Rocket {
         .mount("/", routes![
             get_verse,
             get_similars,
-            get_chapter_similars_route
-            // get,
+            get_verse_similar_by_chapter_route,
             ])
 }
 

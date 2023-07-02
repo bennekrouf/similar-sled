@@ -55,6 +55,6 @@ pub struct VerseSimilarOutput {
 }
 #[derive(Serialize, Deserialize, Debug)]
 pub struct ChapterSimilarOutput {
-    pub chapter: u32,
-    pub similar_keys: Vec<String>,
+    pub chapter_name: String,
+    pub similar_objects: Vec<Similar>,
 }
