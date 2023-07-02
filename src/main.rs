@@ -8,6 +8,7 @@ mod files {
 
 use api::verse_by_chapter::static_rocket_route_info_for_get_verse;
 use api::similars_all::static_rocket_route_info_for_get_similars;
+use api::similars_all::static_rocket_route_info_for_get_chapters;
 use api::verse_similar_by_chapter::static_rocket_route_info_for_get_verse_similar_by_chapter_route;
 // use api::count::static_rocket_route_info_for_get;
 use rocket::{routes, Rocket};
@@ -65,6 +66,7 @@ fn rocket() -> Rocket {
         .mount("/", routes![
             get_verse,
             get_similars,
+            get_chapters,
             get_verse_similar_by_chapter_route,
             ])
 }

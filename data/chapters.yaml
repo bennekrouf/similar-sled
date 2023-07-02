@@ -1,228 +1,570 @@
 - name: 'الفاتحة'
   no: 1
+  mekka: true
+  background_color: '#F0F0F0'
+  font_color: '#000000'
 - name: 'البقرة'
   no: 2
+  mekka: false
+  background_color: '#EFEFEF'
+  font_color: '#000000'
 - name: 'آل عمران'
   no: 3
+  mekka: false
+  background_color: '#EDEDED'
+  font_color: '#000000'
 - name: 'النساء'
   no: 4
+  mekka: false
+  background_color: '#EBEBEB'
+  font_color: '#000000'
 - name: 'المائدة'
   no: 5
+  mekka: false
+  background_color: '#E9E9E9'
+  font_color: '#000000'
 - name: 'الأنعام'
   no: 6
+  mekka: true
+  background_color: '#E7E7E7'
+  font_color: '#000000'
 - name: 'الأعراف'
   no: 7
+  mekka: true
+  background_color: '#E5E5E5'
+  font_color: '#000000'
 - name: 'الأنفال'
   no: 8
+  mekka: true
+  background_color: '#E3E3E3'
+  font_color: '#000000'
 - name: 'التوبة'
   no: 9
+  mekka: false
+  background_color: '#E1E1E1'
+  font_color: '#000000'
 - name: 'يونس'
   no: 10
+  mekka: true
+  background_color: '#DFDFDF'
+  font_color: '#000000'
 - name: 'هود'
   no: 11
+  mekka: true
+  background_color: '#DDDDDD'
+  font_color: '#000000'
 - name: 'يوسف'
   no: 12
+  mekka: true
+  background_color: '#DBDBDB'
+  font_color: '#000000'
 - name: 'الرعد'
   no: 13
+  mekka: true
+  background_color: '#D9D9D9'
+  font_color: '#000000'
 - name: 'إبراهيم'
   no: 14
+  mekka: true
+  background_color: '#D7D7D7'
+  font_color: '#000000'
 - name: 'الحجر'
   no: 15
+  mekka: true
+  background_color: '#D5D5D5'
+  font_color: '#000000'
 - name: 'النحل'
   no: 16
+  mekka: true
+  background_color: '#D3D3D3'
+  font_color: '#000000'
 - name: 'الإسراء'
   no: 17
+  mekka: true
+  background_color: '#D1D1D1'
+  font_color: '#000000'
 - name: 'الكهف'
   no: 18
+  mekka: true
+  background_color: '#CFCFCF'
+  font_color: '#000000'
 - name: 'مريم'
   no: 19
+  mekka: true
+  background_color: '#CDCDCD'
+  font_color: '#000000'
 - name: 'طه'
   no: 20
+  mekka: true
+  background_color: '#CBCBCB'
+  font_color: '#000000'
 - name: 'الأنبياء'
   no: 21
+  mekka: true
+  background_color: '#C9C9C9'
+  font_color: '#000000'
 - name: 'الحج'
   no: 22
+  mekka: true
+  background_color: '#C7C7C7'
+  font_color: '#000000'
 - name: 'المؤمنون'
   no: 23
+  mekka: true
+  background_color: '#C5C5C5'
+  font_color: '#000000'
 - name: 'النور'
   no: 24
+  mekka: true
+  background_color: '#C3C3C3'
+  font_color: '#000000'
 - name: 'الفرقان'
   no: 25
+  mekka: true
+  background_color: '#C1C1C1'
+  font_color: '#000000'
 - name: 'الشعراء'
   no: 26
+  mekka: true
+  background_color: '#BFBFBF'
+  font_color: '#000000'
 - name: 'النمل'
   no: 27
+  mekka: true
+  background_color: '#BDBDBD'
+  font_color: '#000000'
 - name: 'القصص'
   no: 28
+  mekka: true
+  background_color: '#BBBBBB'
+  font_color: '#000000'
 - name: 'العنكبوت'
   no: 29
+  mekka: true
+  background_color: '#B9B9B9'
+  font_color: '#000000'
 - name: 'الروم'
   no: 30
+  mekka: true
+  background_color: '#B7B7B7'
+  font_color: '#000000'
 - name: 'لقمان'
   no: 31
+  mekka: true
+  background_color: '#B5B5B5'
+  font_color: '#000000'
 - name: 'السجدة'
   no: 32
+  mekka: true
+  background_color: '#B3B3B3'
+  font_color: '#000000'
 - name: 'الأحزاب'
   no: 33
+  mekka: true
+  background_color: '#B1B1B1'
+  font_color: '#000000'
 - name: 'سبإ'
   no: 34
+  mekka: true
+  background_color: '#AFAFAF'
+  font_color: '#000000'
 - name: 'فاطر'
   no: 35
+  mekka: true
+  background_color: '#ADADAD'
+  font_color: '#000000'
 - name: 'يس'
   no: 36
+  mekka: true
+  background_color: '#ABABAB'
+  font_color: '#000000'
 - name: 'الصافات'
   no: 37
+  mekka: true
+  background_color: '#A9A9A9'
+  font_color: '#000000'
 - name: 'ص'
   no: 38
+  mekka: true
+  background_color: '#A7A7A7'
+  font_color: '#000000'
 - name: 'الزمر'
   no: 39
+  mekka: true
+  background_color: '#A5A5A5'
+  font_color: '#000000'
 - name: 'غافر'
   no: 40
+  mekka: true
+  background_color: '#A3A3A3'
+  font_color: '#000000'
 - name: 'فصلت'
   no: 41
+  mekka: true
+  background_color: '#A1A1A1'
+  font_color: '#000000'
 - name: 'الشورى'
   no: 42
+  mekka: true
+  background_color: '#9F9F9F'
+  font_color: '#000000'
 - name: 'الزخرف'
   no: 43
+  mekka: true
+  background_color: '#9D9D9D'
+  font_color: '#000000'
 - name: 'الدخان'
   no: 44
+  mekka: true
+  background_color: '#9B9B9B'
+  font_color: '#000000'
 - name: 'الجاثية'
   no: 45
+  mekka: true
+  background_color: '#999999'
+  font_color: '#000000'
 - name: 'الأحقاف'
   no: 46
+  mekka: true
+  background_color: '#979797'
+  font_color: '#000000'
 - name: 'محمد'
   no: 47
+  mekka: true
+  background_color: '#959595'
+  font_color: '#000000'
 - name: 'الفتح'
   no: 48
+  mekka: true
+  background_color: '#939393'
+  font_color: '#000000'
 - name: 'الحجرات'
   no: 49
+  mekka: true
+  background_color: '#919191'
+  font_color: '#000000'
 - name: 'ق'
   no: 50
+  mekka: true
+  background_color: '#8F8F8F'
+  font_color: '#000000'
 - name: 'الذاريات'
   no: 51
+  mekka: true
+  background_color: '#8D8D8D'
+  font_color: '#000000'
 - name: 'الطور'
   no: 52
+  mekka: true
+  background_color: '#8B8B8B'
+  font_color: '#000000'
 - name: 'النجم'
   no: 53
+  mekka: true
+  background_color: '#898989'
+  font_color: '#000000'
 - name: 'القمر'
   no: 54
+  mekka: true
+  background_color: '#878787'
+  font_color: '#000000'
 - name: 'الرحمن'
   no: 55
+  mekka: true
+  background_color: '#858585'
+  font_color: '#000000'
 - name: 'الواقعة'
   no: 56
+  mekka: true
+  background_color: '#838383'
+  font_color: '#000000'
 - name: 'الحديد'
   no: 57
+  mekka: true
+  background_color: '#818181'
+  font_color: '#000000'
 - name: 'المجادلة'
   no: 58
+  mekka: true
+  background_color: '#7F7F7F'
+  font_color: '#FFFFFF'
 - name: 'الحشر'
   no: 59
+  mekka: true
+  background_color: '#7D7D7D'
+  font_color: '#FFFFFF'
 - name: 'الممتحنة'
   no: 60
+  mekka: true
+  background_color: '#7B7B7B'
+  font_color: '#FFFFFF'
 - name: 'الصف'
   no: 61
+  mekka: true
+  background_color: '#797979'
+  font_color: '#FFFFFF'
 - name: 'الجمعة'
   no: 62
+  mekka: true
+  background_color: '#777777'
+  font_color: '#FFFFFF'
 - name: 'المنافقون'
   no: 63
+  mekka: true
+  background_color: '#757575'
+  font_color: '#FFFFFF'
 - name: 'التغابن'
   no: 64
+  mekka: true
+  background_color: '#737373'
+  font_color: '#FFFFFF'
 - name: 'الطلاق'
   no: 65
+  mekka: true
+  background_color: '#717171'
+  font_color: '#FFFFFF'
 - name: 'التحريم'
   no: 66
+  mekka: true
+  background_color: '#6F6F6F'
+  font_color: '#FFFFFF'
 - name: 'الملك'
   no: 67
+  mekka: true
+  background_color: '#6D6D6D'
+  font_color: '#FFFFFF'
 - name: 'القلم'
   no: 68
+  mekka: true
+  background_color: '#6B6B6B'
+  font_color: '#FFFFFF'
 - name: 'الحاقة'
   no: 69
+  mekka: true
+  background_color: '#696969'
+  font_color: '#FFFFFF'
 - name: 'المعارج'
   no: 70
+  mekka: true
+  background_color: '#676767'
+  font_color: '#FFFFFF'
 - name: 'نوح'
   no: 71
+  mekka: true
+  background_color: '#656565'
+  font_color: '#FFFFFF'
 - name: 'الجن'
   no: 72
+  mekka: true
+  background_color: '#636363'
+  font_color: '#FFFFFF'
 - name: 'المزمل'
   no: 73
+  mekka: true
+  background_color: '#616161'
+  font_color: '#FFFFFF'
 - name: 'المدثر'
   no: 74
+  mekka: true
+  background_color: '#5F5F5F'
+  font_color: '#FFFFFF'
 - name: 'القيامة'
   no: 75
+  mekka: true
+  background_color: '#5D5D5D'
+  font_color: '#FFFFFF'
 - name: 'الإنسان'
   no: 76
+  mekka: true
+  background_color: '#5B5B5B'
+  font_color: '#FFFFFF'
 - name: 'المرسلات'
   no: 77
+  mekka: true
+  background_color: '#595959'
+  font_color: '#FFFFFF'
 - name: 'النبأ'
   no: 78
+  mekka: true
+  background_color: '#575757'
+  font_color: '#FFFFFF'
 - name: 'النازعات'
   no: 79
+  mekka: true
+  background_color: '#555555'
+  font_color: '#FFFFFF'
 - name: 'عبس'
   no: 80
+  mekka: true
+  background_color: '#535353'
+  font_color: '#FFFFFF'
 - name: 'التكوير'
   no: 81
+  mekka: true
+  background_color: '#515151'
+  font_color: '#FFFFFF'
 - name: 'الإنفطار'
   no: 82
+  mekka: true
+  background_color: '#4F4F4F'
+  font_color: '#FFFFFF'
 - name: 'المطففين'
   no: 83
+  mekka: true
+  background_color: '#4D4D4D'
+  font_color: '#FFFFFF'
 - name: 'الإنشقاق'
   no: 84
+  mekka: true
+  background_color: '#4B4B4B'
+  font_color: '#FFFFFF'
 - name: 'البروج'
   no: 85
+  mekka: true
+  background_color: '#494949'
+  font_color: '#FFFFFF'
 - name: 'الطارق'
   no: 86
+  mekka: true
+  background_color: '#474747'
+  font_color: '#FFFFFF'
 - name: 'الأعلى'
   no: 87
+  mekka: true
+  background_color: '#454545'
+  font_color: '#FFFFFF'
 - name: 'الغاشية'
   no: 88
+  mekka: true
+  background_color: '#434343'
+  font_color: '#FFFFFF'
 - name: 'الفجر'
   no: 89
+  mekka: true
+  background_color: '#414141'
+  font_color: '#FFFFFF'
 - name: 'البلد'
   no: 90
+  mekka: true
+  background_color: '#3F3F3F'
+  font_color: '#FFFFFF'
 - name: 'الشمس'
   no: 91
+  mekka: true
+  background_color: '#3D3D3D'
+  font_color: '#FFFFFF'
 - name: 'الليل'
   no: 92
+  mekka: true
+  background_color: '#3B3B3B'
+  font_color: '#FFFFFF'
 - name: 'الضحى'
   no: 93
+  mekka: true
+  background_color: '#393939'
+  font_color: '#FFFFFF'
 - name: 'الشرح'
   no: 94
+  mekka: true
+  background_color: '#373737'
+  font_color: '#FFFFFF'
 - name: 'التين'
   no: 95
+  mekka: true
+  background_color: '#353535'
+  font_color: '#FFFFFF'
 - name: 'العلق'
   no: 96
+  mekka: true
+  background_color: '#333333'
+  font_color: '#FFFFFF'
 - name: 'القدر'
   no: 97
+  mekka: true
+  background_color: '#313131'
+  font_color: '#FFFFFF'
 - name: 'البينة'
   no: 98
+  mekka: true
+  background_color: '#2F2F2F'
+  font_color: '#FFFFFF'
 - name: 'الزلزلة'
   no: 99
+  mekka: true
+  background_color: '#2D2D2D'
+  font_color: '#FFFFFF'
 - name: 'العاديات'
   no: 100
+  mekka: true
+  background_color: '#2B2B2B'
+  font_color: '#FFFFFF'
 - name: 'القارعة'
   no: 101
+  mekka: true
+  background_color: '#292929'
+  font_color: '#FFFFFF'
 - name: 'التكاثر'
   no: 102
+  mekka: true
+  background_color: '#272727'
+  font_color: '#FFFFFF'
 - name: 'العصر'
   no: 103
+  mekka: true
+  background_color: '#252525'
+  font_color: '#FFFFFF'
 - name: 'الهمزة'
   no: 104
+  mekka: true
+  background_color: '#232323'
+  font_color: '#FFFFFF'
 - name: 'الفيل'
   no: 105
+  mekka: true
+  background_color: '#212121'
+  font_color: '#FFFFFF'
 - name: 'قريش'
   no: 106
+  mekka: true
+  background_color: '#1F1F1F'
+  font_color: '#FFFFFF'
 - name: 'الماعون'
   no: 107
+  mekka: true
+  background_color: '#1D1D1D'
+  font_color: '#FFFFFF'
 - name: 'الكوثر'
   no: 108
+  mekka: true
+  background_color: '#1B1B1B'
+  font_color: '#FFFFFF'
 - name: 'الكافرون'
   no: 109
+  mekka: true
+  background_color: '#191919'
+  font_color: '#FFFFFF'
 - name: 'النصر'
   no: 110
+  mekka: true
+  background_color: '#171717'
+  font_color: '#FFFFFF'
 - name: 'المسد'
   no: 111
+  mekka: true
+  background_color: '#151515'
+  font_color: '#FFFFFF'
 - name: 'الإخلاص'
   no: 112
+  mekka: true
+  background_color: '#131313'
+  font_color: '#FFFFFF'
 - name: 'الفلق'
   no: 113
+  mekka: true
+  background_color: '#111111'
+  font_color: '#FFFFFF'
 - name: 'الناس'
   no: 114
+  mekka: true
+  background_color: '#0F0F0F'
+  font_color: '#FFFFFF'
