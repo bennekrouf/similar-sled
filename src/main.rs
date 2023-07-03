@@ -36,7 +36,7 @@ mod db {
     pub mod similar_output_format;
     pub mod verse_insert;
     pub mod all_db;
-    pub mod chapters;
+    pub mod chapters_init;
 }
 
 use crate::utils::data_folder_path;

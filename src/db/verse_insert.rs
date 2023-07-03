@@ -5,7 +5,6 @@ pub fn insert(dbs: &Database, verse: &Verse) -> sled::Result<Option<IVec>> {
     let verse_db = &dbs.verse_db;
 
     let key = format!("{}:{}", verse.chapter, verse.ayat);
-    // println!("Inserting Verse : {:?} {:?}", key, verse.text);
 
     verse_db.insert(&key, verse.text.as_str())
 }

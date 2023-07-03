@@ -2,20 +2,12 @@ use bincode;
 use std::collections::HashSet;
 use crate::files::similars_from_yaml::load;
 use crate::db::verse_insert;
-use crate::utils::yml_path;
 use crate::models::{Similar, Verse, Database};
 use crate::db::similars_insert;
 
 pub fn init(dbs: &Database) {
-    let data_folder_path = yml_path::get_data_folder_path();
-
-    let similars_yaml_path = data_folder_path.join("similars.yaml");
-    let similars = load(similars_yaml_path.to_str().unwrap()).expect("Failed to load YAML file");
-
-    process_similars(&dbs, similars);
-}
-
-fn process_similars(dbs: &Database, similars: Vec<Similar>) {
+    let similars = load().expect("Failed to load YAML file");
+    // process_similars(&dbs, similars);
     for similar in similars {
         let kalima = similar.kalima.clone();
         let verse_references = get_verse_references(&similar);
@@ -28,6 +20,7 @@ fn process_similars(dbs: &Database, similars: Vec<Similar>) {
         }
     }
 }
+
 
 fn get_verse_references(similar: &Similar) -> Vec<String> {
     similar

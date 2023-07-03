@@ -1,6 +1,6 @@
 use std::path::PathBuf;
 use crate::models::Database;
-use crate::db::chapters;
+use crate::db::chapters_init;
 use crate::db::similars_init;
 
 pub fn init(absolute_data_folder_path: &PathBuf) -> Database {
@@ -23,7 +23,7 @@ pub fn init(absolute_data_folder_path: &PathBuf) -> Database {
         verse_similar_db,
     };
 
-    chapters::init(&database);
+    chapters_init::init(&database);
     similars_init::init(&database);
     database
 }
