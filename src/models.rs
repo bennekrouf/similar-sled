@@ -8,6 +8,7 @@ pub struct Chapter {
     pub mekka: bool,
     pub background_color: String,
     pub font_color: String,
+    pub count: Option<u32>,
 }
 
 #[derive(Serialize, Deserialize, Debug, PartialEq)]

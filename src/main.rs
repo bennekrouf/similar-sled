@@ -33,6 +33,7 @@ mod db {
     pub mod similars_all;
     pub mod similars_insert;
     pub mod similars_init;
+    pub mod similars_by_chapter;
     pub mod similar_output_format;
     pub mod verse_insert;
     pub mod all_db;
