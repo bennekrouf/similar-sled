@@ -12,6 +12,8 @@ use api::similars_all::static_rocket_route_info_for_get_chapters;
 use api::verse_similar_by_chapter::static_rocket_route_info_for_get_verse_similar_by_chapter_route;
 // use api::count::static_rocket_route_info_for_get;
 use rocket::{routes, Rocket};
+use std::env;
+use log::LevelFilter;
 
 mod utils {
     pub mod data_folder_path;
@@ -80,5 +82,12 @@ fn rocket() -> Rocket {
 }
 
 fn main() {
+    // Set the log level based on the RUST_LOG environment variable
+   env::set_var("RUST_LOG", "info"); // Adjust log level as needed: error, warn, info, debug, trace
+    env_logger::Builder::from_env(env_logger::Env::default())
+        .format_timestamp(None) // Disable timestamp
+        .format_module_path(false)
+        .filter(None, LevelFilter::Info)
+        .init();
     rocket().launch();
 }

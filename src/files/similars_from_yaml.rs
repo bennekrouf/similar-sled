@@ -5,6 +5,7 @@ use crate::models::Similar;
 
 use std::error::Error;
 use std::path::Path;
+use log::info;
 
 pub fn load() -> Result<Vec<Similar>, Box<dyn Error>> {
     let data_folder_path = yml_path::get_data_folder_path();
@@ -29,10 +30,19 @@ fn traverse_directory(
             traverse_directory(&path, similars)?;
         } else if let Some(extension) = path.extension() {
             if extension == "yml" {
-                let mut file = File::open(path)?;
+                let path = entry.path().clone(); // Clone the path
+
+                let mut file = File::open(&path)?;
                 let mut contents = String::new();
                 file.read_to_string(&mut contents)?;
                 let file_similars: Vec<Similar> = serde_yaml::from_str(&contents)?;
+
+                for similar in &file_similars {
+                    if similar.verses.is_empty() {
+                        info!("Missing field in file: {:?}", &path);
+                    }
+                }
+
                 similars.extend(file_similars);
             }
         }
