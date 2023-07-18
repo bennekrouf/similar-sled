@@ -12,12 +12,12 @@ pub fn get_similars(dbs: State<Database>) -> Json<Vec<SimilarOutput>> {
 
 #[get("/chapters")]
 pub fn get_chapters(dbs: State<Database>) -> Json<Vec<Chapter>> {
-    let mut chapters: Vec<Chapter> = dbs.chapter_db
+    let chapters: Vec<Chapter> = dbs.chapter_db
         .iter()
         .filter_map(|result| match result {
             Ok((_, value)) => {
                 let chapter: Chapter = bincode::deserialize(&value).unwrap();
-                let similar_objects = similars_by_chapter::get_chapter_similars(&dbs, chapter.no as u32);
+                let similar_objects = similars_by_chapter::get_chapter_similars_adapted(&dbs, chapter.no as u32);
                 let count = similar_objects.len() as u32;
                 if count > 0 {
                     Some(Chapter { count: Some(count), ..chapter })
@@ -28,9 +28,6 @@ pub fn get_chapters(dbs: State<Database>) -> Json<Vec<Chapter>> {
             _ => None,
         })
         .collect();
-
-    // Sort chapters based on the count field in ascending order
-    // chapters.sort_by_key(|chapter| chapter.count.unwrap_or(0));
 
     Json(chapters)
 }

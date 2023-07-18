@@ -26,7 +26,7 @@ fn get_verse_references(similar: &Similar) -> Vec<String> {
     similar
         .verses
         .iter()
-        .map(|verse| format!("{}:{}", verse.chapter, verse.ayat))
+        .map(|verse| format!("{}:{}", verse.chapter, verse.ayah))
         .collect()
 }
 

@@ -11,10 +11,10 @@ pub struct Chapter {
     pub count: Option<u32>,
 }
 
-#[derive(Serialize, Deserialize, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Debug, PartialEq, Clone)]
 pub struct Verse {
     pub text: String,
-    pub ayat: u32,
+    pub ayah: u32,
     pub chapter: u32,
 }
 
@@ -42,7 +42,7 @@ impl Clone for Database {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct VerseOutput {
     pub verse: Verse,
     pub chapter: u32,
@@ -51,6 +51,13 @@ pub struct VerseOutput {
 #[derive(Serialize, Deserialize, Debug)]
 pub struct SimilarOutput {
     pub verses: Vec<VerseOutput>,
+    pub kalima: String,
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct SimilarOutputAdapted {
+    pub verses: Vec<VerseOutput>,
+    pub similars: Vec<VerseOutput>,
     pub kalima: String,
 }
 #[derive(Serialize, Deserialize, Debug)]
