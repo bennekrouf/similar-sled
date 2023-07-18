@@ -9,9 +9,9 @@ pub fn get() -> PathBuf {
         .expect("Failed to convert username to string");
 
     if let Some(mut home_path) = home_dir() {
-        home_path.push("dbs");
+        home_path.push("similarDB");
         return home_path;
     }
 
-    Path::new("/tmp").join(&username).join("dbs")
+    Path::new("/tmp").join(&username).join("similarDB")
 }
