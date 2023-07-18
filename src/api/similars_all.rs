@@ -1,8 +1,8 @@
 use rocket::{get, State};
 use rocket_contrib::json::Json;
 use crate::models::{SimilarOutput, Database, Chapter};
-use crate::db::similars_all;
-use crate::db::similars_by_chapter;
+use crate::db::similar::similars_all;
+use crate::db::similar::similars_by_chapter;
 
 #[get("/similars")]
 pub fn get_similars(dbs: State<Database>) -> Json<Vec<SimilarOutput>> {

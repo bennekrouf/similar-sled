@@ -45,6 +45,7 @@ impl Clone for Database {
 #[derive(Serialize, Deserialize, Debug)]
 pub struct VerseOutput {
     pub verse: Verse,
+    pub chapter: u32,
     pub sourate: String,
 }
 #[derive(Serialize, Deserialize, Debug)]

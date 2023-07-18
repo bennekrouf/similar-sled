@@ -26,18 +26,25 @@ mod api {
 }
 
 mod db {
-    pub mod chapter_name;
-    pub mod verses_by_chapter;
-    pub mod verse_by_chapter_and_ayat;
-    pub mod chapter_insert;
-    pub mod similars_all;
-    pub mod similars_insert;
-    pub mod similars_init;
-    pub mod similars_by_chapter;
-    pub mod similar_output_format;
-    pub mod verse_insert;
+    pub mod chapter {
+        pub mod chapter_name;
+        pub mod chapter_insert;
+        pub mod chapters_init;
+    }
+    pub mod similar {
+        pub mod similars_insert;
+        pub mod similars_init;
+        pub mod similars_by_chapter;
+        pub mod similars_by_key;
+        pub mod similar_output_format;
+        pub mod similars_all;
+    }
+    pub mod verse {
+        pub mod verses_by_chapter;
+        pub mod verse_by_chapter_and_ayat;
+        pub mod verse_insert;
+    }
     pub mod all_db;
-    pub mod chapters_init;
 }
 
 use crate::utils::data_folder_path;

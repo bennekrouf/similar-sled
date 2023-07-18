@@ -1,9 +1,9 @@
 use bincode;
 use std::collections::HashSet;
 use crate::files::similars_from_yaml::load;
-use crate::db::verse_insert;
+use crate::db::verse::verse_insert;
 use crate::models::{Similar, Verse, Database};
-use crate::db::similars_insert;
+use crate::db::similar::similars_insert;
 
 pub fn init(dbs: &Database) {
     let similars = load().expect("Failed to load YAML file");

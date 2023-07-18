@@ -1,6 +1,6 @@
 use crate::models::{SimilarOutput, Verse, VerseOutput, Database};
-use crate::db::verse_by_chapter_and_ayat;
-use crate::db::chapter_name;
+use crate::db::verse::verse_by_chapter_and_ayat;
+use crate::db::chapter::chapter_name;
 
 pub fn create_similar_output(kalima: String, references: &Vec<String>, dbs: &Database) -> SimilarOutput {
     let verses: Vec<VerseOutput> = references
@@ -24,6 +24,7 @@ pub fn create_similar_output(kalima: String, references: &Vec<String>, dbs: &Dat
 
             VerseOutput {
                 sourate: chapter_name,
+                chapter,
                 verse: Verse {
                     text,
                     ayat,
