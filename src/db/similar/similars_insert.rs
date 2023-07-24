@@ -1,5 +1,5 @@
 use bincode;
-use crate::models::Database;
+use crate::domain::coran::models::Database;
 
 pub fn similars_insert(dbs: &Database, kalima: &str, verse_references: &[String]) {
     let similar_db = &dbs.similar_db;

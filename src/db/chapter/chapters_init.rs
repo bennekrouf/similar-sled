@@ -1,6 +1,6 @@
 use crate::files::chapters_from_yaml::load;
 use crate::db::chapter::chapter_insert;
-use crate::models::Database;
+use crate::domain::coran::models::Database;
 use crate::utils::yml_path;
 
 pub fn init(dbs: &Database) {

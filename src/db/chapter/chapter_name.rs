@@ -1,6 +1,5 @@
 use bincode;
-use crate::models::Chapter;
-use crate::models::Database;
+use crate::domain::coran::models::{Chapter, Database};
 
 pub fn get(dbs: &Database, chapter_no: u8) -> sled::Result<Option<String>> {
     let chapter_db = &dbs.chapter_db;

@@ -1,5 +1,5 @@
 use std::path::PathBuf;
-use crate::models::Database;
+use crate::domain::coran::models::Database;
 use crate::db::chapter::chapters_init;
 use crate::db::similar::similars_init;
 

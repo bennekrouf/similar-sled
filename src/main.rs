@@ -1,9 +1,22 @@
 #![feature(proc_macro_hygiene, decl_macro)]
-mod models;
-
 mod files {
     pub mod chapters_from_yaml;
     pub mod similars_from_yaml;
+}
+
+mod domain {
+    pub mod coran {
+        pub mod models;
+    }
+    pub mod hadith {
+        pub mod models;
+        // pub mod find_hadith_by_raoui;
+        // pub mod find_hadith_by_reference;
+        // pub mod load_and_store;
+        // pub mod parse_yml_file;
+        // pub mod persist_to_sled;
+    }
+
 }
 
 use api::verse_by_chapter::static_rocket_route_info_for_get_verse;

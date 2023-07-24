@@ -2,7 +2,7 @@ use bincode;
 use std::collections::HashSet;
 use crate::files::similars_from_yaml::load;
 use crate::db::verse::verse_insert;
-use crate::models::{Similar, Verse, Database};
+use crate::domain::coran::models::{Similar, Verse, Database};
 use crate::db::similar::similars_insert;
 
 pub fn init(dbs: &Database) {

@@ -1,6 +1,7 @@
 use rocket::{get, State};
 use rocket_contrib::json::Json;
-use crate::{models::{SimilarOutputAdapted, Database}, db::similar::similars_by_chapter};
+use crate::domain::coran::{models::{SimilarOutputAdapted, Database}};
+use crate::db::similar::similars_by_chapter;
 
 #[get("/similars/<chapter>")]
 pub fn get_verse_similar_by_chapter_route(

@@ -1,5 +1,5 @@
 use sled::IVec;
-use crate::models::{Verse, Database};
+use crate::domain::coran::models::{Verse, Database};
 
 pub fn insert(dbs: &Database, verse: &Verse) -> sled::Result<Option<IVec>> {
     let verse_db = &dbs.verse_db;

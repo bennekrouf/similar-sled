@@ -6,8 +6,8 @@ pub struct Chapter {
     pub name: String,
     pub no: u8,
     pub mekka: bool,
-    pub background_color: String,
-    pub font_color: String,
+    pub backgroundColor: String,
+    pub color: String,
     pub count: Option<u32>,
 }
 

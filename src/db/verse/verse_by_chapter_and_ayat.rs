@@ -1,4 +1,4 @@
-use crate::models::Database;
+use crate::domain::coran::models::Database;
 
 pub fn get(dbs: &Database, chapter: u32, ayah: u32) -> sled::Result<Option<String>> {
     let verse_db = &dbs.verse_db;
