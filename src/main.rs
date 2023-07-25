@@ -18,6 +18,8 @@ mod domain {
         pub mod persist_to_db;
         pub mod read_and_persist_all_files;
         pub mod read_mousned_from_file;
+        pub mod create_reference_index;
+        pub mod search_ahadith_by_reference;
     }
 }
 

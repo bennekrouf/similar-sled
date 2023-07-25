@@ -1,11 +1,7 @@
-use serde::{Deserialize, Serialize};
-use serde_yaml::Value;
-use sled::{Config, Db, IVec};
-use std::collections::HashMap;
+use sled::{Db, IVec};
 use std::error::Error;
-use std::fs;
-use std::path::Path;
-use hadith::models::{Mousned, Hadith, Riwaya}; // Import your existing structs here
+use crate::domain::hadith::models::{Hadith}; // Import your existing structs here
+use serde_json::to_vec;
 
 pub fn create_reference_index(db: &Db) -> Result<(), Box<dyn Error>> {
     let reference_index = db.open_tree(b"reference_index")?;
@@ -17,11 +13,10 @@ pub fn create_reference_index(db: &Db) -> Result<(), Box<dyn Error>> {
 
             for hadith in &ahadith {
                 for riwaya in &hadith.riwayate {
-                    if let Some(references) = &riwaya.reference {
-                        for reference in references {
-                            let key = format!("{}:{}", sahib, reference);
-                            reference_index.insert(key.as_bytes(), IVec::from(hadith.clone()))?;
-                        }
+                    for reference in &riwaya.references {
+                        let key = format!("{}:{}", sahib, reference);
+                        let serialized_hadith = to_vec(hadith)?;
+                        reference_index.insert(key.as_bytes(), IVec::from(serialized_hadith))?;
                     }
                 }
             }

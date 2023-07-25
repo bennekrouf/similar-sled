@@ -24,7 +24,7 @@ pub fn init(absolute_data_folder_path: &PathBuf) -> Result<Database, Box<dyn Err
     };
 
     // Call the read_and_persist_all_files function with the folder path as a string
-    let mousned_map = read_and_persist_all_files::read_and_persist_all_files(&folder_path_str, &database);
+    read_and_persist_all_files::read_and_persist_all_files(&folder_path_str, &database);
 
     // chapters_init::init(&database);
     // similars_init::init(&database);

@@ -5,7 +5,7 @@ use crate::domain::hadith::read_mousned_from_file;
 use crate::domain::hadith::persist_to_db;
 
 pub fn read_and_persist_all_files(folder_path: &str, dbs: &Database) -> HashMap<String, Vec<Hadith>> {
-    let mousned_db = &dbs.mousned_db;
+    // let mousned_db = &dbs.mousned_db;
 
     let mut mousned_map: HashMap<String, Vec<Hadith>> = HashMap::new();
 
