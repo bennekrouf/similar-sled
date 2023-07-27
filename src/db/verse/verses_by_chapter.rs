@@ -1,5 +1,5 @@
 use rocket::State;
-use crate::domain::coran::models::Database;
+use crate::models::Database;
 
 pub fn get(dbs: &State<Database>, chapter: u8) -> sled::Result<Vec<(String, String)>> {
     let verse_db = &dbs.verse_db;

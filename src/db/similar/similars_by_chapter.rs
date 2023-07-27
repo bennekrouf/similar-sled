@@ -1,4 +1,5 @@
-use crate::domain::coran::models::{VerseOutput, SimilarOutputAdapted, Database};
+use crate::domain::coran::models::{VerseOutput, SimilarOutputAdapted};
+use crate::models::Database;
 use super::similars_by_key;
 
 pub fn get_chapter_similars_adapted(dbs: &Database, chapter: u32) -> Vec<SimilarOutputAdapted> {

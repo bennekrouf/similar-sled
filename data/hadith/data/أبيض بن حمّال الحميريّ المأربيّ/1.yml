@@ -1,0 +1,31 @@
+ahadith:
+  - matan: 'حديث أنّه وفد إلى النبيّ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ فاستقطعه الملح الذي بمأرِب'
+    references:
+      - 'مأرِب'
+      - 'ملح'
+    koutoub:
+      - name: 'Kitab1'
+        riwayate:
+          - raoui: 'First Raoui in First Riwaya'
+            to:
+              - raoui: 'Second Raoui in First Sanad'
+                to:
+                  - raoui: 'Third Raoui in First Sanad'
+                    to:
+                      - raoui: 'Fourth Raoui in First Sanad'
+                      - raoui: 'Fifth Raoui in First Sanad'
+  - matan: 'Matan2'
+    references:
+      - 'Reference3'
+      - 'Reference4'
+    koutoub:
+      - name: 'Kitab2'
+        riwayate:
+          - raoui: 'Sixth Raoui in First Riwaya'
+            to:
+              - raoui: 'Seventh Raoui in First Sanad'
+                to:
+                  - raoui: 'Eighth Raoui in First Sanad'
+                    to:
+                      - raoui: 'Ninth Raoui in First Sanad'
+                      - raoui: 'Tenth Raoui in First Sanad'

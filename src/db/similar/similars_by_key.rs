@@ -1,4 +1,5 @@
-use crate::domain::coran::models::{SimilarOutput, Database};
+use crate::domain::coran::models::SimilarOutput;
+use crate::models::Database;
 use crate::db::similar::similar_output_format;
 use crate::utils::sort;
 

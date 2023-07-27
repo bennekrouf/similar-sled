@@ -1,4 +1,5 @@
-use crate::domain::coran::models::{SimilarOutput, Verse, VerseOutput, Database};
+use crate::domain::coran::models::{SimilarOutput, Verse, VerseOutput};
+use crate::models::Database;
 use crate::db::verse::verse_by_chapter_and_ayat;
 use crate::db::chapter::chapter_name;
 

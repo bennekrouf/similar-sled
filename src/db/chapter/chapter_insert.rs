@@ -1,5 +1,6 @@
 use sled::IVec;
-use crate::domain::coran::models::{Chapter, Database};
+use crate::domain::coran::models::Chapter;
+use crate::models::Database;
 use bincode;
 
 pub fn insert(dbs: &Database, chapter: &Chapter) -> sled::Result<Option<IVec>> {

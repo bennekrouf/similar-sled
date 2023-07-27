@@ -1,46 +1,27 @@
 use serde::{Deserialize, Serialize};
-use sled::Db;
 
-#[derive(Debug, Clone)]
-pub struct Database {
-    pub mousned_db: Db,
-    pub abwab_db: Db,
-}
-
-#[derive(Debug, PartialEq, Serialize, Deserialize, Clone)]
-pub struct Mousned {
-    pub sahib: String,
-    pub rouate: Vec<Bab>,
-}
-
-#[derive(Debug, PartialEq, Serialize, Deserialize, Clone)]
-pub struct Bab {
+#[derive(Debug, Deserialize, Serialize)]
+pub struct Node {
     pub raoui: String,
-    pub ahadith: Vec<Hadith>,
+    pub to: Option<Vec<Node>>,
 }
 
-#[derive(Debug, PartialEq, Serialize, Deserialize, Clone)]
+#[derive(Debug, Deserialize, Serialize)]
+pub struct Kitab {
+    pub name: String,
+    pub riwayate: Vec<Node>,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
 pub struct Hadith {
     pub matan: String,
-    pub riwayate: Vec<Riwaya>,
-}
-
-#[derive(Debug, PartialEq, Serialize, Deserialize, Clone)]
-pub struct Riwaya {
-    pub kitab: String,
+    pub koutoub: Vec<Kitab>,
     pub references: Vec<String>,
-    pub houkm: Option<Vec<String>>,
-    pub asanid: Vec<Sanad>,
 }
 
-#[derive(Debug, PartialEq, Serialize, Deserialize, Clone)]
-pub struct Sanad {
-    pub sanad: Either<String, Vec<String>>,
-}
-
-#[derive(Debug, PartialEq, Serialize, Deserialize, Clone)]
-#[serde(untagged)]
-pub enum Either<A, B> {
-    Left(A),
-    Right(B),
+#[derive(Debug, Deserialize, Serialize)]
+pub struct Mousned {
+    pub ahadith: Vec<Hadith>,
+    #[serde(skip)]
+    pub sahib: Option<String>,
 }

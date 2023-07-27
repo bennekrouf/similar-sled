@@ -1,6 +1,7 @@
 use rocket::{get, State};
 use rocket_contrib::json::Json;
-use crate::domain::coran::models::Database;
+
+use crate::models::Database;
 use crate::db::chapter::chapter_name;
 use crate::db::verse::verses_by_chapter;
 

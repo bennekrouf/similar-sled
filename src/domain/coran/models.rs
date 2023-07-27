@@ -1,5 +1,4 @@
 use serde::{Serialize, Deserialize};
-use sled::Db;
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Chapter {
@@ -22,24 +21,6 @@ pub struct Verse {
 pub struct Similar {
     pub kalima: String,
     pub verses: Vec<Verse>,
-}
-#[derive(Debug)]
-pub struct Database {
-    pub chapter_db: Db,
-    pub verse_db: Db,
-    pub similar_db: Db,
-    pub verse_similar_db: Db,
-}
-
-impl Clone for Database {
-    fn clone(&self) -> Self {
-        Database {
-            chapter_db: self.chapter_db.clone(),
-            verse_db: self.verse_db.clone(),
-            similar_db: self.similar_db.clone(),
-            verse_similar_db: self.verse_similar_db.clone(),
-        }
-    }
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone)]

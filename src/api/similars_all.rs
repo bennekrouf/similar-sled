@@ -1,6 +1,7 @@
 use rocket::{get, State};
 use rocket_contrib::json::Json;
-use crate::domain::coran::models::{SimilarOutput, Database, Chapter};
+use crate::domain::coran::models::{SimilarOutput, Chapter};
+use crate::models::Database;
 use crate::db::similar::similars_all;
 use crate::db::similar::similars_by_chapter;
 

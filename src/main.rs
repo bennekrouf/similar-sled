@@ -4,22 +4,15 @@ mod files {
     pub mod similars_from_yaml;
 }
 
+pub mod models;
 mod domain {
     pub mod coran {
         pub mod models;
     }
     pub mod hadith {
-        pub mod all_db;
-        pub mod api {
-            pub mod get_ahadith_for_sahib;
-        }
         pub mod models;
-        pub mod get_ahadith_for_sahib;
-        pub mod persist_to_db;
-        pub mod read_and_persist_all_files;
-        pub mod read_mousned_from_file;
-        pub mod create_reference_index;
-        pub mod search_ahadith_by_reference;
+        pub mod mousned_from_yaml;
+        pub mod mousned_init;
     }
 }
 
@@ -27,17 +20,11 @@ use api::verse_by_chapter::static_rocket_route_info_for_get_verse;
 use api::similars_all::static_rocket_route_info_for_get_similars;
 use api::similars_all::static_rocket_route_info_for_get_chapters;
 
-use domain::hadith::api::get_ahadith_for_sahib::static_rocket_route_info_for_get_ahadith_for_sahib;
-
 use api::verse_similar_by_chapter::static_rocket_route_info_for_get_verse_similar_by_chapter_route;
 // use api::count::static_rocket_route_info_for_get;
 use rocket::{routes, Rocket};
 use std::env;
 use log::LevelFilter;
-
-// use crate::domain::coran::models::Database;
-// use crate::domain::coran::models::Database;
-// use crate::domain::hadith::models::Database as HadithDatabase;
 
 mod utils {
     pub mod data_folder_path;
@@ -75,23 +62,13 @@ mod db {
 
 use crate::utils::data_folder_path;
 use crate::db::all_db;
-use crate::domain::hadith::all_db as hadith_all_db;
 
 use rocket::http::Method;
 use rocket_cors::{AllowedHeaders, AllowedOrigins, CorsOptions};
 
 fn rocket() -> Rocket {
     let data_folder_path = data_folder_path::get();
-    let coran_db = all_db::init(&data_folder_path);
-    // Initialize the Hadith database with a default value (empty or placeholder Database)
-    let hadith_db = match hadith_all_db::init(&data_folder_path) {
-        Ok(db) => Some(db), // Successfully initialized database
-        Err(err) => {
-            eprintln!("Error initializing Hadith database: {}", err);
-            // Return a placeholder value or None to represent the absence of a valid database.
-            None // You can also use another value that makes sense for your application.
-        }
-    };
+    let all_db = all_db::init(&data_folder_path);
     let cors = CorsOptions::default()
         .allowed_origins(AllowedOrigins::all())
         .allowed_methods(
@@ -107,16 +84,13 @@ fn rocket() -> Rocket {
 
     rocket::ignite()
         .attach(cors)
-        .manage(coran_db.clone())
-        .manage(hadith_db.clone())
+        .manage(all_db.clone())
+        // .manage(hadith_db.clone())
         .mount("/", routes![
             get_verse,
             get_similars,
             get_chapters,
             get_verse_similar_by_chapter_route,
-            ])
-        .mount("/hadith", routes![
-            get_ahadith_for_sahib
             ])
 }
 
