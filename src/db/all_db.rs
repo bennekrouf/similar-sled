@@ -4,7 +4,6 @@ use crate::models::Database;
 use crate::db::chapter::chapters_init;
 use crate::db::similar::similars_init;
 use crate::domain::hadith::mousned_init;
-// use crate::domain::hadith::abwab_init;
 
 pub fn init(absolute_data_folder_path: &PathBuf) -> Database {
     // Construct the absolute paths to the database files
@@ -39,7 +38,6 @@ pub fn init(absolute_data_folder_path: &PathBuf) -> Database {
 
     // Hadith
     mousned_init::init(&database);
-    // abwab_init::init(&database);
 
     // Count the number of key/value pairs in each database and print
     let chapter_db_size = database.chapter_db.iter().count();
@@ -57,8 +55,15 @@ pub fn init(absolute_data_folder_path: &PathBuf) -> Database {
     let mousned_db_size = database.mousned_db.iter().count();
     println!("mousned_db contains {} key/value pairs", mousned_db_size);
 
-    let abwab_db_size = database.abwab_db.iter().count();
-    println!("abwab_db contains {} key/value pairs", abwab_db_size);
-
+    println!("Keys in mousned_db:");
+    for result in database.mousned_db.iter() {
+        let (key, _) = result.expect("Read error");
+        if let Ok(key_str) = std::str::from_utf8(&key) {
+            println!("{}", key_str);
+        } else {
+            println!("Non-string key found");
+        }
+    }
+    
     database
 }

@@ -13,8 +13,12 @@ mod domain {
         pub mod models;
         pub mod mousned_from_yaml;
         pub mod mousned_init;
+        pub mod api;
+        pub mod get_ahadith_by_sahib;
     }
 }
+
+use domain::hadith::api::static_rocket_route_info_for_get_ahadith_by_sahib_route;
 
 use api::verse_by_chapter::static_rocket_route_info_for_get_verse;
 use api::similars_all::static_rocket_route_info_for_get_similars;
@@ -85,13 +89,15 @@ fn rocket() -> Rocket {
     rocket::ignite()
         .attach(cors)
         .manage(all_db.clone())
-        // .manage(hadith_db.clone())
         .mount("/", routes![
             get_verse,
             get_similars,
             get_chapters,
             get_verse_similar_by_chapter_route,
             ])
+        .mount("/ahadith", routes![
+            get_ahadith_by_sahib_route,
+        ])
 }
 
 fn main() {

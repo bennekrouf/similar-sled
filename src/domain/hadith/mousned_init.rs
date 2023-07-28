@@ -10,17 +10,14 @@ use sled::Result as SledResult;
 fn persist_data(mousned_vec: &Vec<Mousned>, db: &Database) -> SledResult<()> {
     for mousned in mousned_vec {
         let key = mousned.sahib.clone().unwrap_or_default(); // Use a default string if sahib is None
-        let value = bincode::serialize(&mousned).expect("Failed to serialize mousned");
-        db.mousned_db.insert(key, IVec::from(value))?;
+        let value = bincode::serialize(&mousned.ahadith).expect("Failed to serialize mousned");
+        db.mousned_db.insert(key.as_bytes(), IVec::from(value))?;
     }
     Ok(())
 }
 
 pub fn init(dbs: &Database) -> Result<(), Box<dyn std::error::Error>> {
     let mousned_vec = load(Path::new("./data/hadith"), None)?;
-    // for mousned in mousned_vec {
-    //     println!("{:?}", mousned);
-    // }
     persist_data(&mousned_vec, &dbs)?;
     Ok(())
 }

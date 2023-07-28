@@ -25,7 +25,10 @@ pub fn load(dir_path: &Path, sahib: Option<String>) -> Result<Vec<Mousned>, Box<
                 let inner_mousned_vec = load(&path, new_sahib)?;
                 mousned_vec.extend(inner_mousned_vec);
             } else {
-                let mousned = build_mousned_from_file(&path, sahib.clone())?;
+                let file_stem = path.file_stem()
+                    .and_then(|name| name.to_str())
+                    .map(|name| name.to_string());
+                let mousned = build_mousned_from_file(&path, file_stem)?;
                 mousned_vec.push(mousned);
             }
         }
