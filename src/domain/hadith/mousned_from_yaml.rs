@@ -22,8 +22,19 @@ pub fn load(dir_path: &Path, sahib: Option<String>) -> Result<Vec<Mousned>, Box<
                 let new_sahib = path.file_name()
                     .and_then(|name| name.to_str())
                     .map(|name| name.to_string());
-                let inner_mousned_vec = load(&path, new_sahib)?;
-                mousned_vec.extend(inner_mousned_vec);
+                
+                let mut new_mousned = Mousned {
+                    ahadith: vec![],
+                    sahib: new_sahib.clone(),
+                };
+                
+                for file_entry in read_dir(path)? {
+                    let file_path = file_entry?.path();
+                    let mousned = build_mousned_from_file(&file_path, new_sahib.clone())?;
+                    new_mousned.ahadith.extend(mousned.ahadith);
+                }
+
+                mousned_vec.push(new_mousned);
             } else {
                 let file_stem = path.file_stem()
                     .and_then(|name| name.to_str())
