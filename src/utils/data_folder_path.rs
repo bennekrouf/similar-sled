@@ -12,6 +12,5 @@ pub fn get() -> PathBuf {
         home_path.push("similarDB");
         return home_path;
     }
-
     Path::new("/tmp").join(&username).join("similarDB")
 }

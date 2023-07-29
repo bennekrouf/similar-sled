@@ -72,6 +72,8 @@ use rocket_cors::{AllowedHeaders, AllowedOrigins, CorsOptions};
 
 fn rocket() -> Rocket {
     let data_folder_path = data_folder_path::get();
+    println!("Path to similarDB: {:?}", data_folder_path);
+
     let all_db = all_db::init(&data_folder_path);
     let cors = CorsOptions::default()
         .allowed_origins(AllowedOrigins::all())
