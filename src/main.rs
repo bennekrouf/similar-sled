@@ -8,7 +8,12 @@ pub mod models;
 mod domain {
     pub mod coran {
         pub mod models;
-    }
+        pub mod api {
+                pub mod similars_all;
+                pub mod verse_by_chapter;
+                pub mod verse_similar_by_chapter;
+            }
+        }
     pub mod hadith {
         pub mod models;
         pub mod mousned_from_yaml;
@@ -20,11 +25,11 @@ mod domain {
 
 use domain::hadith::api::static_rocket_route_info_for_get_ahadith_by_sahib_route;
 
-use api::verse_by_chapter::static_rocket_route_info_for_get_verse;
-use api::similars_all::static_rocket_route_info_for_get_similars;
-use api::similars_all::static_rocket_route_info_for_get_chapters;
+use domain::coran::api::verse_by_chapter::static_rocket_route_info_for_get_verse;
+use domain::coran::api::similars_all::static_rocket_route_info_for_get_similars;
+use domain::coran::api::similars_all::static_rocket_route_info_for_get_chapters;
 
-use api::verse_similar_by_chapter::static_rocket_route_info_for_get_verse_similar_by_chapter_route;
+use domain::coran::api::verse_similar_by_chapter::static_rocket_route_info_for_get_verse_similar_by_chapter_route;
 // use api::count::static_rocket_route_info_for_get;
 use rocket::{routes, Rocket};
 use std::env;
@@ -34,12 +39,6 @@ mod utils {
     pub mod data_folder_path;
     pub mod yml_path;
     pub mod sort;
-}
-
-mod api {
-    pub mod similars_all;
-    pub mod verse_by_chapter;
-    pub mod verse_similar_by_chapter;
 }
 
 mod db {

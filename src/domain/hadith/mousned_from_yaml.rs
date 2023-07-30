@@ -30,7 +30,11 @@ pub fn load(dir_path: &Path, sahib: Option<String>) -> Result<Vec<Mousned>, Box<
                 
                 for file_entry in read_dir(path)? {
                     let file_path = file_entry?.path();
-                    let mousned = build_mousned_from_file(&file_path, new_sahib.clone())?;
+                    let mousned = build_mousned_from_file(&file_path, new_sahib.clone())
+                    .map_err(|e| {
+                        eprintln!("Failed to deserialize file: {}", e);  // This will print the error to stderr
+                        e
+                    })?;
                     new_mousned.ahadith.extend(mousned.ahadith);
                 }
 
