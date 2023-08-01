@@ -3,7 +3,7 @@ use crate::models::Database;
 use crate::db::similar::similar_output_format;
 use crate::utils::sort;
 
-pub fn get_similars_db(dbs: &Database) -> Vec<SimilarOutput> {
+pub fn get(dbs: &Database) -> Vec<SimilarOutput> {
     let similar_db = &dbs.similar_db;
     let mut similars = similar_db
         .iter()

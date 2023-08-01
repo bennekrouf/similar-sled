@@ -2,7 +2,7 @@ use crate::domain::coran::models::{VerseOutput, SimilarOutputAdapted};
 use crate::models::Database;
 use super::similars_by_key;
 
-pub fn get_chapter_similars_adapted(dbs: &Database, chapter: u32) -> Vec<SimilarOutputAdapted> {
+pub fn get(dbs: &Database, chapter: u32) -> Vec<SimilarOutputAdapted> {
     let chapter_key = chapter.to_string();
     let similar_keys = get_similar_keys(dbs, &chapter_key);
 
@@ -34,10 +34,10 @@ pub fn get_chapter_similars_adapted(dbs: &Database, chapter: u32) -> Vec<Similar
 }
 
 
-fn get_similar_keys(dbs: &Database, key: &str) -> Vec<String> {
+fn get_similar_keys(dbs: &Database, chapter_key: &str) -> Vec<String> {
     let serialized_keys = dbs
         .verse_similar_db
-        .get(key.as_bytes())
+        .get(chapter_key.as_bytes())
         .unwrap_or(None)
         .unwrap_or_default();
 

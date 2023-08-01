@@ -32,8 +32,8 @@ fn get_verse_references(similar: &Similar) -> Vec<String> {
 
 fn update_verse_similar_mapping(dbs: &Database, verse: &Verse, kalima: &str) {
     let verse_similar_db = &dbs.verse_similar_db;
-    let verse_key = verse.chapter.to_string();
-    let similar_keys = get_similar_keys(dbs, &verse_key);
+    let chapter_no = verse.chapter.to_string();
+    let similar_keys = get_similar_keys(dbs, &chapter_no);
     let mut similar_keys_set: HashSet<String> = similar_keys.into_iter().collect();
 
     if !similar_keys_set.contains(kalima) {
@@ -42,9 +42,9 @@ fn update_verse_similar_mapping(dbs: &Database, verse: &Verse, kalima: &str) {
 
     let similar_keys: Vec<String> = similar_keys_set.into_iter().collect();
 
-    let serialized_keys = bincode::serialize(&similar_keys).unwrap();
+    let serialized_similar_keys = bincode::serialize(&similar_keys).unwrap();
     verse_similar_db
-        .insert(verse_key, serialized_keys)
+        .insert(chapter_no, serialized_similar_keys)
         .expect("Failed to insert verse-similar mapping");
 }
 

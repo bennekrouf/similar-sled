@@ -7,7 +7,7 @@ use crate::db::similar::similars_by_chapter;
 
 #[get("/similars")]
 pub fn get_similars(dbs: State<Database>) -> Json<Vec<SimilarOutput>> {
-    let similars = similars_all::get_similars_db(&dbs);
+    let similars = similars_all::get(&dbs);
     Json(similars)
 }
 
@@ -18,7 +18,7 @@ pub fn get_chapters(dbs: State<Database>) -> Json<Vec<Chapter>> {
         .filter_map(|result| match result {
             Ok((_, value)) => {
                 let chapter: Chapter = bincode::deserialize(&value).unwrap();
-                let similar_objects = similars_by_chapter::get_chapter_similars_adapted(&dbs, chapter.no as u32);
+                let similar_objects = similars_by_chapter::get(&dbs, chapter.no as u32);
                 let count = similar_objects.len() as u32;
                 if count > 0 {
                     Some(Chapter { count: Some(count), ..chapter })
