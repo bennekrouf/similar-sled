@@ -36,7 +36,7 @@ pub fn get(dbs: &Database, chapter: u32) -> Vec<SimilarOutputAdapted> {
 
 fn get_similar_keys(dbs: &Database, chapter_key: &str) -> Vec<String> {
     let serialized_keys = dbs
-        .verse_similar_db
+        .chapter_similar_db
         .get(chapter_key.as_bytes())
         .unwrap_or(None)
         .unwrap_or_default();

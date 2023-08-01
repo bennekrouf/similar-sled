@@ -31,7 +31,7 @@ fn get_verse_references(similar: &Similar) -> Vec<String> {
 }
 
 fn update_verse_similar_mapping(dbs: &Database, verse: &Verse, kalima: &str) {
-    let verse_similar_db = &dbs.verse_similar_db;
+    let chapter_similar_db = &dbs.chapter_similar_db;
     let chapter_no = verse.chapter.to_string();
     let similar_keys = get_similar_keys(dbs, &chapter_no);
     let mut similar_keys_set: HashSet<String> = similar_keys.into_iter().collect();
@@ -43,15 +43,15 @@ fn update_verse_similar_mapping(dbs: &Database, verse: &Verse, kalima: &str) {
     let similar_keys: Vec<String> = similar_keys_set.into_iter().collect();
 
     let serialized_similar_keys = bincode::serialize(&similar_keys).unwrap();
-    verse_similar_db
+    chapter_similar_db
         .insert(chapter_no, serialized_similar_keys)
         .expect("Failed to insert verse-similar mapping");
 }
 
-fn get_similar_keys(dbs: &Database, verse_key: &str) -> Vec<String> {
-    let verse_similar_db = &dbs.verse_similar_db;
-    verse_similar_db
-        .get(verse_key)
+fn get_similar_keys(dbs: &Database, chapter_no: &str) -> Vec<String> {
+    let chapter_similar_db = &dbs.chapter_similar_db;
+    chapter_similar_db
+        .get(chapter_no)
         .unwrap()
         .map(|ivec| bincode::deserialize(&ivec).unwrap())
         .unwrap_or_else(Vec::new)
