@@ -14,7 +14,8 @@ fn build_mousned_from_file(file_path: &Path, sahib: Option<String>) -> Result<Mo
     Ok(mousned)
 }
 
-pub fn load(dir_path: &Path) -> Result<Vec<Mousned>, Box<dyn std::error::Error>> {
+pub fn load() -> Result<Vec<Mousned>, Box<dyn std::error::Error>> {
+    let dir_path = Path::new("./data/hadith");
     let mut mousned_vec: Vec<Mousned> = Vec::new();
 
     if dir_path.is_dir() {

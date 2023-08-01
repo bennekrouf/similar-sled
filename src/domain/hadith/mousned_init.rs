@@ -3,7 +3,6 @@ use crate::models::Database;
 use crate::domain::hadith::models::Mousned;
 use bincode;
 
-use std::path::Path;
 use sled::IVec;
 use sled::Result as SledResult;
 
@@ -17,7 +16,7 @@ fn persist_data(mousned_vec: &Vec<Mousned>, db: &Database) -> SledResult<()> {
 }
 
 pub fn init(dbs: &Database) -> Result<(), Box<dyn std::error::Error>> {
-    let mousned_vec = load(Path::new("./data/hadith"))?;
+    let mousned_vec = load()?;
     persist_data(&mousned_vec, &dbs)?;
     Ok(())
 }
