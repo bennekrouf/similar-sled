@@ -35,15 +35,22 @@ fn traverse_directory(
                 let mut file = File::open(&path)?;
                 let mut contents = String::new();
                 file.read_to_string(&mut contents)?;
-                let file_similars: Vec<Similar> = serde_yaml::from_str(&contents)?;
-
-                for similar in &file_similars {
-                    if similar.verses.is_empty() {
-                        info!("Missing field in file: {:?}", &path);
+                
+                // Wrap the deserialization in a match block
+                match serde_yaml::from_str::<Vec<Similar>>(&contents) {
+                    Ok(file_similars) => {
+                        for similar in &file_similars {
+                            if similar.verses.is_empty() {
+                                info!("Missing field in file: {:?}", &path);
+                            }
+                        }
+                        similars.extend(file_similars);
+                    }
+                    Err(e) => {
+                        // Return a new error that includes the path of the file that failed to deserialize
+                        return Err(format!("Failed to deserialize file at {:?}: {}", path, e).into());
                     }
                 }
-
-                similars.extend(file_similars);
             }
         }
     }

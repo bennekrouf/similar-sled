@@ -22,7 +22,6 @@ pub fn init(dbs: &Database) {
     }
 }
 
-
 fn get_verse_references(similar: &Similar) -> Vec<String> {
     similar
         .verses
