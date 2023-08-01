@@ -1,4 +1,5 @@
 - kalima: 'إنا منتظرون'
+  opposite_similars: []
   verses:
     - chapter: 6
       ayah: 158
@@ -8,6 +9,7 @@
       text: 'وَٱنتَظِرُوٓا۟ إِنَّا مُنتَظِرُونَ'
 
 - kalima: 'إنهم منتظرون'
+  opposite_similars: []
   verses:
     - chapter: 32
       ayah: 30

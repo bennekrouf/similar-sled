@@ -1,10 +1,12 @@
 - kalima: 'وما كان جواب قومه'
+  opposite_similars: []
   verses:
     - chapter: 7
       ayah: 82
       text: 'وَمَا كَانَ جَوَابَ قَوْمِهِۦٓ إِلَّآ أَن قَالُوٓا۟ أَخْرِجُوهُم مِّن قَرْيَتِكُمْ ۖ إِنَّهُمْ أُنَاسٌ يَتَطَهَّرُونَ'
 
 - kalima: 'فما كان جواب قومه'
+  opposite_similars: []
   verses:
     - chapter: 27
       ayah: 56

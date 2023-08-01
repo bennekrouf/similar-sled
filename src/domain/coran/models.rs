@@ -20,7 +20,7 @@ pub struct Verse {
 #[derive(Serialize, Deserialize, Debug, PartialEq)]
 pub struct Similar {
     pub kalima: String,
-    pub opposites: Option<Vec<String>>,
+    pub opposite_similars: Option<Vec<String>>,
     pub verses: Vec<Verse>,
 }
 
@@ -33,6 +33,7 @@ pub struct VerseOutput {
 #[derive(Serialize, Deserialize, Debug)]
 pub struct SimilarOutput {
     pub verses: Vec<VerseOutput>,
+    // pub opposites: Option<Vec<VerseOutput>>,
     pub kalima: String,
 }
 
@@ -40,6 +41,7 @@ pub struct SimilarOutput {
 pub struct SimilarOutputAdapted {
     pub verses: Vec<VerseOutput>,
     pub similars: Vec<VerseOutput>,
+    // pub opposites: Vec<VerseOutput>,
     pub kalima: String,
 }
 #[derive(Serialize, Deserialize, Debug)]

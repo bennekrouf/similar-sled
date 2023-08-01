@@ -2,24 +2,38 @@ use crate::domain::coran::models::SimilarOutput;
 use crate::models::Database;
 use crate::db::similar::similar_output_format;
 use crate::utils::sort;
+use sled::IVec;
+
+// Extracted helper function to get the key from the result
+fn get_key_from_result(result: &Result<(IVec, IVec), sled::Error>) -> Result<String, sled::Error> {
+    result.clone().map(|(key, _)| String::from_utf8_lossy(&key).into_owned())
+}
+
+// Extracted helper function to get the value from the result
+fn get_value_from_result(result: &Result<(IVec, IVec), sled::Error>, similar_key: &str, dbs: &Database) -> Result<SimilarOutput, sled::Error> {
+    result.clone().map(|(_, similar_value)| {
+        let verses: Vec<String> = bincode::deserialize(&similar_value).expect("Failed to deserialize references");
+        similar_output_format::create_similar_output(similar_key.to_owned(), &verses, dbs)
+    })
+}
 
 pub fn get_similars_db_by_key(dbs: &Database, similar_key: &str) -> Vec<SimilarOutput> {
     let similar_db = &dbs.similar_db;
-    let mut similars = similar_db
+
+    let mut similars: Vec<SimilarOutput> = similar_db
         .iter()
-        .filter(|result| {
-            let (key, _) = result.as_ref().expect("Failed to retrieve similar");
-            String::from_utf8_lossy(&key).eq(similar_key)
+        .filter_map(|result| match get_key_from_result(&result) {
+            Ok(key) => if key == similar_key {
+                Some(result)
+            } else {
+                None
+            },
+            Err(_) => None,
         })
-        .map(|result| {
-            let (_, similar_value) = result.expect("Failed to retrieve similar");
-            let kalima = similar_key.to_owned();
-            let verses: Vec<String> =
-                bincode::deserialize(&similar_value).expect("Failed to deserialize references");
-            similar_output_format::create_similar_output(kalima, &verses, dbs)
-        })
-        .collect::<Vec<SimilarOutput>>();
+        .filter_map(|result| get_value_from_result(&result, similar_key, dbs).ok())
+        .collect();
 
     sort::sort_similars(&mut similars);
+
     similars
 }

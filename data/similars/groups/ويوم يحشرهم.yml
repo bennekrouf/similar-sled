@@ -1,4 +1,5 @@
 - kalima: 'ويوم يحشرهم'
+  opposite_similars: []
   verses:
     - chapter: 6
       ayah: 128
@@ -14,6 +15,7 @@
       text: 'وَيَوْمَ يَحْشُرُهُمْ جَمِيعًا ثُمَّ يَقُولُ لِلْمَلَـٰٓئِكَةِ أَهَـٰٓؤُلَآءِ إِيَّاكُمْ كَانُوا۟ يَعْبُدُونَ'
 
 - kalima: 'ويوم نحشرهم'
+  opposite_similars: []
   verses:
     - chapter: 6
       ayah: 22
