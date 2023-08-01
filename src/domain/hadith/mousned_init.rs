@@ -17,7 +17,7 @@ fn persist_data(mousned_vec: &Vec<Mousned>, db: &Database) -> SledResult<()> {
 }
 
 pub fn init(dbs: &Database) -> Result<(), Box<dyn std::error::Error>> {
-    let mousned_vec = load(Path::new("./data/hadith"), None)?;
+    let mousned_vec = load(Path::new("./data/hadith"))?;
     persist_data(&mousned_vec, &dbs)?;
     Ok(())
 }

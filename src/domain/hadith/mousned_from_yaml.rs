@@ -1,17 +1,20 @@
 use std::fs::File;
-use crate::domain::hadith::models::Mousned;
 use std::path::Path;
 use serde_yaml;
 use std::fs::read_dir;
+use crate::domain::hadith::models::Mousned;
+
+use std::io::{Error as IoError, ErrorKind as IoErrorKind};
 
 fn build_mousned_from_file(file_path: &Path, sahib: Option<String>) -> Result<Mousned, Box<dyn std::error::Error>> {
-    let file = File::open(file_path)?;
-    let mut mousned: Mousned = serde_yaml::from_reader(file)?;
+    let file = File::open(file_path).map_err(|e| IoError::new(IoErrorKind::Other, format!("Failed to open file {}: {}", file_path.display(), e)))?;
+    let mut mousned: Mousned = serde_yaml::from_reader(file)
+        .map_err(|e| IoError::new(IoErrorKind::Other, format!("Failed to deserialize file {}: {}", file_path.display(), e)))?;
     mousned.sahib = sahib;
     Ok(mousned)
 }
 
-pub fn load(dir_path: &Path, sahib: Option<String>) -> Result<Vec<Mousned>, Box<dyn std::error::Error>> {
+pub fn load(dir_path: &Path) -> Result<Vec<Mousned>, Box<dyn std::error::Error>> {
     let mut mousned_vec: Vec<Mousned> = Vec::new();
 
     if dir_path.is_dir() {

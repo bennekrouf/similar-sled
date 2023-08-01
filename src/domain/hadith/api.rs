@@ -12,4 +12,12 @@ pub fn get_ahadith_by_sahib_route(
 ) -> Json<Vec<Hadith>> {
     let result = get_ahadith_by_sahib::get_ahadith_by_sahib(&dbs, sahib).unwrap_or_else(|_| vec![]);
     Json(result)
-}  
+}
+
+#[get("/counts")]
+pub fn get_all_ahadith_counts_route(
+    dbs: State<Database>,
+) -> Json<Vec<(String, usize)>> {
+    let result = get_ahadith_by_sahib::get_all_ahadith_counts(&dbs).unwrap_or_else(|_| vec![]);
+    Json(result)
+}
