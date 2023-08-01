@@ -20,6 +20,7 @@ pub struct Verse {
 #[derive(Serialize, Deserialize, Debug, PartialEq)]
 pub struct Similar {
     pub kalima: String,
+    pub opposites: Option<Vec<String>>,
     pub verses: Vec<Verse>,
 }
 
