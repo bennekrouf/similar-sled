@@ -3,8 +3,8 @@ use crate::models::Database;
 use crate::db::verse::verse_by_chapter_and_ayat;
 use crate::db::chapter::chapter_name;
 
-pub fn create_similar_output(kalima: String, references: &Vec<String>, dbs: &Database) -> SimilarOutput {
-    let verses: Vec<VerseOutput> = references
+pub fn create_similar_output(kalima: String, verses: &Vec<String>, dbs: &Database) -> SimilarOutput {
+    let verses: Vec<VerseOutput> = verses
         .iter()
         .map(|reference| {
             let split: Vec<&str> = reference.split(":").collect();
