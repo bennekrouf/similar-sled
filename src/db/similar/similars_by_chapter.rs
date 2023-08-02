@@ -9,7 +9,7 @@ pub fn get(dbs: &Database, chapter: u32) -> Vec<SimilarOutputAdapted> {
     let mut similar_objects: Vec<SimilarOutputAdapted> = Vec::new();
 
     for similar_key in similar_keys {
-        let similar = similars_by_key::get_similars_db_by_key(dbs, &similar_key);
+        let similar = similars_by_key::get(dbs, &similar_key);
 
         let mut verses: Vec<VerseOutput> = Vec::new();
         let mut similars: Vec<VerseOutput> = Vec::new();
