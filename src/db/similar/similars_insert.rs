@@ -1,13 +1,13 @@
 use bincode;
-use crate::models::Database;
+use crate::{models::Database, domain::coran::models::Similar};
 
-pub fn similars_insert(dbs: &Database, kalima: &str, verse_references: &[String]) {
+pub fn similars_insert(dbs: &Database, similar: &Similar) {
     let similar_db = &dbs.similar_db;
-
-    // println!("insert_similar kalima {:?} verse_references {:?}", kalima, &verse_references);
     
-    let serialized_references = bincode::serialize(verse_references).unwrap();
+    // Serialize the whole Similar struct
+    let serialized_similar = bincode::serialize(similar).unwrap();
+    
     similar_db
-        .insert(kalima.to_string(), serialized_references)
+        .insert(similar.kalima.clone(), serialized_similar)
         .expect("Failed to insert similar");
 }

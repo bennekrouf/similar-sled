@@ -1,6 +1,7 @@
 use crate::domain::coran::models::{VerseOutput, SimilarOutputAdapted};
 use crate::models::Database;
 use super::similars_by_key;
+use log::info;
 
 pub fn get(dbs: &Database, chapter: u32) -> Vec<SimilarOutputAdapted> {
     let chapter_key = chapter.to_string();
@@ -10,24 +11,27 @@ pub fn get(dbs: &Database, chapter: u32) -> Vec<SimilarOutputAdapted> {
 
     for similar_key in similar_keys {
         let similar = similars_by_key::get(dbs, &similar_key);
+        if similar.is_empty() {
+            info!("similar empty for key : {:?}", &similar_key);
+        } else {
+            let mut verses: Vec<VerseOutput> = Vec::new();
+            let mut similars: Vec<VerseOutput> = Vec::new();
+            let kalima = similar[0].kalima.clone();
 
-        let mut verses: Vec<VerseOutput> = Vec::new();
-        let mut similars: Vec<VerseOutput> = Vec::new();
-        let kalima = similar[0].kalima.clone();
-
-        for verse_output in similar[0].verses.iter().cloned() {
-            if verse_output.chapter == chapter {
-                verses.push(verse_output);
-            } else {
-                similars.push(verse_output);
+            for verse_output in similar[0].verses.iter().cloned() {
+                if verse_output.chapter == chapter {
+                    verses.push(verse_output);
+                } else {
+                    similars.push(verse_output);
+                }
             }
-        }
 
-        similar_objects.push(SimilarOutputAdapted {
-            verses,
-            similars,
-            kalima,
-        });
+            similar_objects.push(SimilarOutputAdapted {
+                verses,
+                similars,
+                kalima,
+            });
+        }
     }
 
     similar_objects
