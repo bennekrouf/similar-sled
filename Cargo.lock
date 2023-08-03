@@ -1195,6 +1195,7 @@ dependencies = [
  "env_logger",
  "hex",
  "log 0.4.19",
+ "rand",
  "rocket",
  "rocket_codegen",
  "rocket_contrib",

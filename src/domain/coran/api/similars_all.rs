@@ -1,15 +1,46 @@
 use rocket::{get, State};
 use rocket_contrib::json::Json;
-use crate::domain::coran::models::Chapter;
+use crate::domain::coran::models::{Chapter, ExerciseOutput, VerseUngrouped};
 use crate::models::Database;
-// use crate::db::similar::similars_all;
 use crate::db::similar::similars_by_chapter;
+use crate::db::similar::similars_solutions;
+use crate::db::similar::check_discriminant;
+use crate::db::similar::generate_exercise::generate_exercise;
 
-// #[get("/similars")]
-// pub fn get_similars(dbs: State<Database>) -> Json<Vec<SimilarOutput>> {
-//     let similars = similars_all::get(&dbs);
-//     Json(similars)
-// }
+#[get("/check?<similar_key>&<kalima>&<pre>&<discriminant>&<post>&<ayah>&<chapter>")]
+pub fn check(
+    similar_key: Option<String>,
+    kalima: Option<String>,
+    pre: Option<String>,
+    discriminant: Option<String>,
+    post: Option<String>,
+    ayah: Option<u32>,
+    chapter: Option<u32>,
+    dbs: State<Database>,
+) -> Json<bool> {
+    let is_match = check_discriminant::check(
+        &dbs,
+        similar_key.as_deref().unwrap_or_default(),
+        kalima,
+        pre,
+        discriminant,
+        post,
+        ayah,
+        chapter,
+    );
+    Json(is_match)
+}
+
+#[get("/exercise/<similar_key>")]
+pub fn generate_exercise_endpoint(similar_key: String, dbs: State<Database>) -> Option<Json<(VerseUngrouped, Vec<Option<String>>)>> {
+    generate_exercise(&dbs, &similar_key).map(Json)
+}
+
+#[get("/solutions/<similar_key>")]
+pub fn get_solutions(similar_key: String, dbs: State<Database>) -> Json<Vec<ExerciseOutput>> {
+    let solutions = similars_solutions::get_solution(&dbs, &similar_key);
+    Json(solutions)
+}
 
 #[get("/chapters")]
 pub fn get_chapters(dbs: State<Database>) -> Json<Vec<Chapter>> {

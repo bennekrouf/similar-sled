@@ -54,3 +54,17 @@ pub struct ChapterSimilarOutput {
     pub chapter_name: String,
     pub similar_objects: Vec<Similar>,
 }
+#[derive(Serialize, Deserialize, Debug, Clone)]
+pub struct VerseUngrouped {
+    pub pre: Option<String>,
+    pub discriminant: Option<String>,
+    pub post: Option<String>,
+    pub ayah: u32,
+    pub chapter: u32,
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct ExerciseOutput {
+    pub kalima: String,
+    pub verses: Vec<VerseUngrouped>,
+}
