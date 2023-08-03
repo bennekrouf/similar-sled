@@ -16,6 +16,7 @@ pub fn get(dbs: &Database, chapter: u32) -> Vec<SimilarOutputAdapted> {
         } else {
             let mut verses: Vec<VerseOutput> = Vec::new();
             let mut similars: Vec<VerseOutput> = Vec::new();
+            let mut opposites: Vec<VerseOutput> = Vec::new();
             let kalima = similar[0].kalima.clone();
 
             for verse_output in similar[0].verses.iter().cloned() {
@@ -26,9 +27,16 @@ pub fn get(dbs: &Database, chapter: u32) -> Vec<SimilarOutputAdapted> {
                 }
             }
 
+            if let Some(opposite_verses) = &similar[0].opposites {
+                for verse_output in opposite_verses.iter().cloned() {
+                    opposites.push(verse_output);
+                }
+            }
+
             similar_objects.push(SimilarOutputAdapted {
                 verses,
                 similars,
+                opposites,
                 kalima,
             });
         }
@@ -36,7 +44,6 @@ pub fn get(dbs: &Database, chapter: u32) -> Vec<SimilarOutputAdapted> {
 
     similar_objects
 }
-
 
 fn get_similar_keys(dbs: &Database, chapter_key: &str) -> Vec<String> {
     let serialized_keys = dbs

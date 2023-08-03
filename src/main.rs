@@ -40,12 +40,12 @@ mod db {
         pub mod similars_init;
         pub mod similars_by_chapter;
         pub mod similars_by_key;
-        pub mod similar_output_format;
-        pub mod similars_all;
+        // pub mod similar_output_format;
+        // pub mod similars_all;
     }
     pub mod verse {
         pub mod verses_by_chapter;
-        pub mod verse_by_chapter_and_ayat;
+        // pub mod verse_by_chapter_and_ayat;
         pub mod verse_insert;
     }
     pub mod all_db;

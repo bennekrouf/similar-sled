@@ -2,6 +2,7 @@ use crate::domain::coran::models::{SimilarOutput, Similar, Verse, VerseOutput};
 use crate::models::Database;
 use crate::utils::sort;
 use crate::db::chapter::chapter_name;
+use log::info;
 
 pub fn get(dbs: &Database, similar_key: &str) -> Vec<SimilarOutput> {
     let similar_db = &dbs.similar_db;
@@ -14,6 +15,7 @@ pub fn get(dbs: &Database, similar_key: &str) -> Vec<SimilarOutput> {
             if key == similar_key {
                 // Deserialize the value into Similar
                 let similar: Similar = bincode::deserialize(&value).ok()?;
+
                 // Convert Similar to SimilarOutput
                 let similar_output = convert_to_output(dbs, &similar);
                 Some(similar_output)
@@ -28,27 +30,70 @@ pub fn get(dbs: &Database, similar_key: &str) -> Vec<SimilarOutput> {
     similars
 }
 
-fn get_sourate(dbs: &Database, verse: &Verse) -> String {
+fn sourate_name_from_verse(dbs: &Database, verse: &Verse) -> String {
     // Some logic to get the sourate name from the verse chapter
     let chapter_name_result = chapter_name::get(dbs, verse.chapter as u8);
     match chapter_name_result {
         Ok(Some(name)) => name,
-        Ok(None) | Err(_) => String::from("Default Chapter"),
+        Ok(None) | Err(_) => String::from("No found"),
     }
 }
 
-fn convert_to_output(dbs: &Database, similar: &Similar) -> SimilarOutput {
-    let verses_output: Vec<VerseOutput> = similar.verses.iter().map(|verse| {
-        // Conversion logic from Verse to VerseOutput
+// Conversion logic from Verse to VerseOutput
+fn convert_verses(dbs: &Database, verses: &[Verse]) -> Vec<VerseOutput> {
+    verses.iter().map(|verse| {
         VerseOutput {
             verse: verse.clone(),
             chapter: verse.chapter,
-            sourate: get_sourate(dbs, verse),  // get the sourate string
+            sourate: sourate_name_from_verse(dbs, verse),
         }
-    }).collect();
+    }).collect()
+}
+
+// Fetch and convert opposites from the database
+fn convert_opposites(dbs: &Database, kalimas: &[String]) -> Option<Vec<VerseOutput>> {
+    let mut verse_outputs = Vec::new();
+    for kalima in kalimas {
+        let result = dbs.similar_db.get(kalima);
+        match result {
+            Ok(Some(ivec)) => {
+                // Deserialize the value into Similar
+                let similar: Similar = bincode::deserialize(&ivec).unwrap();
+                let verses = convert_verses(dbs, &similar.verses);
+                verse_outputs.extend(verses);
+            },
+            Ok(None) => {
+                // handle the case where there is no entry for the given key
+                // this block could be left empty if there's no specific action needed
+            },
+            Err(e) => {
+                // handle the error, you could print it or return it
+                eprintln!("Database error: {}", e);
+                // you could decide to return from the function here
+            }
+        }
+    }
+    if verse_outputs.is_empty() {
+        None
+    } else {
+        Some(verse_outputs)
+    }
+}
+
+pub fn convert_to_output(dbs: &Database, similar: &Similar) -> SimilarOutput {
+    let verses = convert_verses(dbs, &similar.verses);
+    let mut opposites = None;
+
+    if let Some(opposite_similars) = &similar.opposite_similars {
+        if !opposite_similars.is_empty() {
+            info!("Found opposite similars: {:?}", opposite_similars);
+            opposites = convert_opposites(dbs, opposite_similars);
+        }
+    }
 
     SimilarOutput {
-        verses: verses_output,
+        verses,
+        opposites,
         kalima: similar.kalima.clone(),
     }
 }

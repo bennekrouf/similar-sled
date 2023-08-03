@@ -1,15 +1,15 @@
 use rocket::{get, State};
 use rocket_contrib::json::Json;
-use crate::domain::coran::models::{SimilarOutput, Chapter};
+use crate::domain::coran::models::Chapter;
 use crate::models::Database;
-use crate::db::similar::similars_all;
+// use crate::db::similar::similars_all;
 use crate::db::similar::similars_by_chapter;
 
-#[get("/similars")]
-pub fn get_similars(dbs: State<Database>) -> Json<Vec<SimilarOutput>> {
-    let similars = similars_all::get(&dbs);
-    Json(similars)
-}
+// #[get("/similars")]
+// pub fn get_similars(dbs: State<Database>) -> Json<Vec<SimilarOutput>> {
+//     let similars = similars_all::get(&dbs);
+//     Json(similars)
+// }
 
 #[get("/chapters")]
 pub fn get_chapters(dbs: State<Database>) -> Json<Vec<Chapter>> {

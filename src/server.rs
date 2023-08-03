@@ -10,7 +10,7 @@ use crate::domain::hadith::api::static_rocket_route_info_for_get_ahadith_by_sahi
 use crate::domain::hadith::api::static_rocket_route_info_for_get_all_ahadith_counts_route;
 
 use crate::domain::coran::api::verse_by_chapter::static_rocket_route_info_for_get_verse;
-use crate::domain::coran::api::similars_all::static_rocket_route_info_for_get_similars;
+// use crate::domain::coran::api::similars_all::static_rocket_route_info_for_get_similars;
 use crate::domain::coran::api::similars_all::static_rocket_route_info_for_get_chapters;
 
 use crate::domain::coran::api::verse_similar_by_chapter::static_rocket_route_info_for_get_verse_similar_by_chapter_route;
@@ -50,7 +50,7 @@ rocket::ignite()
     .manage(all_db.clone())
     .mount("/", routes![
         get_verse,
-        get_similars,
+        // get_similars,
         get_chapters,
         get_verse_similar_by_chapter_route,
         ])
