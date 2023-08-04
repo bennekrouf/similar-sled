@@ -56,9 +56,11 @@ pub struct ChapterSimilarOutput {
 }
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct VerseUngrouped {
+    pub kalima: String,
     pub pre: Option<String>,
     pub discriminant: Option<String>,
     pub post: Option<String>,
+    pub chapter_name: String,
     pub ayah: u32,
     pub chapter: u32,
 }

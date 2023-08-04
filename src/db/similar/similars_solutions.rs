@@ -1,8 +1,9 @@
 use crate::domain::coran::models::{Similar, ExerciseOutput, VerseUngrouped};
 use crate::models::Database;
 use crate::utils::extract_parts::extract_parts;
+use crate::db::chapter::chapter_name;
 
-pub fn get_solution(dbs: &Database, similar_key: &str) -> Vec<ExerciseOutput> {
+pub fn get_solution(dbs: &Database, similar_key: String) -> Vec<ExerciseOutput> {
     let similar_db = &dbs.similar_db;
 
     let mut solutions: Vec<ExerciseOutput> = similar_db
@@ -34,11 +35,20 @@ pub fn convert_to_exercise(dbs: &Database, similar: &Similar) -> ExerciseOutput 
     let mut all_verses = Vec::new();
     for verse in &similar.verses {
         let (pre, discriminant, post) = extract_parts(&verse.text);
+
+        let chapter_name_result = chapter_name::get(dbs, verse.chapter as u8);
+        let chapter_name = match chapter_name_result {
+                Ok(Some(name)) => name,
+                Ok(None) | Err(_) => String::from("No found"),
+            };
+
         all_verses.push(VerseUngrouped {
             // text: verse.text.clone(),
             pre,
             discriminant,
             post,
+            kalima: similar.kalima.clone(),
+            chapter_name,
             ayah: verse.ayah,
             chapter: verse.chapter,
         });
@@ -49,11 +59,19 @@ pub fn convert_to_exercise(dbs: &Database, similar: &Similar) -> ExerciseOutput 
             if let Ok(Some(data)) = similar_db.get(kalima) {
                 if let Ok(similar) = bincode::deserialize::<Similar>(&data) {
                     for verse in &similar.verses {
+
+                        let chapter_name_result = chapter_name::get(dbs, verse.chapter as u8);
+                        let chapter_name = match chapter_name_result {
+                                Ok(Some(name)) => name,
+                                Ok(None) | Err(_) => String::from("No found"),
+                            };
+
                         let (pre, discriminant, post) = extract_parts(&verse.text);
                         all_verses.push(VerseUngrouped {
-                            // text: verse.text.clone(),
                             pre,
                             discriminant,
+                            kalima: kalima.clone(),
+                            chapter_name,
                             post,
                             ayah: verse.ayah,
                             chapter: verse.chapter,

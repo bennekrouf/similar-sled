@@ -12,7 +12,7 @@ use crate::domain::hadith::api::static_rocket_route_info_for_get_all_ahadith_cou
 use crate::domain::coran::api::verse_by_chapter::static_rocket_route_info_for_get_verse;
 use crate::domain::coran::api::similars_all::static_rocket_route_info_for_get_chapters;
 use crate::domain::coran::api::similars_all::static_rocket_route_info_for_get_solutions;
-use crate::domain::coran::api::similars_all::static_rocket_route_info_for_check;
+use crate::domain::coran::api::similars_all::static_rocket_route_info_for_check_discriminant;
 use crate::domain::coran::api::similars_all::static_rocket_route_info_for_generate_exercise_endpoint;
 
 use crate::domain::coran::api::verse_similar_by_chapter::static_rocket_route_info_for_get_verse_similar_by_chapter_route;
@@ -53,7 +53,7 @@ rocket::ignite()
     .mount("/", routes![
         get_verse,
         get_solutions,
-        check,
+        check_discriminant,
         generate_exercise_endpoint,
         get_chapters,
         get_verse_similar_by_chapter_route,

@@ -1,9 +1,11 @@
+use std::collections::HashSet;
+
 use rand::Rng;
 use crate::db::similar::similars_solutions::get_solution;
 use crate::domain::coran::models::VerseUngrouped;
 use crate::models::Database;
 
-pub fn generate_exercise(dbs: &Database, similar_key: &str) -> Option<(VerseUngrouped, Vec<Option<String>>)> {
+pub fn generate_exercise(dbs: &Database, similar_key: String) -> Option<(VerseUngrouped, Vec<String>)> {
     let mut exercises = get_solution(dbs, similar_key);
     
     if exercises.is_empty() {
@@ -19,14 +21,17 @@ pub fn generate_exercise(dbs: &Database, similar_key: &str) -> Option<(VerseUngr
     // Temporarily remove the selected verse
     let mut selected_verse = exercise.verses.remove(selected_verse_index);
     let selected_discriminant = selected_verse.discriminant.take(); // hide the discriminant
+    let _selected_kalima = selected_verse.kalima.clear(); // hide the kalima
 
-    // Extract discriminants of the other verses
-    let mut other_discriminants: Vec<Option<String>> = exercise.verses.iter()
-        .filter(|verse| verse.discriminant.is_some() && verse.discriminant != selected_discriminant) 
-        .map(|verse| verse.discriminant.clone()) // clone the discriminant
+    // Extract kalimas of the other verses
+    let other_discriminants: Vec<String> = exercise.verses.iter()
+        .filter(|verse| verse.discriminant.is_some() && verse.discriminant != selected_discriminant)
+        .map(|verse| verse.kalima.clone()) // clone the kalima
         .collect();
-    other_discriminants.sort();
-    other_discriminants.dedup(); // remove duplicates
+
+    // Convert to HashSet to remove duplicates, and then back to Vec
+    let other_discriminants: Vec<String> = other_discriminants.into_iter().collect::<HashSet<_>>().into_iter().collect();
+
     
     // Add the selected verse back into the exercise
     exercise.verses.insert(selected_verse_index, selected_verse.clone());
