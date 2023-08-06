@@ -23,16 +23,32 @@ pub fn generate_exercise(dbs: &Database, similar_key: String) -> Option<(VerseUn
     let selected_discriminant = selected_verse.discriminant.take(); // hide the discriminant
     let _selected_kalima = selected_verse.kalima.clear(); // hide the kalima
 
-    // Extract kalimas of the other verses
+    // Extract discriminants from verses, handling whether or not verse has opposites
     let other_discriminants: Vec<String> = exercise.verses.iter()
-        .filter(|verse| verse.discriminant.is_some() && verse.discriminant != selected_discriminant)
-        .map(|verse| verse.kalima.clone()) // clone the kalima
-        .collect();
+    .filter_map(|verse| {
+        match &verse.discriminant {
+            Some(discriminant) => {
+                if Some(discriminant) != selected_discriminant.as_ref() {
+                    if !verse.has_opposites {
+                        Some(verse.kalima.clone())
+                    } else {
+                        Some(discriminant.clone())
+                    }
+                } else {
+                    None
+                }
+            }
+            None => None,
+        }
+    })
+    .collect();
 
-    // Convert to HashSet to remove duplicates, and then back to Vec
-    let other_discriminants: Vec<String> = other_discriminants.into_iter().collect::<HashSet<_>>().into_iter().collect();
+    // Convert to HashSet to remove duplicates
+    let other_discriminants: HashSet<_> = other_discriminants.into_iter().collect();
 
-    
+    // Convert back to Vec
+    let other_discriminants: Vec<_> = other_discriminants.into_iter().collect();
+
     // Add the selected verse back into the exercise
     exercise.verses.insert(selected_verse_index, selected_verse.clone());
 

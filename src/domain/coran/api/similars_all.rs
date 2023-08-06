@@ -1,5 +1,6 @@
 use rocket::{get, State};
 use rocket_contrib::json::Json;
+
 use crate::domain::coran::models::{Chapter, ExerciseOutput, VerseUngrouped};
 use crate::models::Database;
 use crate::db::similar::similars_by_chapter;

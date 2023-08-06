@@ -51,6 +51,7 @@ pub fn convert_to_exercise(dbs: &Database, similar: &Similar) -> ExerciseOutput 
             chapter_name,
             ayah: verse.ayah,
             chapter: verse.chapter,
+            has_opposites: !similar.opposite_similars.as_deref().unwrap().is_empty(),
         });
     }
 
@@ -75,6 +76,7 @@ pub fn convert_to_exercise(dbs: &Database, similar: &Similar) -> ExerciseOutput 
                             post,
                             ayah: verse.ayah,
                             chapter: verse.chapter,
+                            has_opposites: !similar.opposite_similars.clone().unwrap().is_empty(),
                         });
                     }
                 }

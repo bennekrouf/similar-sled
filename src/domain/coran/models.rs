@@ -63,6 +63,7 @@ pub struct VerseUngrouped {
     pub chapter_name: String,
     pub ayah: u32,
     pub chapter: u32,
+    pub has_opposites: bool,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
