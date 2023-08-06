@@ -47,10 +47,11 @@ pub fn generate_exercise(dbs: &Database, similar_key: String) -> Option<(VerseUn
     let other_discriminants: HashSet<_> = other_discriminants.into_iter().collect();
 
     // Convert back to Vec
-    let other_discriminants: Vec<_> = other_discriminants.into_iter().collect();
+    let mut other_discriminants: Vec<_> = other_discriminants.into_iter().collect();
 
     // Add the selected verse back into the exercise
     exercise.verses.insert(selected_verse_index, selected_verse.clone());
+    other_discriminants.push(selected_discriminant.unwrap());
 
     Some((selected_verse, other_discriminants))
 }
