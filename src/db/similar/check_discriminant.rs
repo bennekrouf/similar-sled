@@ -3,24 +3,28 @@ use crate::db::similar::similars_solutions::get_solution;
 
 pub fn check_discriminant(
     dbs: &Database, 
-    // similar_key: &str, 
-    kalima: String, 
+    kalima: String,
+    discriminant: Option<String>,
     ayah: u32, 
     chapter: u32
 ) -> bool {
-    let solutions = get_solution(dbs, kalima.clone());
+    let solutions = get_solution(dbs, &kalima);
 
     for exercise in solutions {
-        if exercise.kalima != kalima {
-            continue;
-        }
+        // if exercise.kalima != kalima {
+        //     continue;
+        // }
 
         for verse in exercise.verses {
             if verse.ayah != ayah {
                 continue;
             }
 
-            if verse.kalima != kalima {
+            if verse.has_opposites && verse.discriminant != discriminant {
+                continue;
+            }
+
+            if verse.kalima != kalima.clone() {
                 continue;
             }
 

@@ -3,7 +3,7 @@ use crate::models::Database;
 use crate::utils::extract_parts::extract_parts;
 use crate::db::chapter::chapter_name;
 
-pub fn get_solution(dbs: &Database, similar_key: String) -> Vec<ExerciseOutput> {
+pub fn get_solution(dbs: &Database, kalima: &String) -> Vec<ExerciseOutput> {
     let similar_db = &dbs.similar_db;
 
     let mut solutions: Vec<ExerciseOutput> = similar_db
@@ -11,7 +11,7 @@ pub fn get_solution(dbs: &Database, similar_key: String) -> Vec<ExerciseOutput> 
         .filter_map(|result| {
             let (key, value) = result.ok()?;
             let key = std::str::from_utf8(&key).ok()?;
-            if key == similar_key {
+            if key == kalima.clone() {
                 // Deserialize the value into Similar
                 let similar: Similar = bincode::deserialize(&value).ok()?;
 

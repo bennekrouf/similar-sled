@@ -4,7 +4,7 @@ use crate::utils::sort;
 use crate::db::chapter::chapter_name;
 use log::info;
 
-pub fn get(dbs: &Database, similar_key: &str) -> Vec<SimilarOutput> {
+pub fn get(dbs: &Database, kalima: &str) -> Vec<SimilarOutput> {
     let similar_db = &dbs.similar_db;
 
     let mut similars: Vec<SimilarOutput> = similar_db
@@ -12,7 +12,7 @@ pub fn get(dbs: &Database, similar_key: &str) -> Vec<SimilarOutput> {
         .filter_map(|result| {
             let (key, value) = result.ok()?;
             let key = std::str::from_utf8(&key).ok()?;
-            if key == similar_key {
+            if key == kalima {
                 // Deserialize the value into Similar
                 let similar: Similar = bincode::deserialize(&value).ok()?;
 

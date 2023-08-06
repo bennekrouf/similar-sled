@@ -5,8 +5,8 @@ use crate::db::similar::similars_solutions::get_solution;
 use crate::domain::coran::models::VerseUngrouped;
 use crate::models::Database;
 
-pub fn generate_exercise(dbs: &Database, similar_key: String) -> Option<(VerseUngrouped, Vec<String>)> {
-    let mut exercises = get_solution(dbs, similar_key);
+pub fn generate_exercise(dbs: &Database, kalima: String) -> Option<(VerseUngrouped, Vec<String>)> {
+    let mut exercises = get_solution(dbs, &kalima);
     
     if exercises.is_empty() {
         return None;
@@ -21,7 +21,7 @@ pub fn generate_exercise(dbs: &Database, similar_key: String) -> Option<(VerseUn
     // Temporarily remove the selected verse
     let mut selected_verse = exercise.verses.remove(selected_verse_index);
     let selected_discriminant = selected_verse.discriminant.take(); // hide the discriminant
-    let _selected_kalima = selected_verse.kalima.clear(); // hide the kalima
+    // let _selected_kalima = selected_verse.kalima.clear(); // hide the kalima
 
     // Extract discriminants from verses, handling whether or not verse has opposites
     let other_discriminants: Vec<String> = exercise.verses.iter()

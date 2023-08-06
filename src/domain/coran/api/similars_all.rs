@@ -8,31 +8,32 @@ use crate::db::similar::similars_solutions;
 use crate::db::similar::check_discriminant;
 use crate::db::similar::generate_exercise::generate_exercise;
 
-#[get("/check_discriminant?<kalima>&<ayah>&<chapter>")]
+#[get("/check_discriminant?<kalima>&<discriminant>&<ayah>&<chapter>")]
 pub fn check_discriminant(
     kalima: String,
+    discriminant: Option<String>,
     ayah: u32,
     chapter: u32,
     dbs: State<Database>,
 ) -> Json<bool> {
     let is_match = check_discriminant::check_discriminant(
         &dbs,
-        // similar_key.as_deref().unwrap_or_default(),
         kalima,
+        discriminant,
         ayah,
         chapter,
     );
     Json(is_match)
 }
 
-#[get("/exercise/<similar_key>")]
-pub fn generate_exercise_endpoint(similar_key: String, dbs: State<Database>) -> Option<Json<(VerseUngrouped, Vec<String>)>> {
-    generate_exercise(&dbs, similar_key).map(Json)
+#[get("/exercise/<kalima>")]
+pub fn generate_exercise_endpoint(kalima: String, dbs: State<Database>) -> Option<Json<(VerseUngrouped, Vec<String>)>> {
+    generate_exercise(&dbs, kalima).map(Json)
 }
 
-#[get("/solutions/<similar_key>")]
-pub fn get_solutions(similar_key: String, dbs: State<Database>) -> Json<Vec<ExerciseOutput>> {
-    let solutions = similars_solutions::get_solution(&dbs, similar_key);
+#[get("/solutions/<kalima>")]
+pub fn get_solutions(kalima: String, dbs: State<Database>) -> Json<Vec<ExerciseOutput>> {
+    let solutions = similars_solutions::get_solution(&dbs, &kalima);
     Json(solutions)
 }
 

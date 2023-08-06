@@ -9,10 +9,10 @@ pub fn get(dbs: &Database, chapter: u32) -> Vec<SimilarOutputAdapted> {
 
     let mut similar_objects: Vec<SimilarOutputAdapted> = Vec::new();
 
-    for similar_key in similar_keys {
-        let similar = similars_by_key::get(dbs, &similar_key);
+    for kalima in similar_keys {
+        let similar = similars_by_key::get(dbs, &kalima);
         if similar.is_empty() {
-            info!("similar empty for key : {:?}", &similar_key);
+            info!("similar empty for key : {:?}", &kalima);
         } else {
             let mut verses: Vec<VerseOutput> = Vec::new();
             let mut similars: Vec<VerseOutput> = Vec::new();
