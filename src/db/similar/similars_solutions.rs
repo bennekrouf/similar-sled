@@ -51,7 +51,10 @@ pub fn convert_to_exercise(dbs: &Database, similar: &Similar) -> ExerciseOutput 
             chapter_name,
             ayah: verse.ayah,
             chapter: verse.chapter,
-            has_opposites: !similar.opposite_similars.as_deref().unwrap().is_empty(),
+            has_opposites: match &similar.opposite_similars {
+                Some(opposite_similars) => !opposite_similars.is_empty(),
+                None => false,
+            },
         });
     }
 

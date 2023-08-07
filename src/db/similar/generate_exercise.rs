@@ -51,7 +51,9 @@ pub fn generate_exercise(dbs: &Database, kalima: String) -> Option<(VerseUngroup
 
     // Add the selected verse back into the exercise
     exercise.verses.insert(selected_verse_index, selected_verse.clone());
-    other_discriminants.push(selected_discriminant.unwrap());
+    if let Some(discr) = selected_discriminant {
+        other_discriminants.push(discr);
+    }
 
     Some((selected_verse, other_discriminants))
 }
