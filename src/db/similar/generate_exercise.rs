@@ -29,11 +29,11 @@ pub fn generate_exercise(dbs: &Database, kalima: String) -> Option<(VerseUngroup
         match &verse.discriminant {
             Some(discriminant) => {
                 if Some(discriminant) != selected_discriminant.as_ref() {
-                    if !verse.has_opposites {
-                        Some(verse.kalima.clone())
-                    } else {
+                    // if !verse.has_opposites {
+                    //     Some(verse.kalima.clone())
+                    // } else {
                         Some(discriminant.clone())
-                    }
+                    // }
                 } else {
                     None
                 }
