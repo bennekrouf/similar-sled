@@ -20,13 +20,13 @@ pub fn check_discriminant(
                 continue;
             }
 
-            if verse.has_opposites && verse.discriminant != discriminant {
+            if verse.discriminant != discriminant {
                 continue;
             }
 
-            if verse.kalima != kalima.clone() {
-                continue;
-            }
+            // if verse.kalima != kalima.clone() {
+            //     continue;
+            // }
 
             if verse.chapter != chapter {
                 continue;
