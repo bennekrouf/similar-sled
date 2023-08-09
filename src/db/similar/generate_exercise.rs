@@ -1,6 +1,7 @@
 use std::collections::HashSet;
-
+use rand::seq::SliceRandom;
 use rand::Rng;
+
 use crate::db::similar::similars_solutions::get_solution;
 use crate::domain::coran::models::VerseUngrouped;
 use crate::models::Database;
@@ -29,11 +30,7 @@ pub fn generate_exercise(dbs: &Database, kalima: String) -> Option<(VerseUngroup
         match &verse.discriminant {
             Some(discriminant) => {
                 if Some(discriminant) != selected_discriminant.as_ref() {
-                    // if !verse.has_opposites {
-                    //     Some(verse.kalima.clone())
-                    // } else {
-                        Some(discriminant.clone())
-                    // }
+                    Some(discriminant.clone())
                 } else {
                     None
                 }
@@ -51,9 +48,17 @@ pub fn generate_exercise(dbs: &Database, kalima: String) -> Option<(VerseUngroup
 
     // Add the selected verse back into the exercise
     exercise.verses.insert(selected_verse_index, selected_verse.clone());
+    // Ensure the list has a maximum of 2 items
+    other_discriminants.truncate(2);
+
+    // Add the selected_discriminant to the list
     if let Some(discr) = selected_discriminant {
         other_discriminants.push(discr);
     }
+
+    // Shuffle the other_discriminants vector
+    let mut rng = rand::thread_rng();
+    other_discriminants.shuffle(&mut rng);
 
     Some((selected_verse, other_discriminants))
 }
