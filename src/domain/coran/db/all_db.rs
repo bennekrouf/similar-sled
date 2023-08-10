@@ -1,8 +1,8 @@
 use std::path::PathBuf;
 
 use crate::models::Database;
-use crate::db::chapter::chapters_init;
-use crate::db::similar::similars_init;
+use crate::domain::coran::db::chapter::chapters_init;
+use crate::domain::coran::db::similar::similars_init;
 use crate::domain::hadith::mousned_init;
 
 pub fn init(absolute_data_folder_path: &PathBuf) -> Database {

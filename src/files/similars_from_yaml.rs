@@ -43,9 +43,9 @@ fn traverse_directory(
                             if similar.verses.is_empty() {
                                 info!("Missing field in file: {:?}", &path);
                             }
-                            if similar.opposite_similars.as_ref().map_or(false, |v| !v.is_empty()) {
-                                info!("opposite_similars field in file: {:?}", &path);
-                            }
+                            // if similar.opposite_similars.as_ref().map_or(false, |v| !v.is_empty()) {
+                            //     info!("opposite_similars field in file: {:?}", &path);
+                            // }
                         }
                         similars.extend(file_similars);
                     }

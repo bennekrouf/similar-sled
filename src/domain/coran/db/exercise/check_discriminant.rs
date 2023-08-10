@@ -1,20 +1,16 @@
 use crate::models::Database;
-use crate::db::similar::similars_solutions::get_solution;
+use crate::domain::coran::db::exercise::get_solution::get_solution;
 
 pub fn check_discriminant(
     dbs: &Database, 
     kalima: String,
     discriminant: Option<String>,
     ayah: u32, 
-    chapter: u32
+    chapter_no: u32
 ) -> bool {
     let solutions = get_solution(dbs, &kalima);
 
     for exercise in solutions {
-        // if exercise.kalima != kalima {
-        //     continue;
-        // }
-
         for verse in exercise.verses {
             if verse.ayah != ayah {
                 continue;
@@ -24,11 +20,7 @@ pub fn check_discriminant(
                 continue;
             }
 
-            // if verse.kalima != kalima.clone() {
-            //     continue;
-            // }
-
-            if verse.chapter != chapter {
+            if verse.chapter_no != chapter_no {
                 continue;
             }
 

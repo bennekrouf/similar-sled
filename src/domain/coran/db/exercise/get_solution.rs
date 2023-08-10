@@ -1,7 +1,7 @@
 use crate::domain::coran::models::{Similar, ExerciseOutput, VerseUngrouped};
 use crate::models::Database;
 use crate::utils::extract_parts::extract_parts;
-use crate::db::chapter::chapter_name;
+use crate::domain::coran::db::chapter::chapter_name;
 
 pub fn get_solution(dbs: &Database, kalima: &String) -> Vec<ExerciseOutput> {
     let similar_db = &dbs.similar_db;
@@ -36,7 +36,7 @@ pub fn convert_to_exercise(dbs: &Database, similar: &Similar) -> ExerciseOutput 
     for verse in &similar.verses {
         let (pre, discriminant, post) = extract_parts(&verse.text);
 
-        let chapter_name_result = chapter_name::get(dbs, verse.chapter as u8);
+        let chapter_name_result = chapter_name::get(dbs, verse.chapter_no as u8);
         let chapter_name = match chapter_name_result {
                 Ok(Some(name)) => name,
                 Ok(None) | Err(_) => String::from("No found"),
@@ -50,7 +50,7 @@ pub fn convert_to_exercise(dbs: &Database, similar: &Similar) -> ExerciseOutput 
             kalima: similar.kalima.clone(),
             chapter_name,
             ayah: verse.ayah,
-            chapter: verse.chapter,
+            chapter_no: verse.chapter_no,
             has_opposites: match &similar.opposite_similars {
                 Some(opposite_similars) => !opposite_similars.is_empty(),
                 None => false,
@@ -64,7 +64,7 @@ pub fn convert_to_exercise(dbs: &Database, similar: &Similar) -> ExerciseOutput 
                 if let Ok(similar) = bincode::deserialize::<Similar>(&data) {
                     for verse in &similar.verses {
 
-                        let chapter_name_result = chapter_name::get(dbs, verse.chapter as u8);
+                        let chapter_name_result = chapter_name::get(dbs, verse.chapter_no as u8);
                         let chapter_name = match chapter_name_result {
                                 Ok(Some(name)) => name,
                                 Ok(None) | Err(_) => String::from("No found"),
@@ -78,7 +78,7 @@ pub fn convert_to_exercise(dbs: &Database, similar: &Similar) -> ExerciseOutput 
                             chapter_name,
                             post,
                             ayah: verse.ayah,
-                            chapter: verse.chapter,
+                            chapter_no: verse.chapter_no,
                             has_opposites: !similar.opposite_similars.clone().unwrap().is_empty(),
                         });
                     }

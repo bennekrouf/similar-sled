@@ -1,10 +1,10 @@
 use bincode;
 use std::collections::HashSet;
 use crate::files::similars_from_yaml::load;
-use crate::db::verse::verse_insert;
+use crate::domain::coran::db::verse::verse_insert;
 use crate::domain::coran::models::Verse;
 use crate::models::Database;
-use crate::db::similar::similars_insert;
+use crate::domain::coran::db::similar::similars_insert;
 
 pub fn init(dbs: &Database) {
     let similars = load().expect("Failed to load YAML file");
@@ -24,7 +24,7 @@ pub fn init(dbs: &Database) {
 
 fn update_verse_similar_mapping(dbs: &Database, verse: &Verse, kalima: &str) {
     let chapter_similar_db = &dbs.chapter_similar_db;
-    let chapter_no = verse.chapter.to_string();
+    let chapter_no = verse.chapter_no.to_string();
     let similar_keys = get_similar_keys(dbs, &chapter_no);
     let mut similar_keys_set: HashSet<String> = similar_keys.into_iter().collect();
 

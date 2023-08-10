@@ -1,7 +1,7 @@
 use crate::domain::coran::models::{SimilarOutput, Similar, Verse, VerseOutput};
 use crate::models::Database;
 use crate::utils::sort;
-use crate::db::chapter::chapter_name;
+use crate::domain::coran::db::chapter::chapter_name;
 use log::info;
 
 pub fn get(dbs: &Database, kalima: &str) -> Vec<SimilarOutput> {
@@ -32,7 +32,7 @@ pub fn get(dbs: &Database, kalima: &str) -> Vec<SimilarOutput> {
 
 fn sourate_name_from_verse(dbs: &Database, verse: &Verse) -> String {
     // Some logic to get the sourate name from the verse chapter
-    let chapter_name_result = chapter_name::get(dbs, verse.chapter as u8);
+    let chapter_name_result = chapter_name::get(dbs, verse.chapter_no as u8);
     match chapter_name_result {
         Ok(Some(name)) => name,
         Ok(None) | Err(_) => String::from("No found"),
@@ -44,7 +44,7 @@ fn convert_verses(dbs: &Database, verses: &[Verse]) -> Vec<VerseOutput> {
     verses.iter().map(|verse| {
         VerseOutput {
             verse: verse.clone(),
-            chapter: verse.chapter,
+            chapter_no: verse.chapter_no,
             sourate: sourate_name_from_verse(dbs, verse),
         }
     }).collect()
@@ -86,7 +86,7 @@ pub fn convert_to_output(dbs: &Database, similar: &Similar) -> SimilarOutput {
 
     if let Some(opposite_similars) = &similar.opposite_similars {
         if !opposite_similars.is_empty() {
-            info!("Found opposite similars: {:?}", opposite_similars);
+            // info!("Found opposite similars: {:?}", opposite_similars);
             opposites = convert_opposites(dbs, opposite_similars);
         }
     }

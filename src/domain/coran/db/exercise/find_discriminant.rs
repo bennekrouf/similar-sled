@@ -2,11 +2,11 @@ use std::collections::HashSet;
 use rand::seq::SliceRandom;
 use rand::Rng;
 
-use crate::db::similar::similars_solutions::get_solution;
+use crate::domain::coran::db::exercise::get_solution::get_solution;
 use crate::domain::coran::models::VerseUngrouped;
 use crate::models::Database;
 
-pub fn generate_exercise(dbs: &Database, kalima: String) -> Option<(VerseUngrouped, Vec<String>)> {
+pub fn generate(dbs: &Database, kalima: String) -> Option<(VerseUngrouped, Vec<String>)> {
     let mut exercises = get_solution(dbs, &kalima);
     
     if exercises.is_empty() {

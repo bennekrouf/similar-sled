@@ -5,15 +5,39 @@ mod files {
 }
 
 pub mod models;
-mod domain {
+pub mod domain {
     pub mod coran {
         pub mod models;
         pub mod api {
                 pub mod similars_all;
                 pub mod verse_by_chapter;
                 pub mod verse_similar_by_chapter;
-            }
         }
+        pub mod db {
+            pub mod chapter {
+                pub mod chapter_name;
+                pub mod chapter_insert;
+                pub mod chapters_init;
+            }
+            pub mod similar {
+                pub mod similars_insert;
+                pub mod similars_init;
+                pub mod similars_by_chapter;
+                pub mod similars_by_key;
+            }
+            pub mod exercise {
+                pub mod find_discriminant;
+                pub mod check_discriminant;
+                pub mod get_solution;
+            }
+            pub mod verse {
+                pub mod verses_by_chapter;
+                pub mod verse_insert;
+            }
+            pub mod all_db;
+        }
+    }
+
     pub mod hadith {
         pub mod models;
         pub mod mousned_from_yaml;
@@ -28,28 +52,6 @@ mod utils {
     pub mod yml_path;
     pub mod sort;
     pub mod extract_parts;
-}
-
-mod db {
-    pub mod chapter {
-        pub mod chapter_name;
-        pub mod chapter_insert;
-        pub mod chapters_init;
-    }
-    pub mod similar {
-        pub mod similars_insert;
-        pub mod similars_init;
-        pub mod similars_by_chapter;
-        pub mod similars_by_key;
-        pub mod similars_solutions;
-        pub mod check_discriminant;
-        pub mod generate_exercise;
-    }
-    pub mod verse {
-        pub mod verses_by_chapter;
-        pub mod verse_insert;
-    }
-    pub mod all_db;
 }
 
 mod validator;

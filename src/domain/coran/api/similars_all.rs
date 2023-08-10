@@ -3,17 +3,17 @@ use rocket_contrib::json::Json;
 
 use crate::domain::coran::models::{Chapter, ExerciseOutput, VerseUngrouped};
 use crate::models::Database;
-use crate::db::similar::similars_by_chapter;
-use crate::db::similar::similars_solutions;
-use crate::db::similar::check_discriminant;
-use crate::db::similar::generate_exercise::generate_exercise;
+use crate::domain::coran::db::similar::similars_by_chapter;
+use crate::domain::coran::db::exercise::get_solution;
+use crate::domain::coran::db::exercise::check_discriminant;
+use crate::domain::coran::db::exercise::find_discriminant;
 
-#[get("/check_discriminant?<kalima>&<discriminant>&<ayah>&<chapter>")]
+#[get("/check_discriminant?<kalima>&<discriminant>&<ayah>&<chapter_no>")]
 pub fn check_discriminant(
     kalima: String,
     discriminant: Option<String>,
     ayah: u32,
-    chapter: u32,
+    chapter_no: u32,
     dbs: State<Database>,
 ) -> Json<bool> {
     let is_match = check_discriminant::check_discriminant(
@@ -21,19 +21,19 @@ pub fn check_discriminant(
         kalima,
         discriminant,
         ayah,
-        chapter,
+        chapter_no,
     );
     Json(is_match)
 }
 
 #[get("/exercise/<kalima>")]
 pub fn generate_exercise_endpoint(kalima: String, dbs: State<Database>) -> Option<Json<(VerseUngrouped, Vec<String>)>> {
-    generate_exercise(&dbs, kalima).map(Json)
+   find_discriminant::generate(&dbs, kalima).map(Json)
 }
 
 #[get("/solutions/<kalima>")]
 pub fn get_solutions(kalima: String, dbs: State<Database>) -> Json<Vec<ExerciseOutput>> {
-    let solutions = similars_solutions::get_solution(&dbs, &kalima);
+    let solutions = get_solution::get_solution(&dbs, &kalima);
     Json(solutions)
 }
 

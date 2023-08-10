@@ -12,9 +12,16 @@ pub struct Chapter {
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Clone)]
 pub struct Verse {
-    pub text: String,
+    pub chapter_no: u32,
     pub ayah: u32,
-    pub chapter: u32,
+    pub text: String,
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone)]
+pub struct VerseOutput {
+    pub chapter_no: u32,
+    pub sourate: String,
+    pub verse: Verse,
 }
 
 #[derive(Serialize, Deserialize, Debug, PartialEq)]
@@ -24,12 +31,6 @@ pub struct Similar {
     pub verses: Vec<Verse>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone)]
-pub struct VerseOutput {
-    pub verse: Verse,
-    pub chapter: u32,
-    pub sourate: String,
-}
 #[derive(Serialize, Deserialize, Debug)]
 pub struct SimilarOutput {
     pub verses: Vec<VerseOutput>,
@@ -44,25 +45,15 @@ pub struct SimilarOutputAdapted {
     pub opposites: Vec<VerseOutput>,
     pub kalima: String,
 }
-#[derive(Serialize, Deserialize, Debug)]
-pub struct VerseSimilarOutput {
-    pub verse: Verse,
-    pub similar_keys: Vec<String>,
-}
-#[derive(Serialize, Deserialize, Debug)]
-pub struct ChapterSimilarOutput {
-    pub chapter_name: String,
-    pub similar_objects: Vec<Similar>,
-}
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct VerseUngrouped {
     pub kalima: String,
+    pub chapter_no: u32,
+    pub chapter_name: String,
+    pub ayah: u32,
     pub pre: Option<String>,
     pub discriminant: Option<String>,
     pub post: Option<String>,
-    pub chapter_name: String,
-    pub ayah: u32,
-    pub chapter: u32,
     pub has_opposites: bool,
 }
 

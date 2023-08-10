@@ -2,7 +2,7 @@ use rocket::{routes, Rocket};
 use std::env;
 use log::LevelFilter;
 use crate::utils::data_folder_path;
-use crate::db::all_db;
+use crate::domain::coran::db::all_db;
 use rocket::http::Method;
 use rocket_cors::{AllowedHeaders, AllowedOrigins, CorsOptions};
 
