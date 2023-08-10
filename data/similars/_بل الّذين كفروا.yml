@@ -1,8 +1,13 @@
 - kalima: 'بل الّذين كفروا'
   verses:
-    - chapter: 38
+    - chapter_no: 38
       ayah: 2
       text: 'بَلِ ٱلَّذِينَ كَفَرُوا۟ [فِى عِزَّةٍ وَشِقَاقٍ]'
-    - chapter: 85
+      previous: ''
+      next: ''
+
+    - chapter_no: 85
       ayah: 19
       text: 'بَلِ ٱلَّذِينَ كَفَرُوا۟ [فِى تَكْذِيبٍ]'
+      previous: ''
+      next: ''
