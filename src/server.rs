@@ -2,17 +2,17 @@ use rocket::{routes, Rocket};
 use std::env;
 use log::LevelFilter;
 use crate::utils::data_folder_path;
-use crate::domain::coran::db::all_db;
+use crate::db::all_db;
 use rocket::http::Method;
 use rocket_cors::{AllowedHeaders, AllowedOrigins, CorsOptions};
 
-use crate::domain::coran::api::verse_by_chapter::static_rocket_route_info_for_get_verse;
-use crate::domain::coran::api::get_chapters::static_rocket_route_info_for_get_chapters;
-use crate::domain::coran::api::get_solutions::static_rocket_route_info_for_get_solutions;
-use crate::domain::coran::api::check_discriminant::static_rocket_route_info_for_check_discriminant;
-use crate::domain::coran::api::generate_exercise_endpoint::static_rocket_route_info_for_generate_exercise_endpoint;
+use crate::api::verse_by_chapter::static_rocket_route_info_for_get_verse;
+use crate::api::get_chapters::static_rocket_route_info_for_get_chapters;
+use crate::api::get_solutions::static_rocket_route_info_for_get_solutions;
+use crate::api::check_discriminant::static_rocket_route_info_for_check_discriminant;
+use crate::api::generate_exercise_endpoint::static_rocket_route_info_for_generate_exercise_endpoint;
 
-use crate::domain::coran::api::verse_similar_by_chapter::static_rocket_route_info_for_get_verse_similar_by_chapter_route;
+use crate::api::verse_similar_by_chapter::static_rocket_route_info_for_get_verse_similar_by_chapter_route;
 
 pub fn start_server() {
     // Set the log level based on the RUST_LOG environment variable

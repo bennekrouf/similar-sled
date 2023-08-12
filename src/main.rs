@@ -5,41 +5,36 @@ mod files {
 }
 
 pub mod models;
-pub mod domain {
-    pub mod coran {
-        pub mod models;
-        pub mod api {
-                pub mod check_discriminant;
-                pub mod generate_exercise_endpoint;
-                pub mod get_chapters;
-                pub mod get_solutions;
-                pub mod verse_by_chapter;
-                pub mod verse_similar_by_chapter;
-        }
-        pub mod db {
-            pub mod chapter {
-                pub mod chapter_name;
-                pub mod chapter_insert;
-                pub mod chapters_init;
-            }
-            pub mod similar {
-                pub mod similars_insert;
-                pub mod similars_init;
-                pub mod similars_by_chapter;
-                pub mod similars_by_key;
-            }
-            pub mod exercise {
-                pub mod find_discriminant;
-                pub mod check_discriminant;
-                pub mod get_solution;
-            }
-            pub mod verse {
-                pub mod verses_by_chapter;
-                pub mod verse_insert;
-            }
-            pub mod all_db;
-        }
+pub mod api {
+        pub mod check_discriminant;
+        pub mod generate_exercise_endpoint;
+        pub mod get_chapters;
+        pub mod get_solutions;
+        pub mod verse_by_chapter;
+        pub mod verse_similar_by_chapter;
+}
+pub mod db {
+    pub mod chapter {
+        pub mod chapter_name;
+        pub mod chapter_insert;
+        pub mod chapters_init;
     }
+    pub mod similar {
+        pub mod similars_insert;
+        pub mod similars_init;
+        pub mod similars_by_chapter;
+        pub mod similars_by_key;
+    }
+    pub mod exercise {
+        pub mod find_discriminant;
+        pub mod check_discriminant;
+        pub mod get_solution;
+    }
+    pub mod verse {
+        pub mod verses_by_chapter;
+        pub mod verse_insert;
+    }
+    pub mod all_db;
 }
 
 mod utils {

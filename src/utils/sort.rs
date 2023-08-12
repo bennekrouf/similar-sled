@@ -1,4 +1,4 @@
-use crate::domain::coran::models::SimilarOutput;
+use crate::models::SimilarOutput;
 
 pub fn sort_similars(similars: &mut [SimilarOutput]) {
     similars.sort_by(|a, b| {

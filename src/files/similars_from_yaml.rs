@@ -1,7 +1,7 @@
 use std::fs::{self, File};
 use std::io::Read;
 use crate::utils::yml_path;
-use crate::domain::coran::models::Similar;
+use crate::models::Similar;
 
 use std::error::Error;
 use std::path::Path;
