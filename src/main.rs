@@ -9,7 +9,10 @@ pub mod domain {
     pub mod coran {
         pub mod models;
         pub mod api {
-                pub mod similars_all;
+                pub mod check_discriminant;
+                pub mod generate_exercise_endpoint;
+                pub mod get_chapters;
+                pub mod get_solutions;
                 pub mod verse_by_chapter;
                 pub mod verse_similar_by_chapter;
         }

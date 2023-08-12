@@ -10,10 +10,10 @@ use crate::domain::hadith::api::static_rocket_route_info_for_get_ahadith_by_sahi
 use crate::domain::hadith::api::static_rocket_route_info_for_get_all_ahadith_counts_route;
 
 use crate::domain::coran::api::verse_by_chapter::static_rocket_route_info_for_get_verse;
-use crate::domain::coran::api::similars_all::static_rocket_route_info_for_get_chapters;
-use crate::domain::coran::api::similars_all::static_rocket_route_info_for_get_solutions;
-use crate::domain::coran::api::similars_all::static_rocket_route_info_for_check_discriminant;
-use crate::domain::coran::api::similars_all::static_rocket_route_info_for_generate_exercise_endpoint;
+use crate::domain::coran::api::get_chapters::static_rocket_route_info_for_get_chapters;
+use crate::domain::coran::api::get_solutions::static_rocket_route_info_for_get_solutions;
+use crate::domain::coran::api::check_discriminant::static_rocket_route_info_for_check_discriminant;
+use crate::domain::coran::api::generate_exercise_endpoint::static_rocket_route_info_for_generate_exercise_endpoint;
 
 use crate::domain::coran::api::verse_similar_by_chapter::static_rocket_route_info_for_get_verse_similar_by_chapter_route;
 

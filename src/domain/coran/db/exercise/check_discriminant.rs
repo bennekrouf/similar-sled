@@ -7,28 +7,30 @@ pub fn check_discriminant(
     discriminant: Option<String>,
     ayah: u32, 
     chapter_no: u32
-) -> bool {
+) -> (bool, String) {
     let solutions = get_solution(dbs, &kalima);
-
-    for exercise in solutions {
-        for verse in exercise.verses {
-            if verse.ayah != ayah {
-                continue;
+    
+    // First loop to check if a match exists
+    for exercise in &solutions {
+        for verse in &exercise.verses {
+            if verse.ayah == ayah && verse.chapter_no == chapter_no && verse.discriminant == discriminant {
+                // Match found
+                return (true, String::from(""));
             }
-
-            if verse.discriminant != discriminant {
-                continue;
+        }
+    }
+    
+    // If we reached here, no match was found in the first loop
+    // Let's now try to find the chapter name for the given ayah and chapter_no
+    for exercise in &solutions {
+        for verse in &exercise.verses {
+            if verse.ayah == ayah && verse.chapter_no == chapter_no {
+                // Return the chapter name of the matching verse
+                return (false, verse.chapter_name.clone());
             }
-
-            if verse.chapter_no != chapter_no {
-                continue;
-            }
-
-            // All fields matched, return true
-            return true;
         }
     }
 
-    // No match found in any exercise
-    false
+    // If we reached here, we didn't even find a verse with matching ayah and chapter_no
+    (false, String::from("Chapter name not found"))
 }
