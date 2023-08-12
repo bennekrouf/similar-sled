@@ -40,14 +40,6 @@ pub mod domain {
             pub mod all_db;
         }
     }
-
-    pub mod hadith {
-        pub mod models;
-        pub mod mousned_from_yaml;
-        pub mod mousned_init;
-        pub mod api;
-        pub mod get_ahadith_by_sahib;
-    }
 }
 
 mod utils {

@@ -6,9 +6,6 @@ use crate::domain::coran::db::all_db;
 use rocket::http::Method;
 use rocket_cors::{AllowedHeaders, AllowedOrigins, CorsOptions};
 
-use crate::domain::hadith::api::static_rocket_route_info_for_get_ahadith_by_sahib_route;
-use crate::domain::hadith::api::static_rocket_route_info_for_get_all_ahadith_counts_route;
-
 use crate::domain::coran::api::verse_by_chapter::static_rocket_route_info_for_get_verse;
 use crate::domain::coran::api::get_chapters::static_rocket_route_info_for_get_chapters;
 use crate::domain::coran::api::get_solutions::static_rocket_route_info_for_get_solutions;
@@ -57,9 +54,5 @@ rocket::ignite()
         generate_exercise_endpoint,
         get_chapters,
         get_verse_similar_by_chapter_route,
-        ])
-    .mount("/ahadith", routes![
-        get_ahadith_by_sahib_route,
-        get_all_ahadith_counts_route,
     ])
 }
