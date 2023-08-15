@@ -1,0 +1,10 @@
+http://localhost:8000/chapters
+
+http://localhost:8000/ahadith/%D8%A7%D9%94%D8%A8%D9%8A%D8%B6%20%D8%A8%D9%86%20%D8%AD%D9%85%D9%91%D8%A7%D9%84
+
+http://localhost:8000/similars/13
+
+http://localhost:8000/exercise/%D8%A5%D9%86%D9%87%20%D9%84%D8%A7%D9%8A%D9%81%D9%84%D8%AD
+
+http://localhost:8000/check_discriminant?discriminant=%D8%A3%D9%8E%D9%86%D9%8E%D9%91%20%D9%B1%D9%84%D9%84%D9%8E%D9%91%D9%87%D9%8E%20%D9%8A%D9%8E%D8%B9%D9%92%D9%84%D9%8E%D9%85%D9%8F%20%D8%B3%D9%90%D8%B1%D9%8E%D9%91%D9%87%D9%8F%D9%85%D9%92%20%D9%88%D9%8E%D9%86%D9%8E%D8%AC%D9%92%D9%88%D9%8E%D9%89%D9%B0%D9%87%D9%8F%D9%85%D9%92&ayah=104&chapter_no=9&kalima=%D8%A3%D9%84%D9%85%20%D9%8A%D8%B9%D9%84%D9%85%D9%88%D8%A7
+
