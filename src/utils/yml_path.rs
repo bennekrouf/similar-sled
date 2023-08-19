@@ -1,5 +1,4 @@
 use std::path::PathBuf;
-use std::fs::File;
 use serde_yaml;
 use std::env;
 use crate::models::AppConfig;
