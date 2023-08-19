@@ -7,5 +7,8 @@ pub fn insert(dbs: &Database, verse: &Verse) -> sled::Result<Option<IVec>> {
 
     let key = format!("{}:{}", verse.chapter_no, verse.ayah);
 
-    verse_db.insert(&key, verse.text.as_str())
+    // Remove the "غغغ" pattern from the text
+    let cleaned_text = verse.text.replace("غغغ", "");
+
+    verse_db.insert(&key, cleaned_text.as_str())
 }
