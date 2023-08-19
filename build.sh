@@ -14,6 +14,7 @@ SRC="/home/similar/similar-sled2/target/release/similars-sled"
 DEST="/home/similar/${ENV}/similars-sled-${ENV}"
 
 if [ "$SRC" != "$DEST" ]; then
+    rm -Rf "$DEST"
     mv "$SRC" "$DEST"
 else
     echo "Source and destination are the same. Skipping move operation."
