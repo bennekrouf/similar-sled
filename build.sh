@@ -9,5 +9,13 @@ fi
 ENV=$1
 
 APP_ENV=${ENV} cargo build --release
-cp -r target/release/similars-sled /home/similar/${ENV}/similars-sled-${ENV}
+
+SRC="target/release/similars-sled"
+DEST="/home/similar/${ENV}/similars-sled-${ENV}"
+
+if [ "$SRC" != "$DEST" ]; then
+    mv "$SRC" "$DEST"
+else
+    echo "Source and destination are the same. Skipping move operation."
+fi
 cp -r config.${ENV}.yml /home/similar/${ENV}/
