@@ -2,7 +2,6 @@ use crate::models::{SimilarOutput, Similar, Verse, VerseOutput};
 use crate::models::Database;
 use crate::utils::sort;
 use crate::db::chapter::chapter_name;
-use log::info;
 
 pub fn get(dbs: &Database, kalima: &str) -> Vec<SimilarOutput> {
     let similar_db = &dbs.similar_db;

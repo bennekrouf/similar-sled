@@ -80,3 +80,10 @@ impl Clone for Database {
         }
     }
 }
+
+#[derive(Deserialize)]
+pub struct AppConfig {
+    pub macos_path: String,
+    pub debian_path: String,
+    pub port: u16,
+}
