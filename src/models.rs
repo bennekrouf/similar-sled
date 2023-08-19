@@ -45,6 +45,7 @@ pub struct SimilarOutputAdapted {
     pub opposites: Vec<VerseOutput>,
     pub kalima: String,
 }
+
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct VerseUngrouped {
     pub kalima: String,
@@ -86,4 +87,10 @@ pub struct AppConfig {
     pub macos_path: String,
     pub debian_path: String,
     pub port: u16,
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone)]
+pub enum ExerciseType {
+    A,
+    B,
 }

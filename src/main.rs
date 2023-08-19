@@ -7,6 +7,7 @@ mod files {
 pub mod models;
 pub mod api {
         pub mod check_discriminant;
+        pub mod check_chapter;
         pub mod generate_exercise_endpoint;
         pub mod get_chapters;
         pub mod get_solutions;
@@ -24,10 +25,12 @@ pub mod db {
         pub mod similars_init;
         pub mod similars_by_chapter;
         pub mod similars_by_key;
+        pub mod similars_by_key_count;
     }
     pub mod exercise {
         pub mod find_discriminant;
         pub mod check_discriminant;
+        pub mod check_chapter;
         pub mod get_solution;
     }
     pub mod verse {

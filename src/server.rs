@@ -13,7 +13,9 @@ use crate::api::verse_by_chapter::static_rocket_route_info_for_get_verse;
 use crate::api::get_chapters::static_rocket_route_info_for_get_chapters;
 use crate::api::get_solutions::static_rocket_route_info_for_get_solutions;
 use crate::api::check_discriminant::static_rocket_route_info_for_check_discriminant;
+use crate::api::check_chapter::static_rocket_route_info_for_check_chapter;
 use crate::api::generate_exercise_endpoint::static_rocket_route_info_for_generate_exercise_endpoint;
+use crate::api::generate_exercise_endpoint::static_rocket_route_info_for_generate_exercise_list_endpoint;
 
 use crate::api::verse_similar_by_chapter::static_rocket_route_info_for_get_verse_similar_by_chapter_route;
 use crate::utils::yml_path::load_config;
@@ -76,7 +78,9 @@ fn rocket() -> Rocket {
             get_verse,
             get_solutions,
             check_discriminant,
+            check_chapter,
             generate_exercise_endpoint,
+            generate_exercise_list_endpoint,
             get_chapters,
             get_verse_similar_by_chapter_route,
         ])
