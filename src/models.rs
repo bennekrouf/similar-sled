@@ -46,7 +46,7 @@ pub struct SimilarOutputAdapted {
     pub kalima: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone)]
+#[derive(Serialize, Deserialize, Debug, Eq, PartialEq, Clone, Hash)]
 pub struct VerseUngrouped {
     pub kalima: String,
     pub chapter_no: u32,
@@ -89,8 +89,14 @@ pub struct AppConfig {
     pub port: u16,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone)]
+#[derive(Serialize, Deserialize, Debug, Hash, Eq, PartialEq, Clone)]
 pub enum ExerciseType {
     A,
     B,
+}
+
+#[derive(Serialize, Deserialize, Clone, Eq, PartialEq, Hash, Ord, PartialOrd)]
+pub struct ChapterAyah {
+    pub chapter_name: String,
+    pub ayah: Option<u32>,
 }
