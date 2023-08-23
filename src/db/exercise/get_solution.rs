@@ -1,7 +1,7 @@
-use crate::models::{Similar, ExerciseOutput, VerseUngrouped};
+use crate::models::{Similar, ExerciseOutput, Statement};
 use crate::models::Database;
 use crate::utils::extract_parts::extract_parts;
-use crate::db::chapter::chapter_name;
+use crate::db::chapter::chapter;
 
 pub fn get_solution(dbs: &Database, kalima: &String) -> Vec<ExerciseOutput> {
     let similar_db = &dbs.similar_db;
@@ -36,21 +36,19 @@ pub fn convert_to_exercise(dbs: &Database, similar: &Similar) -> ExerciseOutput 
     for verse in &similar.verses {
         let (pre, discriminant, post) = extract_parts(&verse.text);
 
-        let chapter_name_result = chapter_name::get(dbs, verse.chapter_no as u8);
-        let chapter_name = match chapter_name_result {
-                Ok(Some(name)) => name,
+        let chapter_name_result = chapter::get(dbs, verse.chapter_no as u8);
+        let sourate = match chapter_name_result {
+                Ok(Some(sourate)) => sourate,
                 Ok(None) | Err(_) => String::from("No found"),
             };
 
-        all_verses.push(VerseUngrouped {
+        all_verses.push(Statement {
             // text: verse.text.clone(),
+            verse: verse.clone(),
             pre,
             discriminant,
             post,
             kalima: similar.kalima.clone(),
-            chapter_name,
-            ayah: verse.ayah,
-            chapter_no: verse.chapter_no,
             has_opposites: match &similar.opposite_similars {
                 Some(opposite_similars) => !opposite_similars.is_empty(),
                 None => false,
@@ -64,21 +62,19 @@ pub fn convert_to_exercise(dbs: &Database, similar: &Similar) -> ExerciseOutput 
                 if let Ok(similar) = bincode::deserialize::<Similar>(&data) {
                     for verse in &similar.verses {
 
-                        let chapter_name_result = chapter_name::get(dbs, verse.chapter_no as u8);
-                        let chapter_name = match chapter_name_result {
+                        let chapter_name_result = chapter::get(dbs, verse.chapter_no as u8);
+                        let sourate = match chapter_name_result {
                                 Ok(Some(name)) => name,
                                 Ok(None) | Err(_) => String::from("No found"),
                             };
 
                         let (pre, discriminant, post) = extract_parts(&verse.text);
-                        all_verses.push(VerseUngrouped {
+                        all_verses.push(Statement {
+                            verse: verse.clone(),
                             pre,
                             discriminant,
                             kalima: kalima.clone(),
-                            chapter_name,
                             post,
-                            ayah: verse.ayah,
-                            chapter_no: verse.chapter_no,
                             has_opposites: !similar.opposite_similars.clone().unwrap().is_empty(),
                         });
                     }

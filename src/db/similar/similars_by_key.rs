@@ -1,7 +1,7 @@
-use crate::models::{SimilarOutput, Similar, Verse, VerseOutput};
+use crate::models::{SimilarOutput, Similar, VerseOutput};
 use crate::models::Database;
 use crate::utils::sort;
-use crate::db::chapter::chapter_name;
+use crate::db::chapter::chapter;
 
 pub fn get(dbs: &Database, kalima: &str) -> Vec<SimilarOutput> {
     let similar_db = &dbs.similar_db;
@@ -29,24 +29,13 @@ pub fn get(dbs: &Database, kalima: &str) -> Vec<SimilarOutput> {
     similars
 }
 
-fn sourate_name_from_verse(dbs: &Database, verse: &Verse) -> String {
+fn sourate_name_from_verse(dbs: &Database, verse: &VerseOutput) -> String {
     // Some logic to get the sourate name from the verse chapter
-    let chapter_name_result = chapter_name::get(dbs, verse.chapter_no as u8);
+    let chapter_name_result = chapter::get(dbs, verse.chapter_no as u8);
     match chapter_name_result {
         Ok(Some(name)) => name,
         Ok(None) | Err(_) => String::from("No found"),
     }
-}
-
-// Conversion logic from Verse to VerseOutput
-fn convert_verses(dbs: &Database, verses: &[Verse]) -> Vec<VerseOutput> {
-    verses.iter().map(|verse| {
-        VerseOutput {
-            verse: verse.clone(),
-            chapter_no: verse.chapter_no,
-            sourate: sourate_name_from_verse(dbs, verse),
-        }
-    }).collect()
 }
 
 // Fetch and convert opposites from the database
@@ -58,7 +47,7 @@ fn convert_opposites(dbs: &Database, kalimas: &[String]) -> Option<Vec<VerseOutp
             Ok(Some(ivec)) => {
                 // Deserialize the value into Similar
                 let similar: Similar = bincode::deserialize(&ivec).unwrap();
-                let verses = convert_verses(dbs, &similar.verses);
+                let verses = similar.verses.clone();
                 verse_outputs.extend(verses);
             },
             Ok(None) => {
@@ -80,7 +69,7 @@ fn convert_opposites(dbs: &Database, kalimas: &[String]) -> Option<Vec<VerseOutp
 }
 
 pub fn convert_to_output(dbs: &Database, similar: &Similar) -> SimilarOutput {
-    let verses = convert_verses(dbs, &similar.verses);
+    let verses = similar.verses.clone();
     let mut opposites = None;
 
     if let Some(opposite_similars) = &similar.opposite_similars {

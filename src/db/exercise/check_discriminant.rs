@@ -12,8 +12,8 @@ pub fn check_discriminant(
     
     // First loop to check if a match exists
     for exercise in &solutions {
-        for verse in &exercise.verses {
-            if verse.ayah == ayah && verse.chapter_no == chapter_no && verse.discriminant == discriminant {
+        for statement in &exercise.verses {
+            if statement.verse.ayah == ayah && statement.verse.chapter_no == chapter_no && statement.discriminant == discriminant {
                 // Match found
                 return (true, String::from(""));
             }
@@ -23,10 +23,10 @@ pub fn check_discriminant(
     // If we reached here, no match was found in the first loop
     // Let's now try to find the chapter name for the given ayah and chapter_no
     for exercise in &solutions {
-        for verse in &exercise.verses {
-            if verse.ayah == ayah && verse.chapter_no == chapter_no {
+        for statement in &exercise.verses {
+            if statement.verse.ayah == ayah && statement.verse.chapter_no == chapter_no {
                 // Return the chapter name of the matching verse
-                return (false, verse.chapter_name.clone());
+                return (false, statement.verse.sourate.as_ref().unwrap_or(&"".to_string()).clone());
             }
         }
     }

@@ -2,7 +2,7 @@ use sled::Db;
 use serde::{Serialize, Deserialize};
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Chapter {
-    pub name: String,
+    pub sourate: String,
     pub no: u8,
     pub mekka: bool,
     pub backgroundColor: String,
@@ -10,25 +10,26 @@ pub struct Chapter {
     pub count: Option<u32>,
 }
 
-#[derive(Serialize, Deserialize, Debug, PartialEq, Clone)]
-pub struct Verse {
-    pub chapter_no: u32,
-    pub ayah: u32,
-    pub text: String,
-}
+// #[derive(Serialize, Deserialize, Debug, PartialEq, Clone)]
+// pub struct Verse {
+//     pub chapter_no: u32,
+//     pub ayah: u32,
+//     pub text: String,
+// }
 
-#[derive(Serialize, Deserialize, Debug, Clone)]
+#[derive(Serialize, Deserialize, Debug, Clone, PartialEq, Eq, Hash, Ord, PartialOrd)]
 pub struct VerseOutput {
     pub chapter_no: u32,
-    pub sourate: String,
-    pub verse: Verse,
+    pub ayah: u32,
+    pub sourate: Option<String>,
+    pub text: String,
 }
 
 #[derive(Serialize, Deserialize, Debug, PartialEq)]
 pub struct Similar {
     pub kalima: String,
     pub opposite_similars: Option<Vec<String>>,
-    pub verses: Vec<Verse>,
+    pub verses: Vec<VerseOutput>,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
@@ -47,11 +48,9 @@ pub struct SimilarOutputAdapted {
 }
 
 #[derive(Serialize, Deserialize, Debug, Eq, PartialEq, Clone, Hash)]
-pub struct VerseUngrouped {
+pub struct Statement {
     pub kalima: String,
-    pub chapter_no: u32,
-    pub chapter_name: String,
-    pub ayah: u32,
+    pub verse: VerseOutput,
     pub pre: Option<String>,
     pub discriminant: Option<String>,
     pub post: Option<String>,
@@ -61,7 +60,7 @@ pub struct VerseUngrouped {
 #[derive(Serialize, Deserialize, Debug)]
 pub struct ExerciseOutput {
     pub kalima: String,
-    pub verses: Vec<VerseUngrouped>,
+    pub verses: Vec<Statement>,
 }
 #[derive(Debug)]
 pub struct Database {
@@ -96,7 +95,7 @@ pub enum ExerciseType {
 }
 
 #[derive(Serialize, Deserialize, Clone, Eq, PartialEq, Hash, Ord, PartialOrd)]
-pub struct ChapterAyah {
-    pub chapter_name: String,
-    pub ayah: Option<u32>,
+pub struct Alternative {
+    pub content: String,
+    pub ayah: Option<VerseOutput>,
 }

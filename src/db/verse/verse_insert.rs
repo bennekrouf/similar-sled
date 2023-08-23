@@ -1,8 +1,8 @@
 use sled::IVec;
-use crate::models::Verse;
+use crate::models::VerseOutput;
 use crate::models::Database;
 
-pub fn insert(dbs: &Database, verse: &Verse) -> sled::Result<Option<IVec>> {
+pub fn insert(dbs: &Database, verse: &VerseOutput) -> sled::Result<Option<IVec>> {
     let verse_db = &dbs.verse_db;
 
     let key = format!("{}:{}", verse.chapter_no, verse.ayah);

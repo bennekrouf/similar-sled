@@ -8,7 +8,7 @@ pub fn get(dbs: &Database, chapter_no: u8) -> sled::Result<Option<String>> {
     match chapter_db.get(&key)? {
         Some(value) => {
             let chapter: Chapter = bincode::deserialize(&value).expect("Failed to deserialize");
-            Ok(Some(chapter.name))
+            Ok(Some(chapter.sourate))
         },
         None => Ok(None),
     }

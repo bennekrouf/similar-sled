@@ -10,8 +10,8 @@ pub fn check_chapter(
 
     // Check if the user's selection is correct
     for exercise in &solutions {
-        for verse in &exercise.verses {
-            if verse.ayah == ayah && verse.chapter_no == selected_chapter_no {
+        for statement in &exercise.verses {
+            if statement.verse.ayah == ayah && statement.verse.chapter_no == selected_chapter_no {
                 return (true, None, None, None); // Correctly matched
             }
         }
@@ -20,13 +20,13 @@ pub fn check_chapter(
     // If we reached here, the user's selection was wrong
     // Let's find the corresponding verse to return its pre, post, and discriminant
     for exercise in &solutions {
-        for verse in &exercise.verses {
-            if verse.ayah == ayah {
+        for statement in &exercise.verses {
+            if statement.verse.ayah == ayah {
                 return (
                     false, 
-                    verse.pre.clone(), 
-                    verse.post.clone(), 
-                    verse.discriminant.clone()
+                    statement.pre.clone(), 
+                    statement.post.clone(), 
+                    statement.discriminant.clone()
                 );
             }
         }

@@ -16,7 +16,7 @@ pub mod api {
 }
 pub mod db {
     pub mod chapter {
-        pub mod chapter_name;
+        pub mod chapter;
         pub mod chapter_insert;
         pub mod chapters_init;
     }
@@ -28,10 +28,14 @@ pub mod db {
         pub mod similars_by_key_count;
     }
     pub mod exercise {
-        pub mod find_discriminant;
+        pub mod generate;
+        pub mod a;
+        pub mod b;
         pub mod check_discriminant;
         pub mod check_chapter;
         pub mod get_solution;
+        pub mod extract_and_shuffle_options;
+        pub mod select_random_verse_index;
     }
     pub mod verse {
         pub mod verses_by_chapter;

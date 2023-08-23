@@ -1,569 +1,569 @@
-- name: 'الفاتحة'
+- sourate: 'الفاتحة'
   no: 1
   mekka: true
   backgroundColor: '#3c486c'
   color: '#FFFFFF'
-- name: 'البقرة'
+- sourate: 'البقرة'
   no: 2
   mekka: false
   backgroundColor: '#6d85b3'
   color: '#000000'
-- name: 'آل عمران'
+- sourate: 'آل عمران'
   no: 3
   mekka: false
   backgroundColor: '#464950'
   color: '#FFFFFF'
-- name: 'النساء'
+- sourate: 'النساء'
   no: 4
   mekka: false
   backgroundColor: '#deb245'
   color: '#000000'
-- name: 'المائدة'
+- sourate: 'المائدة'
   no: 5
   mekka: false
   backgroundColor: '#f0f4fd'
   color: '#181819'
-- name: 'الأنعام'
+- sourate: 'الأنعام'
   no: 6
   mekka: true
   backgroundColor: '#464950'
   color: '#FFFFFF'
-- name: 'الأعراف'
+- sourate: 'الأعراف'
   no: 7
   mekka: true
   backgroundColor: '#deb245'
   color: '#000000'
-- name: 'الأنفال'
+- sourate: 'الأنفال'
   no: 8
   mekka: true
   backgroundColor: '#6d85b3'
   color: '#000000'
-- name: 'التوبة'
+- sourate: 'التوبة'
   no: 9
   mekka: false
   backgroundColor: '#464950'
   color: '#FFFFFF'
-- name: 'يونس'
+- sourate: 'يونس'
   no: 10
   mekka: true
   backgroundColor: '#6d85b3'
   color: '#000000'
-- name: 'هود'
+- sourate: 'هود'
   no: 11
   mekka: true
   backgroundColor: '#464950'
   color: '#FFFFFF'
-- name: 'يوسف'
+- sourate: 'يوسف'
   no: 12
   mekka: true
   backgroundColor: '#deb245'
   color: '#000000'
-- name: 'الرعد'
+- sourate: 'الرعد'
   no: 13
   mekka: true
   backgroundColor: '#f0f4fd'
   color: '#181819'
-- name: 'إبراهيم'
+- sourate: 'إبراهيم'
   no: 14
   mekka: true
   backgroundColor: '#3c486c'
   color: '#FFFFFF'
-- name: 'الحجر'
+- sourate: 'الحجر'
   no: 15
   mekka: true
   backgroundColor: '#6d85b3'
   color: '#000000'
-- name: 'النحل'
+- sourate: 'النحل'
   no: 16
   mekka: true
   backgroundColor: '#464950'
   color: '#FFFFFF'
-- name: 'الإسراء'
+- sourate: 'الإسراء'
   no: 17
   mekka: true
   backgroundColor: '#deb245'
   color: '#000000'
-- name: 'الكهف'
+- sourate: 'الكهف'
   no: 18
   mekka: true
   backgroundColor: '#464950'
   color: '#FFFFFF'
-- name: 'مريم'
+- sourate: 'مريم'
   no: 19
   mekka: true
   backgroundColor: '#6d85b3'
   color: '#000000'
-- name: 'طه'
+- sourate: 'طه'
   no: 20
   mekka: true
   backgroundColor: '#f0f4fd'
   color: '#181819'
-- name: 'الأنبياء'
+- sourate: 'الأنبياء'
   no: 21
   mekka: true
   backgroundColor: '#3c486c'
   color: '#FFFFFF'
-- name: 'الحج'
+- sourate: 'الحج'
   no: 22
   mekka: true
   backgroundColor: '#deb245'
   color: '#000000'
-- name: 'المؤمنون'
+- sourate: 'المؤمنون'
   no: 23
   mekka: true
   backgroundColor: '#464950'
   color: '#FFFFFF'
-- name: 'النور'
+- sourate: 'النور'
   no: 24
   mekka: true
   backgroundColor: '#f0f4fd'
   color: '#181819'
-- name: 'الفرقان'
+- sourate: 'الفرقان'
   no: 25
   mekka: true
   backgroundColor: '#6d85b3'
   color: '#000000'
-- name: 'الشعراء'
+- sourate: 'الشعراء'
   no: 26
   mekka: true
   backgroundColor: '#464950'
   color: '#FFFFFF'
-- name: 'النمل'
+- sourate: 'النمل'
   no: 27
   mekka: true
   backgroundColor: '#deb245'
   color: '#000000'
-- name: 'القصص'
+- sourate: 'القصص'
   no: 28
   mekka: true
   backgroundColor: '#464950'
   color: '#FFFFFF'
-- name: 'العنكبوت'
+- sourate: 'العنكبوت'
   no: 29
   mekka: true
   backgroundColor: '#f0f4fd'
   color: '#181819'
-- name: 'الروم'
+- sourate: 'الروم'
   no: 30
   mekka: true
   backgroundColor: '#3c486c'
   color: '#FFFFFF'
-- name: 'لقمان'
+- sourate: 'لقمان'
   no: 31
   mekka: true
   backgroundColor: '#6d85b3'
   color: '#000000'
-- name: 'السجدة'
+- sourate: 'السجدة'
   no: 32
   mekka: true
   backgroundColor: '#464950'
   color: '#FFFFFF'
-- name: 'الأحزاب'
+- sourate: 'الأحزاب'
   no: 33
   mekka: true
   backgroundColor: '#deb245'
   color: '#000000'
-- name: 'سبإ'
+- sourate: 'سبإ'
   no: 34
   mekka: true
   backgroundColor: '#464950'
   color: '#FFFFFF'
-- name: 'فاطر'
+- sourate: 'فاطر'
   no: 35
   mekka: true
   backgroundColor: '#f0f4fd'
   color: '#181819'
-- name: 'يس'
+- sourate: 'يس'
   no: 36
   mekka: true
   backgroundColor: '#3c486c'
   color: '#FFFFFF'
-- name: 'الصافات'
+- sourate: 'الصافات'
   no: 37
   mekka: true
   backgroundColor: '#6d85b3'
   color: '#000000'
-- name: 'ص'
+- sourate: 'ص'
   no: 38
   mekka: true
   backgroundColor: '#464950'
   color: '#FFFFFF'
-- name: 'الزمر'
+- sourate: 'الزمر'
   no: 39
   mekka: true
   backgroundColor: '#deb245'
   color: '#000000'
-- name: 'غافر'
+- sourate: 'غافر'
   no: 40
   mekka: true
   backgroundColor: '#464950'
   color: '#FFFFFF'
-- name: 'فصلت'
+- sourate: 'فصلت'
   no: 41
   mekka: true
   backgroundColor: '#f0f4fd'
   color: '#181819'
-- name: 'الشورى'
+- sourate: 'الشورى'
   no: 42
   mekka: true
   backgroundColor: '#3c486c'
   color: '#FFFFFF'
-- name: 'الزخرف'
+- sourate: 'الزخرف'
   no: 43
   mekka: true
   backgroundColor: '#6d85b3'
   color: '#000000'
-- name: 'الدخان'
+- sourate: 'الدخان'
   no: 44
   mekka: true
   backgroundColor: '#464950'
   color: '#FFFFFF'
-- name: 'الجاثية'
+- sourate: 'الجاثية'
   no: 45
   mekka: true
   backgroundColor: '#deb245'
   color: '#000000'
-- name: 'الأحقاف'
+- sourate: 'الأحقاف'
   no: 46
   mekka: true
   backgroundColor: '#464950'
   color: '#FFFFFF'
-- name: 'محمد'
+- sourate: 'محمد'
   no: 47
   mekka: true
   backgroundColor: '#6d85b3'
   color: '#000000'
-- name: 'الفتح'
+- sourate: 'الفتح'
   no: 48
   mekka: true
   backgroundColor: '#f0f4fd'
   color: '#181819'
-- name: 'الحجرات'
+- sourate: 'الحجرات'
   no: 49
   mekka: true
   backgroundColor: '#464950'
   color: '#FFFFFF'
-- name: 'ق'
+- sourate: 'ق'
   no: 50
   mekka: true
   backgroundColor: '#deb245'
   color: '#000000'
-- name: 'الذاريات'
+- sourate: 'الذاريات'
   no: 51
   mekka: true
   backgroundColor: '#000000'
   color: '#FFFFFF'
-- name: 'الطور'
+- sourate: 'الطور'
   no: 52
   mekka: true
   backgroundColor: '#6d85b3'
   color: '#000000'
-- name: 'النجم'
+- sourate: 'النجم'
   no: 53
   mekka: true
   backgroundColor: '#464950'
   color: '#FFFFFF'
-- name: 'القمر'
+- sourate: 'القمر'
   no: 54
   mekka: true
   backgroundColor: '#deb245'
   color: '#000000'
-- name: 'الرحمن'
+- sourate: 'الرحمن'
   no: 55
   mekka: true
   backgroundColor: '#464950'
   color: '#FFFFFF'
-- name: 'الواقعة'
+- sourate: 'الواقعة'
   no: 56
   mekka: true
   backgroundColor: '#f0f4fd'
   color: '#181819'
-- name: 'الحديد'
+- sourate: 'الحديد'
   no: 57
   mekka: true
   backgroundColor: '#3c486c'
   color: '#FFFFFF'
-- name: 'المجادلة'
+- sourate: 'المجادلة'
   no: 58
   mekka: true
   backgroundColor: '#464950'
   color: '#FFFFFF'
-- name: 'الحشر'
+- sourate: 'الحشر'
   no: 59
   mekka: true
   backgroundColor: '#6d85b3'
   color: '#000000'
-- name: 'الممتحنة'
+- sourate: 'الممتحنة'
   no: 60
   mekka: true
   backgroundColor: '#464950'
   color: '#FFFFFF'
-- name: 'الصف'
+- sourate: 'الصف'
   no: 61
   mekka: true
   backgroundColor: '#deb245'
   color: '#000000'
-- name: 'الجمعة'
+- sourate: 'الجمعة'
   no: 62
   mekka: true
   backgroundColor: '#464950'
   color: '#FFFFFF'
-- name: 'المنافقون'
+- sourate: 'المنافقون'
   no: 63
   mekka: true
   backgroundColor: '#f0f4fd'
   color: '#181819'
-- name: 'التغابن'
+- sourate: 'التغابن'
   no: 64
   mekka: true
   backgroundColor: '#3c486c'
   color: '#FFFFFF'
-- name: 'الطلاق'
+- sourate: 'الطلاق'
   no: 65
   mekka: true
   backgroundColor: '#6d85b3'
   color: '#000000'
-- name: 'التحريم'
+- sourate: 'التحريم'
   no: 66
   mekka: true
   backgroundColor: '#464950'
   color: '#FFFFFF'
-- name: 'الملك'
+- sourate: 'الملك'
   no: 67
   mekka: true
   backgroundColor: '#deb245'
   color: '#000000'
-- name: 'القلم'
+- sourate: 'القلم'
   no: 68
   mekka: true
   backgroundColor: '#464950'
   color: '#FFFFFF'
-- name: 'الحاقة'
+- sourate: 'الحاقة'
   no: 69
   mekka: true
   backgroundColor: '#f0f4fd'
   color: '#181819'
-- name: 'المعارج'
+- sourate: 'المعارج'
   no: 70
   mekka: true
   backgroundColor: '#3c486c'
   color: '#FFFFFF'
-- name: 'نوح'
+- sourate: 'نوح'
   no: 71
   mekka: true
   backgroundColor: '#6d85b3'
   color: '#000000'
-- name: 'الجن'
+- sourate: 'الجن'
   no: 72
   mekka: true
   backgroundColor: '#464950'
   color: '#FFFFFF'
-- name: 'المزمل'
+- sourate: 'المزمل'
   no: 73
   mekka: true
   backgroundColor: '#deb245'
   color: '#000000'
-- name: 'المدثر'
+- sourate: 'المدثر'
   no: 74
   mekka: true
   backgroundColor: '#464950'
   color: '#FFFFFF'
-- name: 'القيامة'
+- sourate: 'القيامة'
   no: 75
   mekka: true
   backgroundColor: '#f0f4fd'
   color: '#181819'
-- name: 'الإنسان'
+- sourate: 'الإنسان'
   no: 76
   mekka: true
   backgroundColor: '#3c486c'
   color: '#FFFFFF'
-- name: 'المرسلات'
+- sourate: 'المرسلات'
   no: 77
   mekka: true
   backgroundColor: '#6d85b3'
   color: '#000000'
-- name: 'النبأ'
+- sourate: 'النبأ'
   no: 78
   mekka: true
   backgroundColor: '#464950'
   color: '#FFFFFF'
-- name: 'النازعات'
+- sourate: 'النازعات'
   no: 79
   mekka: true
   backgroundColor: '#deb245'
   color: '#000000'
-- name: 'عبس'
+- sourate: 'عبس'
   no: 80
   mekka: true
   backgroundColor: '#464950'
   color: '#FFFFFF'
-- name: 'التكوير'
+- sourate: 'التكوير'
   no: 81
   mekka: true
   backgroundColor: '#f0f4fd'
   color: '#181819'
-- name: 'الانفطار'
+- sourate: 'الانفطار'
   no: 82
   mekka: true
   backgroundColor: '#3c486c'
   color: '#FFFFFF'
-- name: 'المطففين'
+- sourate: 'المطففين'
   no: 83
   mekka: true
   backgroundColor: '#6d85b3'
   color: '#000000'
-- name: 'الانشقاق'
+- sourate: 'الانشقاق'
   no: 84
   mekka: true
   backgroundColor: '#464950'
   color: '#FFFFFF'
-- name: 'البروج'
+- sourate: 'البروج'
   no: 85
   mekka: true
   backgroundColor: '#deb245'
   color: '#000000'
-- name: 'الطارق'
+- sourate: 'الطارق'
   no: 86
   mekka: true
   backgroundColor: '#464950'
   color: '#FFFFFF'
-- name: 'الأعلى'
+- sourate: 'الأعلى'
   no: 87
   mekka: true
   backgroundColor: '#f0f4fd'
   color: '#181819'
-- name: 'الغاشية'
+- sourate: 'الغاشية'
   no: 88
   mekka: true
   backgroundColor: '#3c486c'
   color: '#FFFFFF'
-- name: 'الفجر'
+- sourate: 'الفجر'
   no: 89
   mekka: true
   backgroundColor: '#6d85b3'
   color: '#000000'
-- name: 'البلد'
+- sourate: 'البلد'
   no: 90
   mekka: true
   backgroundColor: '#464950'
   color: '#FFFFFF'
-- name: 'الشمس'
+- sourate: 'الشمس'
   no: 91
   mekka: true
   backgroundColor: '#deb245'
   color: '#000000'
-- name: 'الليل'
+- sourate: 'الليل'
   no: 92
   mekka: true
   backgroundColor: '#464950'
   color: '#FFFFFF'
-- name: 'الضحى'
+- sourate: 'الضحى'
   no: 93
   mekka: true
   backgroundColor: '#f0f4fd'
   color: '#181819'
-- name: 'الشرح'
+- sourate: 'الشرح'
   no: 94
   mekka: true
   backgroundColor: '#3c486c'
   color: '#FFFFFF'
-- name: 'التين'
+- sourate: 'التين'
   no: 95
   mekka: true
   backgroundColor: '#6d85b3'
   color: '#000000'
-- name: 'العلق'
+- sourate: 'العلق'
   no: 96
   mekka: true
   backgroundColor: '#464950'
   color: '#FFFFFF'
-- name: 'القدر'
+- sourate: 'القدر'
   no: 97
   mekka: true
   backgroundColor: '#deb245'
   color: '#000000'
-- name: 'البينة'
+- sourate: 'البينة'
   no: 98
   mekka: true
   backgroundColor: '#464950'
   color: '#FFFFFF'
-- name: 'الزلزلة'
+- sourate: 'الزلزلة'
   no: 99
   mekka: true
   backgroundColor: '#f0f4fd'
   color: '#181819'
-- name: 'العاديات'
+- sourate: 'العاديات'
   no: 100
   mekka: true
   backgroundColor: '#3c486c'
   color: '#FFFFFF'
-- name: 'القارعة'
+- sourate: 'القارعة'
   no: 101
   mekka: true
   backgroundColor: '#6d85b3'
   color: '#000000'
-- name: 'التكاثر'
+- sourate: 'التكاثر'
   no: 102
   mekka: true
   backgroundColor: '#464950'
   color: '#FFFFFF'
-- name: 'العصر'
+- sourate: 'العصر'
   no: 103
   mekka: true
   backgroundColor: '#deb245'
   color: '#000000'
-- name: 'الهمزة'
+- sourate: 'الهمزة'
   no: 104
   mekka: true
   backgroundColor: '#464950'
   color: '#FFFFFF'
-- name: 'الفيل'
+- sourate: 'الفيل'
   no: 105
   mekka: true
   backgroundColor: '#f0f4fd'
   color: '#181819'
-- name: 'قريش'
+- sourate: 'قريش'
   no: 106
   mekka: true
   backgroundColor: '#3c486c'
   color: '#FFFFFF'
-- name: 'الماعون'
+- sourate: 'الماعون'
   no: 107
   mekka: true
   backgroundColor: '#6d85b3'
   color: '#000000'
-- name: 'الكوثر'
+- sourate: 'الكوثر'
   no: 108
   mekka: true
   backgroundColor: '#464950'
   color: '#FFFFFF'
-- name: 'الكافرون'
+- sourate: 'الكافرون'
   no: 109
   mekka: true
   backgroundColor: '#deb245'
   color: '#000000'
-- name: 'النصر'
+- sourate: 'النصر'
   no: 110
   mekka: true
   backgroundColor: '#464950'
   color: '#FFFFFF'
-- name: 'المسد'
+- sourate: 'المسد'
   no: 111
   mekka: true
   backgroundColor: '#f0f4fd'
   color: '#181819'
-- name: 'الإخلاص'
+- sourate: 'الإخلاص'
   no: 112
   mekka: true
   backgroundColor: '#3c486c'
   color: '#FFFFFF'
-- name: 'الفلق'
+- sourate: 'الفلق'
   no: 113
   mekka: true
   backgroundColor: '#6d85b3'
   color: '#000000'
-- name: 'الناس'
+- sourate: 'الناس'
   no: 114
   mekka: true
   backgroundColor: '#464950'
