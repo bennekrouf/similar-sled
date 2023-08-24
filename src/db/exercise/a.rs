@@ -14,20 +14,22 @@ pub fn generate(dbs: &Database, kalima: String) -> Option<(Statement, Vec<Altern
     let exercise = &mut exercises[0];
     let selected_verse_index = select_random_verse_index(&exercise.verses);
 
+    let exclude_value = Some(Alternative { 
+        content: exercise.verses[selected_verse_index].discriminant.clone().unwrap_or_default(), 
+        ayah: None
+    });
+
     // Convert discriminants (assuming they are chapter names) to the Alternative format
-    let other_chapter_ayahs = extract_and_shuffle_options(&exercise.verses, 
+    let alternatives = extract_and_shuffle_options(&mut exercise.verses, 
         |statement| Some(Alternative { 
             content: statement.discriminant.clone().unwrap_or_default(), 
             ayah: None  // As this is for generate_A
         }),
-        &Some(Alternative { 
-            content: exercise.verses[selected_verse_index].discriminant.clone().unwrap_or_default(), 
-            ayah: None
-        })
+        &exclude_value
     );
 
     // Deduplicate the list using HashSet
-    let mut distinct_set: HashSet<_> = other_chapter_ayahs.into_iter().collect();
+    let mut distinct_set: HashSet<_> = alternatives.into_iter().collect();
     
     // Convert HashSet back to Vec and shuffle
     let mut distinct_vec: Vec<_> = distinct_set.drain().collect();

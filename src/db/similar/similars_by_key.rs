@@ -1,7 +1,6 @@
 use crate::models::{SimilarOutput, Similar, VerseOutput};
 use crate::models::Database;
 use crate::utils::sort;
-use crate::db::chapter::chapter;
 
 pub fn get(dbs: &Database, kalima: &str) -> Vec<SimilarOutput> {
     let similar_db = &dbs.similar_db;
@@ -29,16 +28,6 @@ pub fn get(dbs: &Database, kalima: &str) -> Vec<SimilarOutput> {
     similars
 }
 
-fn sourate_name_from_verse(dbs: &Database, verse: &VerseOutput) -> String {
-    // Some logic to get the sourate name from the verse chapter
-    let chapter_name_result = chapter::get(dbs, verse.chapter_no as u8);
-    match chapter_name_result {
-        Ok(Some(name)) => name,
-        Ok(None) | Err(_) => String::from("No found"),
-    }
-}
-
-// Fetch and convert opposites from the database
 fn convert_opposites(dbs: &Database, kalimas: &[String]) -> Option<Vec<VerseOutput>> {
     let mut verse_outputs = Vec::new();
     for kalima in kalimas {

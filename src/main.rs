@@ -26,6 +26,7 @@ pub mod db {
         pub mod similars_by_chapter;
         pub mod similars_by_key;
         pub mod similars_by_key_count;
+        pub mod sourate_from_verse;
     }
     pub mod exercise {
         pub mod generate;

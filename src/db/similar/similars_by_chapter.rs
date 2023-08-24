@@ -1,6 +1,7 @@
 use crate::models::{VerseOutput, SimilarOutputAdapted};
 use crate::models::Database;
 use super::similars_by_key;
+use crate::db::similar::sourate_from_verse::sourate_name_from_verse;
 use log::info;
 
 pub fn get(dbs: &Database, chapter_no: u32) -> Vec<SimilarOutputAdapted> {
@@ -19,7 +20,8 @@ pub fn get(dbs: &Database, chapter_no: u32) -> Vec<SimilarOutputAdapted> {
             let mut opposites: Vec<VerseOutput> = Vec::new();
             let kalima = similar[0].kalima.clone();
 
-            for verse_output in similar[0].verses.iter().cloned() {
+            for mut verse_output in similar[0].verses.iter().cloned() {
+                verse_output.sourate = Some(sourate_name_from_verse(dbs, &verse_output));
                 if verse_output.chapter_no == chapter_no {
                     verses.push(verse_output);
                 } else {
@@ -28,7 +30,8 @@ pub fn get(dbs: &Database, chapter_no: u32) -> Vec<SimilarOutputAdapted> {
             }
 
             if let Some(opposite_verses) = &similar[0].opposites {
-                for verse_output in opposite_verses.iter().cloned() {
+                for mut verse_output in opposite_verses.iter().cloned() {
+                    verse_output.sourate = Some(sourate_name_from_verse(dbs, &verse_output));
                     opposites.push(verse_output);
                 }
             }

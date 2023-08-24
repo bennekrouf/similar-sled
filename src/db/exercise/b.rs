@@ -2,6 +2,7 @@ use crate::models::{ExerciseType, Statement, Database, Alternative};
 use crate::db::exercise::extract_and_shuffle_options::extract_and_shuffle_options;
 use crate::db::exercise::select_random_verse_index::select_random_verse_index;
 use crate::db::exercise::get_solution::get_solution;
+use crate::db::similar::sourate_from_verse::sourate_name_from_verse;
 
 pub fn generate(dbs: &Database, kalima: String) -> Option<(Statement, Vec<Alternative>, ExerciseType)> {
     let mut exercises = get_solution(dbs, &kalima);
@@ -18,8 +19,10 @@ pub fn generate(dbs: &Database, kalima: String) -> Option<(Statement, Vec<Altern
 
     // Step 3: Extract and shuffle other chapter names and ayahs
     let mut other_chapter_data_set = std::collections::HashSet::new();
-    let mut other_chapter_data = extract_and_shuffle_options(&exercise.verses, 
-        |statement| {
+    let mut alternatives = extract_and_shuffle_options(&mut exercise.verses, 
+        |statement: &mut Statement| {
+            statement.verse.sourate = Some(sourate_name_from_verse(dbs, &statement.verse));
+
             let chapter_ayah = Some(Alternative {
                 content: statement.verse.text.clone(),
                 ayah: Some(statement.verse.clone())
@@ -36,7 +39,7 @@ pub fn generate(dbs: &Database, kalima: String) -> Option<(Statement, Vec<Altern
         }));
     
     // Limit to 3 possible answers (minus the correct answer which we will add back in Step 5)
-    other_chapter_data.truncate(2);
+    alternatives.truncate(2);
 
     // Step 4: Hide the sourate, chapter_no, and ayah of the selected verse
     let selected_statement = &mut exercise.verses[selected_verse_index];
@@ -47,10 +50,10 @@ pub fn generate(dbs: &Database, kalima: String) -> Option<(Statement, Vec<Altern
     //selected_statement.ayah = 0; // Set it to a default value
 
     // Step 5: Add the selected chapter data back to the list
-    other_chapter_data.push(Alternative {
+    alternatives.push(Alternative {
         content: selected_chapter_name.unwrap_or_default(),
         ayah: Some(selected_ayah),
     });
 
-    Some((selected_statement.clone(), other_chapter_data, ExerciseType::B))
+    Some((selected_statement.clone(), alternatives, ExerciseType::B))
 }

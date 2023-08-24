@@ -10,13 +10,6 @@ pub struct Chapter {
     pub count: Option<u32>,
 }
 
-// #[derive(Serialize, Deserialize, Debug, PartialEq, Clone)]
-// pub struct Verse {
-//     pub chapter_no: u32,
-//     pub ayah: u32,
-//     pub text: String,
-// }
-
 #[derive(Serialize, Deserialize, Debug, Clone, PartialEq, Eq, Hash, Ord, PartialOrd)]
 pub struct VerseOutput {
     pub chapter_no: u32,
