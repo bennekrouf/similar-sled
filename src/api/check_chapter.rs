@@ -2,7 +2,7 @@ use rocket::{get, State};
 use rocket_contrib::json::Json;
 
 use crate::models::Database;
-use crate::db::exercise::check_chapter;
+use crate::domain::exercise::check_chapter;
 
 #[get("/check_chapter?<kalima>&<selected_chapter_no>&<ayah>")]
 pub fn check_chapter(

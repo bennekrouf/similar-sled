@@ -1,8 +1,10 @@
+use log::info;
+
+use super::similars_by_key;
+
 use crate::models::{VerseOutput, SimilarOutputAdapted};
 use crate::models::Database;
-use super::similars_by_key;
-use crate::db::similar::sourate_from_verse::sourate_name_from_verse;
-use log::info;
+use crate::domain::similar::sourate_from_verse::sourate_name_from_verse;
 
 pub fn get(dbs: &Database, chapter_no: u32) -> Vec<SimilarOutputAdapted> {
     let chapter_key = chapter_no.to_string();

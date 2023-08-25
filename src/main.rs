@@ -14,7 +14,7 @@ pub mod api {
         pub mod verse_by_chapter;
         pub mod verse_similar_by_chapter;
 }
-pub mod db {
+pub mod domain {
     pub mod chapter {
         pub mod chapter;
         pub mod chapter_insert;
@@ -37,6 +37,8 @@ pub mod db {
         pub mod get_solution;
         pub mod extract_and_shuffle_options;
         pub mod select_random_verse_index;
+        pub mod sort_exercises;
+        pub mod exercises_for_similar;
     }
     pub mod verse {
         pub mod verses_by_chapter;
@@ -50,6 +52,7 @@ mod utils {
     pub mod yml_path;
     pub mod sort;
     pub mod extract_parts;
+    pub mod deduplicate_by_field;
 }
 
 mod validator;

@@ -2,7 +2,7 @@ use rocket::{get, State};
 use rocket_contrib::json::Json;
 
 use crate::models::Database;
-use crate::db::exercise::check_discriminant;
+use crate::domain::exercise::check_discriminant;
 
 #[get("/check_discriminant?<kalima>&<discriminant>&<ayah>&<chapter_no>")]
 pub fn check_discriminant(

@@ -2,8 +2,8 @@ use rocket::{get, State};
 use rocket_contrib::json::Json;
 
 use crate::models::Database;
-use crate::db::chapter::chapter;
-use crate::db::verse::verses_by_chapter;
+use crate::domain::chapter::chapter;
+use crate::domain::verse::verses_by_chapter;
 
 #[get("/verse/<chapter_no>")]
 pub fn get_verse(chapter_no: u8, dbs: State<Database>) -> Json<serde_json::Value> {

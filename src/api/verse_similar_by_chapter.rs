@@ -2,7 +2,7 @@ use rocket::{get, State};
 use rocket_contrib::json::Json;
 use crate::models::SimilarOutputAdapted;
 use crate::models::Database;
-use crate::db::similar::similars_by_chapter;
+use crate::domain::similar::similars_by_chapter;
 
 #[get("/similars/<chapter_no>")]
 pub fn get_verse_similar_by_chapter_route(

@@ -3,7 +3,7 @@ use rocket_contrib::json::Json;
 
 use crate::models::Chapter;
 use crate::models::Database;
-use crate::db::similar::similars_by_chapter;
+use crate::domain::similar::similars_by_chapter;
 
 #[get("/chapters")]
 pub fn get_chapters(dbs: State<Database>) -> Json<Vec<Chapter>> {

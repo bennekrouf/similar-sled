@@ -1,10 +1,10 @@
 use std::collections::HashSet;
 use rand::seq::SliceRandom;
 
-use crate::db::exercise::a::generate as generate_A;
-use crate::db::exercise::b::generate as generate_B;
+use crate::domain::exercise::a::generate as generate_A;
+use crate::domain::exercise::b::generate as generate_B;
 
-use crate::db::similar::similars_by_key_count::get_count_for_kalima;
+use crate::domain::similar::similars_by_key_count::get_count_for_kalima;
 use crate::models::{ExerciseType, Statement, Database, Alternative};
 
 pub fn generate_one(dbs: &Database, kalima: String, exercise_type: ExerciseType) -> Option<(Statement, Vec<Alternative>, ExerciseType)> {

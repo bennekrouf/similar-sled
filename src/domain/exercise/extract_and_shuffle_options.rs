@@ -1,5 +1,4 @@
 use rand::seq::SliceRandom;
-use rand::Rng;
 
 use crate::models::Statement;
 

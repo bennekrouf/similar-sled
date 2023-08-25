@@ -3,7 +3,7 @@ use rocket_contrib::json::Json;
 
 use crate::xhr_guard::XHR;
 use crate::models::{Statement, Database, ExerciseType, Alternative};
-use crate::db::exercise::generate::{self, generate_exercises};
+use crate::domain::exercise::generate::{self, generate_exercises};
 
 #[get("/exercise/<kalima>")]
 pub fn generate_exercise_endpoint(kalima: String, dbs: State<Database>, _xhr: XHR) -> Option<Json<(Statement, Vec<Alternative>, ExerciseType)>> {

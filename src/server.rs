@@ -7,7 +7,7 @@ use std::env;
 use log::LevelFilter;
 
 use crate::utils::data_folder_path;
-use crate::db::all_db;
+use crate::domain::all_db;
 
 use crate::api::verse_by_chapter::static_rocket_route_info_for_get_verse;
 use crate::api::get_chapters::static_rocket_route_info_for_get_chapters;

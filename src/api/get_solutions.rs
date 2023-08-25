@@ -3,7 +3,7 @@ use rocket_contrib::json::Json;
 
 use crate::models::ExerciseOutput;
 use crate::models::Database;
-use crate::db::exercise::get_solution;
+use crate::domain::exercise::get_solution;
 
 #[get("/solutions/<kalima>")]
 pub fn get_solutions(kalima: String, dbs: State<Database>) -> Json<Vec<ExerciseOutput>> {

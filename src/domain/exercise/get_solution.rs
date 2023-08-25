@@ -1,7 +1,10 @@
 use crate::models::{Similar, ExerciseOutput, Statement};
 use crate::models::Database;
+use crate::domain::similar::sourate_from_verse::sourate_name_from_verse;
+
 use crate::utils::extract_parts::extract_parts;
-use crate::db::chapter::chapter;
+use crate::domain::exercise::sort_exercises::sort_exercises;
+use crate::domain::exercise::exercises_for_similar::create;
 
 pub fn get_solution(dbs: &Database, kalima: &String) -> Vec<ExerciseOutput> {
     let similar_db = &dbs.similar_db;
@@ -16,7 +19,7 @@ pub fn get_solution(dbs: &Database, kalima: &String) -> Vec<ExerciseOutput> {
                 let similar: Similar = bincode::deserialize(&value).ok()?;
 
                 // Convert Similar to ExerciseOutput
-                let exercise = convert_to_exercise(dbs, &similar);
+                let exercise = create(dbs, &similar);
                 Some(exercise)
             } else {
                 None
@@ -34,17 +37,14 @@ pub fn convert_to_exercise(dbs: &Database, similar: &Similar) -> ExerciseOutput 
 
     let mut all_verses = Vec::new();
     for verse in &similar.verses {
+        let mut modified_verse = verse.clone();
+
         let (pre, discriminant, post) = extract_parts(&verse.text);
 
-        let chapter_name_result = chapter::get(dbs, verse.chapter_no as u8);
-        let sourate = match chapter_name_result {
-                Ok(Some(sourate)) => sourate,
-                Ok(None) | Err(_) => String::from("No found"),
-            };
+        modified_verse.sourate = Some(sourate_name_from_verse(dbs, verse));
 
         all_verses.push(Statement {
-            // text: verse.text.clone(),
-            verse: verse.clone(),
+            verse: modified_verse,
             pre,
             discriminant,
             post,
@@ -61,12 +61,8 @@ pub fn convert_to_exercise(dbs: &Database, similar: &Similar) -> ExerciseOutput 
             if let Ok(Some(data)) = similar_db.get(kalima) {
                 if let Ok(similar) = bincode::deserialize::<Similar>(&data) {
                     for verse in &similar.verses {
-
-                        let chapter_name_result = chapter::get(dbs, verse.chapter_no as u8);
-                        let sourate = match chapter_name_result {
-                                Ok(Some(name)) => name,
-                                Ok(None) | Err(_) => String::from("No found"),
-                            };
+                        let mut modified_verse = verse.clone();
+                        modified_verse.sourate = Some(sourate_name_from_verse(dbs, verse));
 
                         let (pre, discriminant, post) = extract_parts(&verse.text);
                         all_verses.push(Statement {
@@ -86,16 +82,5 @@ pub fn convert_to_exercise(dbs: &Database, similar: &Similar) -> ExerciseOutput 
     ExerciseOutput {
         kalima: similar.kalima.clone(),
         verses: all_verses,
-    }
-}
-
-pub fn sort_exercises(solutions: &mut [ExerciseOutput]) {
-    use rand::seq::SliceRandom;
-    use rand::thread_rng;
-
-    let mut rng = thread_rng();
-
-    for exercise in solutions {
-        exercise.verses.shuffle(&mut rng);
     }
 }
