@@ -22,7 +22,7 @@ pub fn generate(dbs: &Database, kalima: String) -> Option<(Statement, Vec<Altern
 
     // Step 3: Extract and shuffle other chapter names and ayahs
     let mut other_chapter_data_set = std::collections::HashSet::new();
-    let mut alternatives = extract_and_shuffle_options(&mut exercise.verses, 
+    let alternatives = extract_and_shuffle_options(&mut exercise.verses, 
         |statement: &mut Statement| {
             statement.verse.sourate = Some(sourate_name_from_verse(dbs, &statement.verse));
 

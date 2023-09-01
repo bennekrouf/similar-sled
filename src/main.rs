@@ -62,7 +62,7 @@ mod xhr_guard;
 fn main() {
     // Check deserialization of all files before starting the server
     if let Err(e) = validator::validate() {
-        eprintln!("Error loading files: {}", e);
+        eprintln!("Similar error loading validator files: {}", e);
         std::process::exit(1);  // Exit the program with a non-zero status code
     }
 

@@ -5,7 +5,7 @@ pub struct Chapter {
     pub sourate: String,
     pub no: u8,
     pub mekka: bool,
-    pub backgroundColor: String,
+    pub background_color: String,
     pub color: String,
     pub count: Option<u32>,
 }

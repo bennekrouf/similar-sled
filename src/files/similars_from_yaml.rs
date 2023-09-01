@@ -23,6 +23,7 @@ fn traverse_directory(
     folder_path: &Path,
     similars: &mut Vec<Similar>,
 ) -> Result<(), Box<dyn Error>> {
+    println!("folder_path : {:?}", folder_path);
     for entry in fs::read_dir(folder_path)? {
         let entry = entry?;
         let path = entry.path();
