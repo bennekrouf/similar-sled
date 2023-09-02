@@ -1,19 +1,23 @@
-use crate::models::Database;
+use crate::models::{Database, UngroupedText};
 use crate::domain::exercise::get_solution::get_solution;
 
 pub fn check_chapter(
     dbs: &Database, 
     kalima: String,
     selected_chapter_no: u32,  // user's selected chapter_no
-    ayah: u32
-) -> (bool, Option<String>, Option<String>, Option<String>) {
+    verse_no: u32,
+    discriminant: String,
+) -> (bool, UngroupedText) {
     let solutions = get_solution(dbs, &kalima);
+    println!("DISC : {:?}", kalima);
 
     // Check if the user's selection is correct
     for exercise in &solutions {
         for statement in &exercise.verses {
-            if statement.verse.ayah == ayah && statement.verse.chapter_no == selected_chapter_no {
-                return (true, None, None, None); // Correctly matched
+            if let Some(ref verse_discriminant) = statement.ungrouped_text.discriminant {
+                if verse_discriminant == &discriminant && statement.verse.verse_no == verse_no && statement.verse.chapter_no == selected_chapter_no {
+                    return (true, UngroupedText { pre: None, post: None, discriminant: None}); // Correctly matched
+                }
             }
         }
     }
@@ -22,17 +26,15 @@ pub fn check_chapter(
     // Let's find the corresponding verse to return its pre, post, and discriminant
     for exercise in &solutions {
         for statement in &exercise.verses {
-            if statement.verse.ayah == ayah {
+            if statement.verse.verse_no == verse_no {
                 return (
-                    false, 
-                    statement.pre.clone(), 
-                    statement.post.clone(), 
-                    statement.discriminant.clone()
+                    false,
+                    statement.ungrouped_text.clone()
                 );
             }
         }
     }
 
-    // If we reached here, we didn't even find a verse with matching ayah
-    (false, None, None, None)
+    // If we reached here, we didn't even find a verse with matching verse_no
+    (false, UngroupedText { pre: None, post: None, discriminant: None})
 }

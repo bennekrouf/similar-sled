@@ -12,9 +12,9 @@ use std::hash::Hash;
 // Example:
 // ```
 // let mut alternatives = vec![
-//     Alternative { content: "A".to_string(), ayah: Some("verse1".to_string()) },
-//     Alternative { content: "A".to_string(), ayah: Some("verse2".to_string()) },
-//     Alternative { content: "B".to_string(), ayah: Some("verse1".to_string()) },
+//     Alternative { content: "A".to_string(), verse: Some("verse1".to_string()) },
+//     Alternative { content: "A".to_string(), verse: Some("verse2".to_string()) },
+//     Alternative { content: "B".to_string(), verse: Some("verse1".to_string()) },
 // ];
 // alternatives = deduplicate_by_field(alternatives, |alt| &alt.content);
 // ```

@@ -13,9 +13,10 @@ pub struct Chapter {
 #[derive(Serialize, Deserialize, Debug, Clone, PartialEq, Eq, Hash, Ord, PartialOrd)]
 pub struct VerseOutput {
     pub chapter_no: u32,
-    pub ayah: u32,
+    pub verse_no: u32,
     pub sourate: Option<String>,
-    pub text: String,
+    pub text: Option<String>,
+    pub ungrouped_text: Option<UngroupedText>,
 }
 
 #[derive(Serialize, Deserialize, Debug, PartialEq)]
@@ -40,13 +41,18 @@ pub struct SimilarOutputAdapted {
     pub kalima: String,
 }
 
+#[derive(Serialize, Deserialize, Debug, Eq, PartialEq, Clone, Hash, PartialOrd, Ord)]
+pub struct UngroupedText {
+    pub pre: Option<String>,
+    pub discriminant: Option<String>,
+    pub post: Option<String>,
+}
+
 #[derive(Serialize, Deserialize, Debug, Eq, PartialEq, Clone, Hash)]
 pub struct Statement {
     pub kalima: String,
     pub verse: VerseOutput,
-    pub pre: Option<String>,
-    pub discriminant: Option<String>,
-    pub post: Option<String>,
+    pub ungrouped_text : UngroupedText,
     pub has_opposites: bool,
 }
 
@@ -55,6 +61,13 @@ pub struct ExerciseOutput {
     pub kalima: String,
     pub verses: Vec<Statement>,
 }
+#[derive(Serialize, Deserialize, Debug, Hash, PartialEq, Eq, Clone)]
+pub struct Exercise {
+    pub exercise_type: ExerciseType,
+    pub statement: Statement,
+    pub alternatives: Vec<Alternative>,
+}
+
 #[derive(Debug)]
 pub struct Database {
     pub chapter_db: Db,
@@ -87,8 +100,8 @@ pub enum ExerciseType {
     B,
 }
 
-#[derive(Serialize, Deserialize, Clone, Eq, PartialEq, Hash, Ord, PartialOrd)]
+#[derive(Debug, Serialize, Deserialize, Clone, Eq, PartialEq, Hash, Ord, PartialOrd)]
 pub struct Alternative {
     pub content: String,
-    pub ayah: Option<VerseOutput>,
+    pub verse: Option<VerseOutput>,
 }

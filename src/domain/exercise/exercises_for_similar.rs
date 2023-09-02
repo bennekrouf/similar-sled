@@ -11,15 +11,13 @@ pub fn create(dbs: &Database, similar: &Similar) -> ExerciseOutput {
     for verse in &similar.verses {
         let mut modified_verse = verse.clone();
 
-        let (pre, discriminant, post) = extract_parts(&verse.text);
+        let ungrouped_text = extract_parts(verse.text.as_ref().map(String::as_str));
 
         modified_verse.sourate = Some(sourate_name_from_verse(dbs, verse));
 
         all_verses.push(Statement {
             verse: modified_verse,
-            pre,
-            discriminant,
-            post,
+            ungrouped_text,
             kalima: similar.kalima.clone(),
             has_opposites: match &similar.opposite_similars {
                 Some(opposite_similars) => !opposite_similars.is_empty(),
@@ -36,13 +34,11 @@ pub fn create(dbs: &Database, similar: &Similar) -> ExerciseOutput {
                         let mut modified_verse = verse.clone();
                         modified_verse.sourate = Some(sourate_name_from_verse(dbs, verse));
 
-                        let (pre, discriminant, post) = extract_parts(&verse.text);
+                        let ungrouped_text = extract_parts(verse.text.as_ref().map(String::as_str));
                         all_verses.push(Statement {
                             verse: verse.clone(),
-                            pre,
-                            discriminant,
+                            ungrouped_text,
                             kalima: kalima.clone(),
-                            post,
                             has_opposites: !similar.opposite_similars.clone().unwrap().is_empty(),
                         });
                     }
