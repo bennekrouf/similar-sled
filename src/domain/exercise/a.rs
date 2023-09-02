@@ -44,19 +44,27 @@ pub fn generate(dbs: &Database, kalima: String) -> Option<Exercise> {
         }
     }
 
-    let mut distinct_alternatives = deduplicate_by_field(alternatives.clone(), |alt| alt.content.clone());
-    distinct_alternatives.shuffle(&mut rand::thread_rng());
+    alternatives = deduplicate_by_field(alternatives.clone(), |alt| {
+        alt.verse
+            .as_ref()
+            .and_then(|verse| {
+                verse.ungrouped_text.as_ref().map(|text| text.discriminant.clone())
+            })
+    });
+    alternatives = deduplicate_by_field(alternatives.clone(), |alt| alt.verse.as_ref().unwrap().sourate.clone());
+    alternatives = deduplicate_by_field(alternatives.clone(), |alt| Some(alt.verse.as_ref().unwrap().verse_no));
+    alternatives.shuffle(&mut rand::thread_rng());
 
-    // Limit to 3 possible answers (minus the correct answer which we will add later)
-    distinct_alternatives.truncate(2);
+    // Limit to 3 possible answers (excluding the correct answer which we will add later)
+    alternatives.truncate(2);
 
     let selected_verse = exercise.verses.get_mut(selected_verse_index).unwrap();
     let selected_discriminant = selected_verse.ungrouped_text.discriminant.take();   
 
-    let mut final_alternatives = distinct_alternatives;
     if let Some(discr) = selected_discriminant {
-        final_alternatives.push(Alternative { content: discr, verse: Some(selected_verse.verse.clone()) });
+        alternatives.push(Alternative { content: discr, verse: Some(selected_verse.verse.clone()) });
     }
+    alternatives.shuffle(&mut rand::thread_rng());
     
     Some(Exercise {
         statement: selected_verse.clone(),

@@ -43,7 +43,7 @@ pub fn generate(dbs: &Database, kalima: String) -> Option<Exercise> {
             verse: Some(selected_ayah.clone())
         }));
 
-    let mut distinct_alternatives = deduplicate_by_field(alternatives, |alt| alt.content.clone());
+    let mut distinct_alternatives = deduplicate_by_field(alternatives, |alt| Some(alt.content.clone()));
     distinct_alternatives.shuffle(&mut rand::thread_rng());
     
     // Limit to 3 possible answers (minus the correct answer which we will add back in Step 5)

@@ -28,18 +28,18 @@ pub fn generate_exercises(dbs: &Database, kalima: &str) -> Vec<Exercise> {
     let mut seen_exercises = HashSet::new();
 
     // Generate exercises of type A
-    // for _ in 0..num_exercises {
-    //     if let Some(exercise) = attempt_generate(dbs, kalima.to_string(), ExerciseType::A, &mut seen_exercises) {
-    //         exercises.push(exercise);
-    //     }
-    // }
-
-    // Generate exercises of type B
     for _ in 0..num_exercises {
-        if let Some(exercise) = attempt_generate(dbs, kalima.to_string(), ExerciseType::B, &mut seen_exercises) {
+        if let Some(exercise) = attempt_generate(dbs, kalima.to_string(), ExerciseType::A, &mut seen_exercises) {
             exercises.push(exercise);
         }
     }
+
+    // Generate exercises of type B
+    // for _ in 0..num_exercises {
+    //     if let Some(exercise) = attempt_generate(dbs, kalima.to_string(), ExerciseType::B, &mut seen_exercises) {
+    //         exercises.push(exercise);
+    //     }
+    // }
 
      // Now shuffle the exercises
     let mut rng = rand::thread_rng();
