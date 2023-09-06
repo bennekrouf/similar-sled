@@ -1,5 +1,5 @@
 - kalima: 'معين'
-  opposite_similars: ['مهين']
+  opposites: ['مهين']
   verses:
     - text: 'يُطَافُ عَلَيْهِم بِكَأْسٍ مِّن [مَّعِينٍ]'
       chapter_no: 37
@@ -12,7 +12,7 @@
       verse_no: 30
 
 - kalima: 'مهين'
-  opposite_similars: ['معين']
+  opposites: ['معين']
   verses:
     - text: 'ثُمَّ جَعَلَ نَسْلَهُۥ مِن سُلَـٰلَةٍ مِّن مَّآءٍ [مَّهِينٍ]'
       chapter_no: 32

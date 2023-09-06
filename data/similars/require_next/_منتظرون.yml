@@ -1,5 +1,5 @@
 - kalima: 'إنا منتظرون'
-  opposite_similars: ['إنهم منتظرون']
+  opposites: ['إنهم منتظرون']
   verses:
     - chapter_no: 6
       verse_no: 158
@@ -14,7 +14,7 @@
       next: ''
 
 - kalima: 'إنهم منتظرون'
-  opposite_similars: ['إنا منتظرون']
+  opposites: ['إنا منتظرون']
   verses:
     - chapter_no: 32
       verse_no: 30

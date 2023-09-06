@@ -1,5 +1,5 @@
 - kalima: 'ألم يعلموا'
-  opposite_similars: ['أولم يعلموا']
+  opposites: ['أولم يعلموا']
   verses:
     - chapter_no: 9
       verse_no: 63
@@ -18,7 +18,7 @@
       text: 'أَلَمْ يَعْلَمُوٓا۟ [أَنَّ ٱللَّهَ هُوَ يَقْبَلُ ٱلتَّوْبَةَ عَنْ عِبَادِهِۦ] وَيَأْخُذُ ٱلصَّدَقَـٰتِ وَأَنَّ ٱللَّهَ هُوَ ٱلتَّوَّابُ ٱلرَّحِيمُ'
 
 - kalima: 'أولم يعلموا'
-  opposite_similars: ['ألم يعلموا']
+  opposites: ['ألم يعلموا']
   verses:
     - chapter_no: 39
       verse_no: 52
@@ -27,7 +27,7 @@
       next: ''
 
 - kalima: 'أولم يعلم'
-  opposite_similars: ['ألم يعلم']
+  opposites: ['ألم يعلم']
   verses:
     - chapter_no: 28
       verse_no: 78
@@ -36,7 +36,7 @@
       next: ''
 
 - kalima: 'ألم يعلم'
-  opposite_similars: ['أولم يعلم']
+  opposites: ['أولم يعلم']
   verses:
     - chapter_no: 96
       verse_no: 14

@@ -1,5 +1,5 @@
 - kalima: 'وإذا مس'
-  opposite_similars: ['وإذا أذقنا']
+  opposites: ['وإذا أذقنا']
   verses:
     - chapter_no: 10
       verse_no: 12
@@ -44,7 +44,7 @@
       next: ''
 
 - kalima: 'وإذا أذقنا'
-  opposite_similars: ['وإذا مس']
+  opposites: ['وإذا مس']
   verses:
     - chapter_no: 10
       verse_no: 21

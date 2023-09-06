@@ -1,5 +1,5 @@
 - kalima: 'فإذا جاء أجلهم'
-  opposite_similars: ['إذا جاء أجلهم']
+  opposites: ['إذا جاء أجلهم']
   verses:
     - chapter_no: 7
       verse_no: 34
@@ -38,7 +38,7 @@
       next: ''
 
 - kalima: 'إذا جاء أجلهم'
-  opposite_similars: ['فإذا جاء أجلهم']
+  opposites: ['فإذا جاء أجلهم']
   verses:
     - chapter_no: 10
       verse_no: 49

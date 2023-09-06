@@ -1,5 +1,5 @@
 - kalima: 'أول المسلمين'
-  opposite_similars: ['أول المؤمنين']
+  opposites: ['أول المؤمنين']
   verses:
     - chapter_no: 6
       verse_no: 163
@@ -14,7 +14,7 @@
       next: ''
 
 - kalima: 'أول المؤمنين'
-  opposite_similars: ['أول المسلمين']
+  opposites: ['أول المسلمين']
   verses:
     - chapter_no: 7
       verse_no: 143

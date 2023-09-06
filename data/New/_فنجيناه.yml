@@ -1,5 +1,5 @@
 - kalima: 'فأنجيناه'
-  opposite_similars: ['فنجيناه']
+  opposites: ['فنجيناه']
   verses:
     - chapter_no: 7
       verse_no: 64
@@ -38,7 +38,7 @@
       next: ''
 
 - kalima: 'فنجيناه'
-  opposite_similars: ['فأنجيناه']
+  opposites: ['فأنجيناه']
   verses:
     - chapter_no: 10
       verse_no: 73

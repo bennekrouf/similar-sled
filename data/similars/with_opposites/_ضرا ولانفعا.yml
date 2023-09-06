@@ -1,5 +1,5 @@
 - kalima: 'نفعا ولاضرا'
-  opposite_similars: ['ضرا ولانفعا']
+  opposites: ['ضرا ولانفعا']
   verses:
     - chapter_no: 7
       verse_no: 188
@@ -20,7 +20,7 @@
       next: ''
 
 - kalima: 'ضرا ولانفعا'
-  opposite_similars: ['نفعا ولاضرا']
+  opposites: ['نفعا ولاضرا']
   verses:
     - chapter_no: 5
       verse_no: 76
