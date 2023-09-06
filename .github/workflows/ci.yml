@@ -17,10 +17,8 @@ jobs:
         uses: actions-rs/toolchain@v1
         with:
           toolchain: nightly
+          override: true
 
-      - name: Build and Deploy
+      - name: Build
         run: |
           cargo build --release
-          rm -rf ../dbs
-          cd target/release
-          ./similars-sled
