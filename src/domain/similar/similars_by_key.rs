@@ -61,7 +61,7 @@ pub fn convert_to_output(dbs: &Database, similar: &Similar) -> SimilarOutput {
     let verses = similar.verses.clone();
     let mut opposites = None;
 
-    if let Some(opposite_similars) = &similar.opposite_similars {
+    if let Some(opposite_similars) = &similar.opposites {
         if !opposite_similars.is_empty() {
             // info!("Found opposite similars: {:?}", opposite_similars);
             opposites = convert_opposites(dbs, opposite_similars);

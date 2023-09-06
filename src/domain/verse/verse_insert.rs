@@ -1,30 +1,20 @@
-use crate::models::VerseOutput;
-use crate::models::Database;
+use crate::models::{Database, VerseOutput};
 use sled::{self, IVec};
-use std::borrow::Cow;
+use bincode;
 
 pub fn insert(dbs: &Database, verse: &VerseOutput) -> sled::Result<Option<IVec>> {
     let verse_db = &dbs.verse_db;
 
     let key = format!("{}:{}", verse.chapter_no, verse.verse_no);
 
-    // Clone the text to modify it
-    let modified_text = verse.text.clone();
-
-    // Convert the Option<String> to Cow<str> for efficient borrowing
-    let text: Cow<str> = match modified_text {
-        Some(ref t) => Cow::Borrowed(t),
-        None => Cow::Borrowed(""),
-    };
-
-    // Remove the "غغغ" pattern from the text
-    let cleaned_text = text.replace("غغغ", "");
-
-    // Convert the modified text to bytes
-    let text_bytes: &[u8] = cleaned_text.as_bytes();
+    // let log = &verse;
+    // print!("LOG {:?}", log);
+    // Serialize UngroupedText using bincode
+    let bincode_bytes = bincode::serialize(&verse.ungrouped_text).unwrap();
 
     // Use the ? operator to handle potential errors from insert
-    verse_db.insert(&key, text_bytes)?;
+    // Dereference bincode_bytes so it becomes &[u8]
+    verse_db.insert(&key, &*bincode_bytes)?;
 
     Ok(None)
 }

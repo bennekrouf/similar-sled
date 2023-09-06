@@ -1,4 +1,4 @@
-use crate::models::Database;
+use crate::models::{Database, UngroupedText};
 use crate::domain::exercise::get_solution::get_solution;
 
 pub fn check_discriminant(
@@ -13,7 +13,7 @@ pub fn check_discriminant(
     // First loop to check if a match exists
     for exercise in &solutions {
         for statement in &exercise.verses {
-            if statement.verse.verse_no == verse_no && statement.verse.chapter_no == chapter_no && statement.ungrouped_text.discriminant == discriminant {
+            if statement.verse.verse_no == verse_no && statement.verse.chapter_no == chapter_no && statement.verse.ungrouped_text.as_ref().unwrap_or(&UngroupedText::default()).discriminant == discriminant {
                 // Match found
                 return (true, String::from(""));
             }

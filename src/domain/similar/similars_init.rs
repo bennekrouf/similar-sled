@@ -3,15 +3,12 @@ use std::collections::HashSet;
 use crate::files::similars_from_yaml::load;
 use crate::domain::verse::verse_insert;
 use crate::domain::similar::similars_insert;
-use crate::models::VerseOutput;
-use crate::models::Database;
+use crate::models::{VerseOutput, Database};
 
 pub fn init(dbs: &Database) {
     let similars = load().expect("Failed to load YAML file");
-    // process_similars(&dbs, similars);
+
     for similar in similars {
-        // let verse_references = get_verse_references(&similar);
-        
         similars_insert::similars_insert(&dbs, &similar);
         let kalima = similar.kalima.clone();
 

@@ -9,6 +9,6 @@ pub fn get_verse_similar_by_chapter_route(
     dbs: State<Database>,
     chapter_no: u32,
 ) -> Json<Vec<SimilarOutputAdapted>>{
-    let result = similars_by_chapter::get(&dbs, chapter_no);
+    let result: Vec<SimilarOutputAdapted> = similars_by_chapter::get(&dbs, chapter_no);
     Json(result)
 }

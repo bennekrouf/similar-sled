@@ -15,15 +15,30 @@ pub struct VerseOutput {
     pub chapter_no: u32,
     pub verse_no: u32,
     pub sourate: Option<String>,
-    pub text: Option<String>,
     pub ungrouped_text: Option<UngroupedText>,
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, PartialEq, Eq, Hash, Ord, PartialOrd)]
+pub struct YmlVerse {
+    pub chapter_no: u32,
+    pub verse_no: u32,
+    pub text: String,
+    pub previous: Option<String>,
+    pub next: Option<String>,
 }
 
 #[derive(Serialize, Deserialize, Debug, PartialEq)]
 pub struct Similar {
     pub kalima: String,
-    pub opposite_similars: Option<Vec<String>>,
+    pub opposites: Option<Vec<String>>,
     pub verses: Vec<VerseOutput>,
+}
+
+#[derive(Serialize, Deserialize, Debug, PartialEq, Clone)]
+pub struct YmlSimilar {
+    pub kalima: String,
+    pub opposites: Option<Vec<String>>,
+    pub verses: Vec<YmlVerse>,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
@@ -48,11 +63,20 @@ pub struct UngroupedText {
     pub post: Option<String>,
 }
 
+impl Default for UngroupedText {
+    fn default() -> Self {
+        UngroupedText {
+            pre: None,
+            discriminant: None,
+            post: None,
+        }
+    }
+}
+
 #[derive(Serialize, Deserialize, Debug, Eq, PartialEq, Clone, Hash)]
 pub struct Statement {
     pub kalima: String,
     pub verse: VerseOutput,
-    pub ungrouped_text : UngroupedText,
     pub has_opposites: bool,
 }
 
@@ -102,6 +126,5 @@ pub enum ExerciseType {
 
 #[derive(Debug, Serialize, Deserialize, Clone, Eq, PartialEq, Hash, Ord, PartialOrd)]
 pub struct Alternative {
-    pub content: String,
     pub verse: Option<VerseOutput>,
 }

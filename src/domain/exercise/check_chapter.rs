@@ -14,7 +14,7 @@ pub fn check_chapter(
     // Check if the user's selection is correct
     for exercise in &solutions {
         for statement in &exercise.verses {
-            if let Some(ref verse_discriminant) = statement.ungrouped_text.discriminant {
+            if let Some(ref verse_discriminant) = statement.verse.ungrouped_text.as_ref().unwrap_or(&UngroupedText::default()).discriminant {
                 if verse_discriminant == &discriminant && statement.verse.verse_no == verse_no && statement.verse.chapter_no == selected_chapter_no {
                     return (true, UngroupedText { pre: None, post: None, discriminant: None}); // Correctly matched
                 }
@@ -29,7 +29,7 @@ pub fn check_chapter(
             if statement.verse.verse_no == verse_no {
                 return (
                     false,
-                    statement.ungrouped_text.clone()
+                    statement.verse.ungrouped_text.as_ref().unwrap_or(&UngroupedText::default()).clone()
                 );
             }
         }

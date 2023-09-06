@@ -1,32 +1,42 @@
 use crate::models::UngroupedText;
+use std::borrow::Cow;
+
+// This function cleans the text by removing the "غغغ" pattern.
+fn clean_text(input: Option<&str>) -> Cow<str> {
+    let text: Cow<str> = match input {
+        Some(t) => Cow::Borrowed(t),
+        None => Cow::Borrowed(""),
+    };
+    Cow::Owned(text.replace("غغغ", ""))
+}
 
 pub fn extract_parts(text: Option<&str>) -> UngroupedText {
     match text {
         Some(t) => {
             if let Some(start) = t.find('[') {
                 if let Some(end) = t.find(']') {
-                    let pre = &t[0..start];
-                    let discriminant = &t[start + 1..end];
-                    let post = &t[end + 1..];
+                    let pre = clean_text(Some(&t[0..start])).into_owned();
+                    let discriminant = t[start + 1..end].to_string();
+                    let post = clean_text(Some(&t[end + 1..])).into_owned();
 
                     return UngroupedText {
-                        pre: Some(pre.to_string()),
-                        discriminant: Some(discriminant.to_string()),
-                        post: Some(post.to_string()),
+                        pre: Some(pre),
+                        discriminant: Some(discriminant),
+                        post: Some(post),
                     };
                 }
             }
+            let cleaned_t = clean_text(Some(t)).into_owned();
             return UngroupedText {
-                        pre: Some(t.to_string()),
-                        discriminant: None,
-                        post: None,
-                    };
-            // (Some(t.to_string()), None, None)
+                pre: Some(cleaned_t),
+                discriminant: None,
+                post: None,
+            };
         }
         None => UngroupedText {
-                        pre: None,
-                        discriminant: None,
-                        post: None,
-                    },
+            pre: None,
+            discriminant: None,
+            post: None,
+        },
     }
 }
