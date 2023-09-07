@@ -1,67 +1,75 @@
-use std::collections::HashSet;
 use rand::seq::SliceRandom;
 
-use crate::domain::exercise::a::generate as generate_A;
-use crate::domain::exercise::b::generate as generate_B;
+use crate::domain::exercise::get_solution::get_solution;
+use crate::domain::exercise::extract_and_shuffle_options::extract_and_shuffle_options;
+use crate::domain::exercise::select_random_verse_index::select_random_verse_index;
+use crate::domain::similar::sourate_from_verse::sourate_name_from_verse;
+use crate::models::{ExerciseType, Database, Alternative, Exercise};
+use crate::utils::deduplicate_by_field::deduplicate_by_field;
 
-use crate::domain::similar::similars_by_key_count::get_count_for_kalima;
-use crate::models::{ExerciseType, Database, Exercise};
+pub fn generate(dbs: &Database, kalima: String, exercise_type: ExerciseType) -> Option<Exercise> {
+    let mut solutions = get_solution(dbs, &kalima);
+    if solutions.is_empty() { return None; }
+    
+    let exercise = &mut solutions[0];
+    let valid_verse_index = select_random_verse_index(&exercise.verses);
+    // let log = exercise.verses.get_mut(valid_verse_index);
 
-pub fn generate_one(dbs: &Database, kalima: String, exercise_type: ExerciseType) -> Option<Exercise> {
-    match exercise_type {
-        ExerciseType::A => generate_A(dbs, kalima),
-        ExerciseType::B => generate_B(dbs, kalima),
+    // println!("exercise.verses.get_mut(valid_verse_index) {:?}", log);
+    if let Some(ref mut valid_verse) = exercise.verses.get_mut(valid_verse_index) {
+        valid_verse.verse.sourate = Some(sourate_name_from_verse(dbs, &valid_verse.verse));
     }
-}
 
-pub fn generate_exercises(dbs: &Database, kalima: &str) -> Vec<Exercise> {
-    let mut exercises = Vec::new();
-    
-    // Get the count for the given kalima
-    let count = get_count_for_kalima(dbs, kalima);
-    println!("Count {:?} {:?}", kalima, &count);
-    
-    // Compute the number of exercises to generate based on the count.
-    let num_exercises = std::cmp::min(1, count.saturating_sub(1));
+    let exclude_value = Some(Alternative { 
+        verse: Some(exercise.verses[valid_verse_index].verse.clone())
+    });
 
-    // HashSet to keep track of seen exercises
-    let mut seen_exercises = HashSet::new();
+    // Convert discriminants (assuming they are chapter names) to the Alternative format
+    let mut alternatives = extract_and_shuffle_options(&mut exercise.verses, 
+    |statement| {
+        let alternative = Alternative { 
+            verse: Some(statement.verse.clone())
+        };
+        
+        Some(alternative)
+    },
+    &exclude_value);
 
-    // Generate exercises of type A
-    for _ in 0..num_exercises {
-        if let Some(exercise) = attempt_generate(dbs, kalima.to_string(), ExerciseType::A, &mut seen_exercises) {
-            exercises.push(exercise);
+    for alternative in &mut alternatives {
+        if let Some(ref mut verse) = alternative.verse {
+            verse.sourate = Some(sourate_name_from_verse(dbs, verse));
         }
     }
 
-    // Generate exercises of type B
-    // for _ in 0..num_exercises {
-    //     if let Some(exercise) = attempt_generate(dbs, kalima.to_string(), ExerciseType::B, &mut seen_exercises) {
-    //         exercises.push(exercise);
-    //     }
-    // }
+    alternatives = deduplicate_by_field(alternatives.clone(), |alt| {
+        alt.verse
+            .as_ref()
+            .and_then(|verse| {
+                verse.ungrouped_text.as_ref().map(|text| text.discriminant.clone())
+            })
+    });
+    alternatives = deduplicate_by_field(alternatives.clone(), |alt| alt.verse.as_ref().unwrap().sourate.clone());
+    alternatives = deduplicate_by_field(alternatives.clone(), |alt| Some(alt.verse.as_ref().unwrap().verse_no));
+    alternatives.shuffle(&mut rand::thread_rng());
 
-     // Now shuffle the exercises
-    let mut rng = rand::thread_rng();
-    exercises.shuffle(&mut rng);
+    // Limit to 3 possible answers (excluding the correct answer which we will add later)
+    alternatives.truncate(2);
 
-    exercises
-}
+    let valid_verse = exercise.verses.get_mut(valid_verse_index).unwrap();
 
-// Function to attempt generating a unique exercise with a retry limit
-fn attempt_generate(
-    dbs: &Database,
-    kalima: String,
-    ex_type: ExerciseType,
-    seen: &mut HashSet<Exercise>,
-) -> Option<Exercise> {
-    const MAX_RETRIES: usize = 10;
-    for _ in 0..MAX_RETRIES {
-        if let Some(exercise) = generate_one(dbs, kalima.clone(), ex_type.clone()) {
-            if seen.insert(exercise.clone()) {
-                return Some(exercise);
-            }
-        }
+    alternatives.push(Alternative { verse: Some(valid_verse.verse.clone()) });
+    alternatives.shuffle(&mut rand::thread_rng());
+    
+    let mut generated_exercise = Some(Exercise {
+        statement: valid_verse.clone(),
+        alternatives, // Pass the cloned alternatives here
+        exercise_type: ExerciseType::A
+    });
+
+    if let Some(ref mut exercise) = generated_exercise {
+        exercise_type.hide_fields(exercise);
     }
-    None
+    
+    generated_exercise
+
 }

@@ -29,9 +29,8 @@ pub mod domain {
         pub mod sourate_from_verse;
     }
     pub mod exercise {
+        pub mod get_exercises;
         pub mod generate;
-        pub mod a;
-        pub mod b;
         pub mod check_discriminant;
         pub mod check_chapter;
         pub mod get_solution;
