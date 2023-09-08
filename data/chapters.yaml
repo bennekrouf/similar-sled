@@ -17,7 +17,7 @@
   no: 4
   mekka: false
   background_color: '#deb245'
-  color: '#000000'
+  color: 'black'
 - sourate: 'المائدة'
   no: 5
   mekka: false
@@ -32,7 +32,7 @@
   no: 7
   mekka: true
   background_color: '#deb245'
-  color: '#000000'
+  color: 'black'
 - sourate: 'الأنفال'
   no: 8
   mekka: true
@@ -57,7 +57,7 @@
   no: 12
   mekka: true
   background_color: '#deb245'
-  color: '#000000'
+  color: 'black'
 - sourate: 'الرعد'
   no: 13
   mekka: true
@@ -82,7 +82,7 @@
   no: 17
   mekka: true
   background_color: '#deb245'
-  color: '#000000'
+  color: 'black'
 - sourate: 'الكهف'
   no: 18
   mekka: true
@@ -107,7 +107,7 @@
   no: 22
   mekka: true
   background_color: '#deb245'
-  color: '#000000'
+  color: 'black'
 - sourate: 'المؤمنون'
   no: 23
   mekka: true
@@ -132,7 +132,7 @@
   no: 27
   mekka: true
   background_color: '#deb245'
-  color: '#000000'
+  color: 'black'
 - sourate: 'القصص'
   no: 28
   mekka: true
@@ -162,7 +162,7 @@
   no: 33
   mekka: true
   background_color: '#deb245'
-  color: '#000000'
+  color: 'black'
 - sourate: 'سبإ'
   no: 34
   mekka: true
@@ -192,7 +192,7 @@
   no: 39
   mekka: true
   background_color: '#deb245'
-  color: '#000000'
+  color: 'black'
 - sourate: 'غافر'
   no: 40
   mekka: true
@@ -222,7 +222,7 @@
   no: 45
   mekka: true
   background_color: '#deb245'
-  color: '#000000'
+  color: 'black'
 - sourate: 'الأحقاف'
   no: 46
   mekka: true
@@ -247,7 +247,7 @@
   no: 50
   mekka: true
   background_color: '#deb245'
-  color: '#000000'
+  color: 'black'
 - sourate: 'الذاريات'
   no: 51
   mekka: true
@@ -267,7 +267,7 @@
   no: 54
   mekka: true
   background_color: '#deb245'
-  color: '#000000'
+  color: 'black'
 - sourate: 'الرحمن'
   no: 55
   mekka: true
@@ -302,7 +302,7 @@
   no: 61
   mekka: true
   background_color: '#deb245'
-  color: '#000000'
+  color: 'black'
 - sourate: 'الجمعة'
   no: 62
   mekka: true
@@ -332,7 +332,7 @@
   no: 67
   mekka: true
   background_color: '#deb245'
-  color: '#000000'
+  color: 'black'
 - sourate: 'القلم'
   no: 68
   mekka: true
@@ -362,7 +362,7 @@
   no: 73
   mekka: true
   background_color: '#deb245'
-  color: '#000000'
+  color: 'black'
 - sourate: 'المدثر'
   no: 74
   mekka: true
@@ -392,7 +392,7 @@
   no: 79
   mekka: true
   background_color: '#deb245'
-  color: '#000000'
+  color: 'black'
 - sourate: 'عبس'
   no: 80
   mekka: true
@@ -422,7 +422,7 @@
   no: 85
   mekka: true
   background_color: '#deb245'
-  color: '#000000'
+  color: 'black'
 - sourate: 'الطارق'
   no: 86
   mekka: true
@@ -452,7 +452,7 @@
   no: 91
   mekka: true
   background_color: '#deb245'
-  color: '#000000'
+  color: 'black'
 - sourate: 'الليل'
   no: 92
   mekka: true
@@ -482,7 +482,7 @@
   no: 97
   mekka: true
   background_color: '#deb245'
-  color: '#000000'
+  color: 'black'
 - sourate: 'البينة'
   no: 98
   mekka: true
@@ -512,7 +512,7 @@
   no: 103
   mekka: true
   background_color: '#deb245'
-  color: '#000000'
+  color: 'black'
 - sourate: 'الهمزة'
   no: 104
   mekka: true
@@ -542,7 +542,7 @@
   no: 109
   mekka: true
   background_color: '#deb245'
-  color: '#000000'
+  color: 'black'
 - sourate: 'النصر'
   no: 110
   mekka: true
