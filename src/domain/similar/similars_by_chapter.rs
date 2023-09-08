@@ -47,6 +47,13 @@ pub fn get(dbs: &Database, chapter_no: u32) -> Vec<SimilarOutputAdapted> {
         }
     }
 
+    // Sorting the vector by the total length of verses, similars, and opposites.
+    similar_objects.sort_by(|a, b| {
+        let len_a = a.verses.len() + a.similars.len() + a.opposites.len();
+        let len_b = b.verses.len() + b.similars.len() + b.opposites.len();
+        len_a.cmp(&len_b)
+    });
+
     similar_objects
 }
 

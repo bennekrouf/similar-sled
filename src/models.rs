@@ -8,6 +8,7 @@ pub struct Chapter {
     pub background_color: String,
     pub color: String,
     pub count: Option<u32>,
+    pub count_ayat: Option<u32>,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, PartialEq, Eq, Hash, Ord, PartialOrd)]
