@@ -9,7 +9,6 @@ pub fn insert(dbs: &Database, verse: &VerseOutput) -> sled::Result<Option<IVec>>
 
     // let log = &verse;
     // print!("LOG {:?}", log);
-    // Serialize UngroupedText using bincode
     let bincode_bytes = bincode::serialize(&verse.ungrouped_text).unwrap();
 
     // Use the ? operator to handle potential errors from insert

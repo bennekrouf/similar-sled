@@ -16,7 +16,7 @@ pub fn extract_parts(text: Option<&str>) -> UngroupedText {
             if let Some(start) = t.find('[') {
                 if let Some(end) = t.find(']') {
                     let pre = clean_text(Some(&t[0..start])).into_owned();
-                    let discriminant = t[start..=end].to_string();  // Include the square brackets
+                    let discriminant = t[(start+1)..end].to_string();
                     let post = clean_text(Some(&t[end + 1..])).into_owned();
 
                     return UngroupedText {

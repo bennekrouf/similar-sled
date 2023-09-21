@@ -7,7 +7,7 @@ pub fn check_chapter(
     selected_chapter_no: u32,  // user's selected chapter_no
     verse_no: u32,
     discriminant: String,
-) -> (bool, UngroupedText) {
+) -> (bool, Option<UngroupedText>) {
     let solutions = get_solution(dbs, &kalima);
     println!("DISC : {:?}", kalima);
 
@@ -16,7 +16,7 @@ pub fn check_chapter(
         for statement in &exercise.verses {
             if let Some(ref verse_discriminant) = statement.verse.ungrouped_text.as_ref().unwrap_or(&UngroupedText::default()).discriminant {
                 if verse_discriminant == &discriminant && statement.verse.verse_no == verse_no && statement.verse.chapter_no == selected_chapter_no {
-                    return (true, UngroupedText { pre: None, post: None, discriminant: None}); // Correctly matched
+                    return (true, None); // Correctly matched
                 }
             }
         }
@@ -29,12 +29,12 @@ pub fn check_chapter(
             if statement.verse.verse_no == verse_no {
                 return (
                     false,
-                    statement.verse.ungrouped_text.as_ref().unwrap_or(&UngroupedText::default()).clone()
+                    Some(statement.verse.ungrouped_text.as_ref().unwrap_or(&UngroupedText::default()).clone())
                 );
             }
         }
     }
 
     // If we reached here, we didn't even find a verse with matching verse_no
-    (false, UngroupedText { pre: None, post: None, discriminant: None})
+    (false, None)
 }

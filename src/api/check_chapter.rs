@@ -11,7 +11,7 @@ pub fn check_chapter(
     verse_no: u32,
     discriminant: String,
     dbs: State<Database>,
-) -> Json<(bool, UngroupedText)> {
+) -> Json<(bool, Option<UngroupedText>)> {
     let result = check_chapter::check_chapter(
         &dbs,
         kalima,
