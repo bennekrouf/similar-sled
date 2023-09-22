@@ -4,7 +4,7 @@ use rocket_contrib::json::Json;
 use crate::models::Chapter;
 use crate::models::Database;
 use crate::domain::similar::similars_by_chapter;
-use crate::domain::verse::verse_insert::count_verses_in_chapter;
+use crate::domain::verse::count_verses_in_chapter::count_verses_in_chapter;
 
 #[get("/chapters")]
 pub fn get_chapters(dbs: State<Database>) -> Json<Vec<Chapter>> {

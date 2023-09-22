@@ -17,11 +17,9 @@ pub mod api {
 pub mod domain {
     pub mod chapter {
         pub mod chapter;
-        pub mod chapter_insert;
         pub mod chapters_init;
     }
     pub mod similar {
-        pub mod similars_insert;
         pub mod similars_init;
         pub mod similars_by_chapter;
         pub mod similars_by_key;
@@ -41,7 +39,7 @@ pub mod domain {
     }
     pub mod verse {
         pub mod verses_by_chapter;
-        pub mod verse_insert;
+        pub mod count_verses_in_chapter;
     }
     pub mod all_db;
 }
@@ -52,6 +50,7 @@ mod utils {
     pub mod sort;
     pub mod extract_parts;
     pub mod deduplicate_by_field;
+    pub mod insert_in_sled;
 }
 
 mod validator;

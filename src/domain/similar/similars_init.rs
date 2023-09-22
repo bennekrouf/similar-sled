@@ -1,19 +1,20 @@
 use bincode;
 use std::collections::HashSet;
 use crate::files::similars_from_yaml::load;
-use crate::domain::verse::verse_insert;
-use crate::domain::similar::similars_insert;
+use crate::utils::insert_in_sled;
 use crate::models::{VerseOutput, Database};
 
 pub fn init(dbs: &Database) {
     let similars = load().expect("Failed to load YAML file");
 
     for similar in similars {
-        similars_insert::similars_insert(&dbs, &similar);
+        insert_in_sled::insert_in_sled(&dbs.similar_db, similar.kalima.clone(), &similar);
         let kalima = similar.kalima.clone();
 
         for verse in similar.verses {
-            verse_insert::insert(&dbs, &verse).unwrap();
+            let key = format!("{}:{}", verse.chapter_no, verse.verse_no);
+            insert_in_sled::insert_in_sled(&dbs.verse_db, key, &verse);
+
             update_verse_similar_mapping(&dbs, &verse, &kalima);
         }
     }
