@@ -30,6 +30,7 @@ pub mod domain {
         pub mod get_exercises;
         pub mod generate;
         pub mod check_discriminant;
+        pub mod exercise_type_impl;
         pub mod check_chapter;
         pub mod get_solution;
         pub mod extract_and_shuffle_options;

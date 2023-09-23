@@ -14,7 +14,6 @@ pub fn generate(dbs: &Database, kalima: String, exercise_type: ExerciseType) -> 
     let valid_verse_index = select_random_verse_index(&exercise.verses);
     // let log = exercise.verses.get_mut(valid_verse_index);
 
-    // println!("exercise.verses.get_mut(valid_verse_index) {:?}", log);
     if let Some(ref mut valid_verse) = exercise.verses.get_mut(valid_verse_index) {
         valid_verse.verse.sourate = Some(sourate_name_from_verse(dbs, &valid_verse.verse));
     }
@@ -33,7 +32,7 @@ pub fn generate(dbs: &Database, kalima: String, exercise_type: ExerciseType) -> 
                         verse_no: 0,
                         sourate: None,
                         ungrouped_text: Some(UngroupedText {
-                            discriminant: Some(value),
+                            discriminant: Some(value.0),
                             pre: None,
                             post: None,
                         }),
@@ -44,11 +43,10 @@ pub fn generate(dbs: &Database, kalima: String, exercise_type: ExerciseType) -> 
                 // Use sourate to form alternative
                 Alternative {
                     verse: Some(VerseOutput {
-                        sourate: Some(value),
-                        chapter_no: 0,
-                        verse_no: 0,
+                        sourate: Some(value.0),
+                        chapter_no: value.1.chapter_no,
+                        verse_no: value.1.verse_no,
                         ungrouped_text: None,
-                        // ... populate other fields ...
                     }),
                 }
             },
