@@ -14,7 +14,7 @@ pub fn extract_and_shuffle_options(
     let mut results: Vec<(String, VerseOutput)> = statements.iter_mut()
         .filter_map(|statement| {
             let option = match exercise_type {
-                ExerciseType::FindDscriminant => {
+                ExerciseType::FindDiscriminant => {
                     statement.verse.ungrouped_text.as_ref().and_then(|ut| ut.discriminant.clone())
                 },
                 ExerciseType::FindSourate => {
@@ -27,7 +27,7 @@ pub fn extract_and_shuffle_options(
             };
 
             let exclude_value = match exercise_type {
-                ExerciseType::FindDscriminant => exclude_verse.as_ref().and_then(|verse| verse.ungrouped_text.as_ref().and_then(|ut| ut.discriminant.clone())),
+                ExerciseType::FindDiscriminant => exclude_verse.as_ref().and_then(|verse| verse.ungrouped_text.as_ref().and_then(|ut| ut.discriminant.clone())),
                 ExerciseType::FindSourate => exclude_verse.as_ref().and_then(|verse| verse.sourate.clone()),
                 ExerciseType::C => {
                     // handle other extraction logic here

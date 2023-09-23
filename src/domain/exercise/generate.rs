@@ -24,7 +24,7 @@ pub fn generate(dbs: &Database, kalima: String, exercise_type: ExerciseType) -> 
     let extracted_values = extract_and_shuffle_options(&mut exercise.verses, exercise_type, &exclude_verse);
     let mut alternatives: Vec<Alternative> = extracted_values.into_iter().map(|value| {
         match exercise_type {
-            ExerciseType::FindDscriminant => {
+            ExerciseType::FindDiscriminant => {
                 // Use discriminant to form alternative
                 Alternative {
                     verse: Some(VerseOutput {

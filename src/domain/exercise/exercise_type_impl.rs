@@ -3,7 +3,7 @@ use crate::models::{ExerciseType, Exercise};
 impl ExerciseType {
     pub fn hide_fields(&self, exercise: &mut Exercise) {
         match self {
-            ExerciseType::FindDscriminant => {
+            ExerciseType::FindDiscriminant => {
                 exercise.statement.verse.ungrouped_text.as_mut().and_then(|text| text.discriminant.take());
             },
             ExerciseType::FindSourate => {
@@ -21,7 +21,7 @@ impl ExerciseType {
         // Applying the same rules to alternatives
         for alt in &mut exercise.alternatives {
             match self {
-                ExerciseType::FindDscriminant => {
+                ExerciseType::FindDiscriminant => {
                     alt.verse.as_mut().map(|verse| verse.sourate = None);
                     alt.verse.as_mut().map(|verse| verse.chapter_no = 0);
                     alt.verse.as_mut().map(|verse| verse.verse_no = 0);

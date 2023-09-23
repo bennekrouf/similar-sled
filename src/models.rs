@@ -126,7 +126,7 @@ pub struct Alternative {
 
 #[derive(Serialize, Deserialize, Debug, Hash, Eq, PartialEq, Clone, Copy)]
 pub enum ExerciseType {
-    FindDscriminant,
+    FindDiscriminant,
     FindSourate,
     C,
 }
