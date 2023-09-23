@@ -19,9 +19,9 @@ pub fn get_exercises(dbs: &Database, kalima: &str) -> Vec<Exercise> {
     // HashSet to keep track of seen exercises
     let mut seen_exercises = HashSet::new();
 
-    // Generate exercises of type A
+    // Generate exercises of type FindDscriminant
     for _ in 0..num_exercises {
-        if let Some(exercise) = attempt_generate(dbs, kalima.to_string(), ExerciseType::A, &mut seen_exercises) {
+        if let Some(exercise) = attempt_generate(dbs, kalima.to_string(), ExerciseType::FindDscriminant, &mut seen_exercises) {
             exercises.push(exercise);
         }
     }

@@ -124,20 +124,20 @@ pub struct Alternative {
     pub verse: Option<VerseOutput>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Hash, Eq, PartialEq, Clone)]
+#[derive(Serialize, Deserialize, Debug, Hash, Eq, PartialEq, Clone, Copy)]
 pub enum ExerciseType {
-    A,
-    B,
+    FindDscriminant,
+    FindSourate,
     C,
 }
 
 impl ExerciseType {
     pub fn hide_fields(&self, exercise: &mut Exercise) {
         match self {
-            ExerciseType::A => {
+            ExerciseType::FindDscriminant => {
                 exercise.statement.verse.ungrouped_text.as_mut().and_then(|text| text.discriminant.take());
             },
-            ExerciseType::B => {
+            ExerciseType::FindSourate => {
                 exercise.statement.verse.sourate = None;
             },
             ExerciseType::C => {
@@ -152,7 +152,7 @@ impl ExerciseType {
         // Applying the same rules to alternatives
         for alt in &mut exercise.alternatives {
             match self {
-                ExerciseType::A => {
+                ExerciseType::FindDscriminant => {
                     alt.verse.as_mut().map(|verse| verse.sourate = None);
                     alt.verse.as_mut().map(|verse| verse.chapter_no = 0);
                     alt.verse.as_mut().map(|verse| verse.verse_no = 0);
@@ -163,7 +163,7 @@ impl ExerciseType {
                         });
                     }
                 },
-                ExerciseType::B => {
+                ExerciseType::FindSourate => {
                     alt.verse.as_mut().and_then(|verse| verse.ungrouped_text.as_mut().and_then(|text| text.discriminant.take()));
                 },
                 ExerciseType::C => {

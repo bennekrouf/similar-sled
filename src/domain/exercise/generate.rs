@@ -4,8 +4,7 @@ use crate::domain::exercise::get_solution::get_solution;
 use crate::domain::exercise::extract_and_shuffle_options::extract_and_shuffle_options;
 use crate::domain::exercise::select_random_verse_index::select_random_verse_index;
 use crate::domain::similar::sourate_from_verse::sourate_name_from_verse;
-use crate::models::{ExerciseType, Database, Alternative, Exercise};
-use crate::utils::deduplicate_by_field::deduplicate_by_field;
+use crate::models::{ExerciseType, Database, Alternative, Exercise, VerseOutput, UngroupedText};
 
 pub fn generate(dbs: &Database, kalima: String, exercise_type: ExerciseType) -> Option<Exercise> {
     let mut solutions = get_solution(dbs, &kalima);
@@ -20,37 +19,42 @@ pub fn generate(dbs: &Database, kalima: String, exercise_type: ExerciseType) -> 
         valid_verse.verse.sourate = Some(sourate_name_from_verse(dbs, &valid_verse.verse));
     }
 
-    let exclude_value = Some(Alternative { 
-        verse: Some(exercise.verses[valid_verse_index].verse.clone())
-    });
+    let exclude_verse = Some(exercise.verses[valid_verse_index].verse.clone());
 
     // Convert discriminants (assuming they are chapter names) to the Alternative format
-    let mut alternatives = extract_and_shuffle_options(&mut exercise.verses, 
-    |statement| {
-        let alternative = Alternative { 
-            verse: Some(statement.verse.clone())
-        };
-        
-        Some(alternative)
-    },
-    &exclude_value);
-
-    for alternative in &mut alternatives {
-        if let Some(ref mut verse) = alternative.verse {
-            verse.sourate = Some(sourate_name_from_verse(dbs, verse));
+    let extracted_values = extract_and_shuffle_options(&mut exercise.verses, exercise_type, &exclude_verse);
+    let mut alternatives: Vec<Alternative> = extracted_values.into_iter().map(|value| {
+        match exercise_type {
+            ExerciseType::FindDscriminant => {
+                // Use discriminant to form alternative
+                Alternative {
+                    verse: Some(VerseOutput {
+                        chapter_no: 0,
+                        verse_no: 0,
+                        sourate: None,
+                        ungrouped_text: Some(UngroupedText {
+                            discriminant: Some(value),
+                            pre: None,
+                            post: None,
+                        }),
+                    }),
+                }
+            },
+            ExerciseType::FindSourate => {
+                // Use sourate to form alternative
+                Alternative {
+                    verse: Some(VerseOutput {
+                        sourate: Some(value),
+                        chapter_no: 0,
+                        verse_no: 0,
+                        ungrouped_text: None,
+                        // ... populate other fields ...
+                    }),
+                }
+            },
+            _ => unimplemented!(), // Handle other cases or use a default
         }
-    }
-
-    alternatives = deduplicate_by_field(alternatives.clone(), |alt| {
-        alt.verse
-            .as_ref()
-            .and_then(|verse| {
-                verse.ungrouped_text.as_ref().map(|text| text.discriminant.clone())
-            })
-    });
-    alternatives = deduplicate_by_field(alternatives.clone(), |alt| alt.verse.as_ref().unwrap().sourate.clone());
-    alternatives = deduplicate_by_field(alternatives.clone(), |alt| Some(alt.verse.as_ref().unwrap().verse_no));
-    alternatives.shuffle(&mut rand::thread_rng());
+    }).collect();
 
     // Limit to 3 possible answers (excluding the correct answer which we will add later)
     alternatives.truncate(2);
@@ -63,7 +67,7 @@ pub fn generate(dbs: &Database, kalima: String, exercise_type: ExerciseType) -> 
     let mut generated_exercise = Some(Exercise {
         statement: valid_verse.clone(),
         alternatives, // Pass the cloned alternatives here
-        exercise_type: ExerciseType::A
+        exercise_type: exercise_type.clone(),
     });
 
     if let Some(ref mut exercise) = generated_exercise {

@@ -49,7 +49,6 @@ mod utils {
     pub mod yml_path;
     pub mod sort;
     pub mod extract_parts;
-    pub mod deduplicate_by_field;
     pub mod insert_in_sled;
 }
 
