@@ -57,7 +57,6 @@ mod utils {
 mod validator;
 mod server;
 mod xhr_guard;
-
 fn main() {
     // Check deserialization of all files before starting the server
     if let Err(e) = validator::validate() {

@@ -1,9 +1,12 @@
 use super::similars_by_key;
+use log::info;
 
 use crate::models::{VerseOutput, SimilarOutputAdapted};
 use crate::models::Database;
+use crate::domain::similar::sourate_from_verse::sourate_name_from_verse;
 
 pub fn get(dbs: &Database, chapter_no: u32, chapter_range: Option<Vec<(u8, u8)>>) -> Vec<SimilarOutputAdapted> {
+    println!("Parsed Ranges: {:?}", chapter_range);
     let chapter_key = chapter_no.to_string();
     let similar_keys = get_similar_keys(dbs, &chapter_key);
 
@@ -11,37 +14,35 @@ pub fn get(dbs: &Database, chapter_no: u32, chapter_range: Option<Vec<(u8, u8)>>
 
     for kalima in similar_keys {
         let similar = similars_by_key::get(dbs, &kalima);
-
-        // Filter logic
-        if !similar.is_empty() {
+        if similar.is_empty() {
+            info!("similar empty for key : {:?}", &kalima);
+        } else {
             let mut verses: Vec<VerseOutput> = Vec::new();
             let mut similars: Vec<VerseOutput> = Vec::new();
             let mut opposites: Vec<VerseOutput> = Vec::new();
             let kalima = similar[0].kalima.clone();
 
-            for verse_output in &similar[0].verses {
-                if let Some(ref ranges) = chapter_range {
-                    if verse_belongs_to_range(verse_output, ranges) {
-                        verses.push(verse_output.clone());
+            for mut verse_output in similar[0].verses.iter().cloned() {
+                if is_in_range(&verse_output.chapter_no, &chapter_range) {
+                    verse_output.sourate = Some(sourate_name_from_verse(dbs, &verse_output));
+                    if verse_output.chapter_no == chapter_no {
+                        verses.push(verse_output);
+                    } else {
+                        similars.push(verse_output);
                     }
-                } else {
-                    verses.push(verse_output.clone());
-                }
-
-                if verse_output.chapter_no == chapter_no {
-                    similars.push(verse_output.clone());
                 }
             }
 
             if let Some(opposite_verses) = &similar[0].opposites {
-                for verse_output in opposite_verses {
-                    if chapter_range.is_none() || verse_belongs_to_range(verse_output, chapter_range.as_ref().unwrap()) {
-                        opposites.push(verse_output.clone());
+                for mut verse_output in opposite_verses.iter().cloned() {
+                    if is_in_range(&verse_output.chapter_no, &chapter_range) {
+                        verse_output.sourate = Some(sourate_name_from_verse(dbs, &verse_output));
+                        opposites.push(verse_output);
                     }
                 }
             }
 
-            if !verses.is_empty() && (!similars.is_empty() || !opposites.is_empty()) {
+            if !similars.is_empty() || !opposites.is_empty() {
                 similar_objects.push(SimilarOutputAdapted {
                     verses,
                     similars,
@@ -73,6 +74,9 @@ fn get_similar_keys(dbs: &Database, chapter_key: &str) -> Vec<String> {
         .unwrap_or_default()
 }
 
-fn verse_belongs_to_range(verse: &VerseOutput, range: &[(u8, u8)]) -> bool {
-    range.iter().any(|&(start, end)| verse.chapter_no >= start as u32 && verse.chapter_no <= end as u32)
+fn is_in_range(chapter_no: &u32, chapter_range: &Option<Vec<(u8, u8)>>) -> bool {
+    match chapter_range {
+        Some(ranges) => ranges.iter().any(|&(start, end)| *chapter_no >= start as u32 && *chapter_no <= end as u32),
+        None => true, // If no range is specified, all chapters are considered
+    }
 }
