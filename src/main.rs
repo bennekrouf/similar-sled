@@ -51,6 +51,7 @@ mod utils {
     pub mod sort;
     pub mod extract_parts;
     pub mod insert_in_sled;
+    pub mod parse_ranges;
 }
 
 mod validator;
