@@ -25,7 +25,6 @@ pub mod domain {
     }
     pub mod exercise {
         pub mod get_exercises;
-        pub mod generate;
         pub mod generate_one_exercise;
         pub mod exercise_type_impl;
         pub mod convert_to_exercise;
