@@ -4,7 +4,7 @@ pub fn get_count_for_kalima(dbs: &Database, kalima: &str) -> usize {
     let similar_db = &dbs.similar_db;
 
     // Use the `find_map` iterator method to find the first (and likely only) 
-    // entry with the given kalima, and then return the count of its verses.
+    // entry with the given k alima, and then return the count of its verses.
     similar_db
         .iter()
         .find_map(|result| {

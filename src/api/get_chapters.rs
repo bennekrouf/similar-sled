@@ -19,7 +19,7 @@ pub fn get_chapters(dbs: State<Database>, ranges: Option<String>) -> Json<Vec<Ch
                 let chapter: Chapter = bincode::deserialize(&value).unwrap();
 
                 // Compute counts
-                let similar_objects = similars_by_chapter::get(&dbs, chapter.no as u32, parsed_ranges.clone());
+                let similar_objects = similars_by_chapter::get(&dbs, chapter.no as u32, &parsed_ranges);
                 let count = similar_objects.len() as u32;
                 let count_ayat = count_verses_in_chapter(&dbs, chapter.no as u32);
 

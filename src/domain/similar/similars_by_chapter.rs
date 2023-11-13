@@ -4,8 +4,9 @@ use log::info;
 use crate::models::{VerseOutput, SimilarOutputAdapted};
 use crate::models::Database;
 use crate::domain::similar::sourate_from_verse::sourate_name_from_verse;
+use crate::utils::is_in_range::is_in_range;
 
-pub fn get(dbs: &Database, chapter_no: u32, chapter_range: Option<Vec<(u8, u8)>>) -> Vec<SimilarOutputAdapted> {
+pub fn get(dbs: &Database, chapter_no: u32, chapter_range: &Option<Vec<(u8, u8)>>) -> Vec<SimilarOutputAdapted> {
     println!("Parsed Ranges: {:?}", chapter_range);
     let chapter_key = chapter_no.to_string();
     let similar_keys = get_similar_keys(dbs, &chapter_key);
@@ -72,11 +73,4 @@ fn get_similar_keys(dbs: &Database, chapter_key: &str) -> Vec<String> {
 
     bincode::deserialize(&serialized_keys)
         .unwrap_or_default()
-}
-
-fn is_in_range(chapter_no: &u32, chapter_range: &Option<Vec<(u8, u8)>>) -> bool {
-    match chapter_range {
-        Some(ranges) => ranges.iter().any(|&(start, end)| *chapter_no >= start as u32 && *chapter_no <= end as u32),
-        None => true, // If no range is specified, all chapters are considered
-    }
 }

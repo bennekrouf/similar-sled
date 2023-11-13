@@ -6,11 +6,8 @@ mod files {
 
 pub mod models;
 pub mod api {
-        pub mod check_discriminant;
-        pub mod check_chapter;
         pub mod generate_exercise_endpoint;
         pub mod get_chapters;
-        pub mod get_solutions;
         pub mod verse_by_chapter;
         pub mod verse_similar_by_chapter;
 }
@@ -29,9 +26,9 @@ pub mod domain {
     pub mod exercise {
         pub mod get_exercises;
         pub mod generate;
-        pub mod check_discriminant;
+        pub mod generate_one_exercise;
         pub mod exercise_type_impl;
-        pub mod check_chapter;
+        pub mod convert_to_exercise;
         pub mod get_solution;
         pub mod extract_and_shuffle_options;
         pub mod select_random_verse_index;
@@ -52,6 +49,7 @@ mod utils {
     pub mod extract_parts;
     pub mod insert_in_sled;
     pub mod parse_ranges;
+    pub mod is_in_range;
 }
 
 mod validator;
