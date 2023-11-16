@@ -42,8 +42,14 @@ fn get_option_value(exercise_type: ExerciseType, statement: &Statement) -> Optio
 
 fn get_exclude_value(exercise_type: ExerciseType, exclude_verse: &Option<VerseOutput>) -> Option<String> {
     match exercise_type {
-        ExerciseType::FindDiscriminant => exclude_verse.as_ref().and_then(|verse| verse.ungrouped_text.as_ref().and_then(|ut| ut.discriminant.clone())),
-        ExerciseType::FindSourate => exclude_verse.as_ref().and_then(|verse| verse.sourate.clone()),
+        ExerciseType::FindDiscriminant => exclude_verse
+            .as_ref()
+            .and_then(|verse| verse.ungrouped_text
+                .as_ref()
+                .and_then(|ut| ut.discriminant.clone())),
+        ExerciseType::FindSourate => exclude_verse
+            .as_ref()
+            .and_then(|verse| verse.sourate.clone()),
         ExerciseType::C => None, // Handle other cases or use a default
     }
 }

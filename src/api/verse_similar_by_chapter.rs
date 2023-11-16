@@ -11,7 +11,7 @@ pub fn get_verse_similar_by_chapter_route(
     chapter_no: u32,
     ranges: Option<String>,
 ) -> Json<Vec<SimilarOutputAdapted>>{
-    println!("Parsed Ranges get_verse_similar_by_chapter_route: {:?}", ranges);
+    // println!("Parsed Ranges get_verse_similar_by_chapter_route: {:?}", ranges);
 
     // Parse the range parameter into an Option<Vec<(u8, u8)>>
     let chapter_range = ranges.map(|s| parse_ranges(&s));

@@ -7,7 +7,7 @@ impl ExerciseType {
                 exercise.statement.verse.ungrouped_text.as_mut().and_then(|text| text.discriminant.take());
             },
             ExerciseType::FindSourate => {
-                exercise.statement.verse.sourate = None;
+                // exercise.statement.verse.sourate = None;
             },
             ExerciseType::C => {
                 let text = &mut exercise.statement.verse.ungrouped_text;
@@ -22,9 +22,9 @@ impl ExerciseType {
         for alt in &mut exercise.alternatives {
             match self {
                 ExerciseType::FindDiscriminant => {
-                    alt.verse.as_mut().map(|verse| verse.sourate = None);
-                    alt.verse.as_mut().map(|verse| verse.chapter_no = 0);
-                    alt.verse.as_mut().map(|verse| verse.verse_no = 0);
+                    // alt.verse.as_mut().map(|verse| verse.sourate = None);
+                    // alt.verse.as_mut().map(|verse| verse.chapter_no = 0);
+                    // alt.verse.as_mut().map(|verse| verse.verse_no = 0);
                     if let Some(verse) = &mut alt.verse {
                         verse.ungrouped_text.as_mut().map(|text| {
                             text.pre = None;
@@ -33,7 +33,12 @@ impl ExerciseType {
                     }
                 },
                 ExerciseType::FindSourate => {
-                    alt.verse.as_mut().and_then(|verse| verse.ungrouped_text.as_mut().and_then(|text| text.discriminant.take()));
+                    alt.verse
+                    .as_mut()
+                    .and_then(|verse| verse.ungrouped_text
+                        .as_mut()
+                        .and_then(|text| text.discriminant.take())
+                    );
                 },
                 ExerciseType::C => {
                     if let Some(verse) = &mut alt.verse {

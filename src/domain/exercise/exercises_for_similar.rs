@@ -13,7 +13,7 @@ pub fn create(dbs: &Database, similar: &Similar, ranges: &Option<Vec<(u8, u8)>>)
         .flat_map(|opposites| opposites.iter())
         .filter_map(|kalima| similar_db.get(kalima).ok().flatten())
         .filter_map(|data| bincode::deserialize::<Similar>(&data).ok())
-        .flat_map(|similar| similar.verses.clone())  // clone verses here
+        .flat_map(|similar| similar.verses.clone())
         .filter(|verse| is_in_range(&verse.chapter_no, ranges))
         .map(|verse| create_statement(dbs, &verse, &similar.kalima, !similar.opposites.as_ref().unwrap_or(&Vec::new()).is_empty()));
     

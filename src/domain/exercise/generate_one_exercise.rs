@@ -43,7 +43,7 @@ pub fn generate_one_exercise(dbs: &Database, exercise: &mut ExerciseOutput, exer
             },
             _ => unimplemented!(),
         }
-    }).collect();
+    }).take(2).collect();
 
     // Add the correct answer
     let valid_verse = exercise.verses.get(valid_verse_index).unwrap();

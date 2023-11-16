@@ -9,7 +9,7 @@ use crate::domain::verse::count_verses_in_chapter::count_verses_in_chapter;
 
 #[get("/chapters?<ranges>")]
 pub fn get_chapters(dbs: State<Database>, ranges: Option<String>) -> Json<Vec<Chapter>> {
-    println!("Parsed Ranges get_chapters: {:?}", ranges);
+    // println!("Parsed Ranges get_chapters: {:?}", ranges);
 
     let parsed_ranges = ranges.as_ref().map(|r| parse_ranges(r));
     let chapters: Vec<Chapter> = dbs.chapter_db

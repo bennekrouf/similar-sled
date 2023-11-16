@@ -7,7 +7,7 @@ use crate::domain::similar::sourate_from_verse::sourate_name_from_verse;
 use crate::utils::is_in_range::is_in_range;
 
 pub fn get(dbs: &Database, chapter_no: u32, chapter_range: &Option<Vec<(u8, u8)>>) -> Vec<SimilarOutputAdapted> {
-    println!("Parsed Ranges: {:?}", chapter_range);
+    // println!("Parsed Ranges: {:?}", chapter_range);
     let chapter_key = chapter_no.to_string();
     let similar_keys = get_similar_keys(dbs, &chapter_key);
 
