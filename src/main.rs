@@ -8,6 +8,7 @@ pub mod models;
 pub mod api {
         pub mod generate_exercise_endpoint;
         pub mod get_chapters;
+        pub mod get_labels;
         pub mod verse_by_chapter;
         pub mod verse_similar_by_chapter;
 }
@@ -49,6 +50,7 @@ mod utils {
     pub mod insert_in_sled;
     pub mod parse_ranges;
     pub mod is_in_range;
+    pub mod read_default_range_from_json;
 }
 
 mod validator;

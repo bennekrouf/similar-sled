@@ -6,12 +6,17 @@ use crate::models::Chapter;
 use crate::models::Database;
 use crate::domain::similar::similars_by_chapter;
 use crate::domain::verse::count_verses_in_chapter::count_verses_in_chapter;
+use crate::utils::read_default_range_from_json::read_default_range_from_json;
 
 #[get("/chapters?<ranges>")]
 pub fn get_chapters(dbs: State<Database>, ranges: Option<String>) -> Json<Vec<Chapter>> {
-    // println!("Parsed Ranges get_chapters: {:?}", ranges);
+    let default_range = read_default_range_from_json().unwrap_or((1, 114));
+    let parsed_ranges = match ranges.as_deref() {
+        Some("undefined") | None => Some(parse_ranges(&format!("{}-{}", default_range.0, default_range.1))),
+        Some(r) => Some(parse_ranges(r)),
+    };
+    println!("Parsed Ranges get_chapters: {:?}", parsed_ranges);
 
-    let parsed_ranges = ranges.as_ref().map(|r| parse_ranges(r));
     let chapters: Vec<Chapter> = dbs.chapter_db
         .iter()
         .filter_map(|result| {
@@ -29,16 +34,13 @@ pub fn get_chapters(dbs: State<Database>, ranges: Option<String>) -> Json<Vec<Ch
                 }
 
                 // Check if ranges parameter is provided and filter accordingly
-                if let Some(range_str) = &ranges {
-                    let range_tuples = parse_ranges(range_str);
-                    if range_tuples.iter().any(|&(start, end)| chapter.no >= start && chapter.no <= end) {
-                        Some(Chapter { count_ayat: count_ayat.ok(), count: Some(count), ..chapter })
-                    } else {
-                        None
-                    }
-                } else {
+                if parsed_ranges.is_some() && parsed_ranges.as_ref().unwrap().iter().any(|&(start, end)| chapter.no >= start && chapter.no <= end) {
+                    Some(Chapter { count_ayat: count_ayat.ok(), count: Some(count), ..chapter })
+                } else if parsed_ranges.is_none() {
                     // If no ranges provided, do not filter and return all chapters
                     Some(Chapter { count_ayat: count_ayat.ok(), count: Some(count), ..chapter })
+                } else {
+                    None
                 }
             } else {
                 None

@@ -11,6 +11,7 @@ use crate::domain::all_db;
 
 use crate::api::verse_by_chapter::static_rocket_route_info_for_get_verse;
 use crate::api::get_chapters::static_rocket_route_info_for_get_chapters;
+use crate::api::get_labels::static_rocket_route_info_for_get_labels;
 use crate::api::generate_exercise_endpoint::static_rocket_route_info_for_generate_exercise_list_endpoint;
 
 use crate::api::verse_similar_by_chapter::static_rocket_route_info_for_get_verse_similar_by_chapter_route;
@@ -74,6 +75,7 @@ fn rocket() -> Rocket {
             get_verse,
             generate_exercise_list_endpoint,
             get_chapters,
+            get_labels,
             get_verse_similar_by_chapter_route,
         ])
 }
