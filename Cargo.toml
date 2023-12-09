@@ -18,7 +18,7 @@ rocket_contrib = { version = "0.4.11", features = ["json"] }
 rocket_cors = "0.5.2"
 serde = { version = "1.0.164", features = ["derive"] }
 serde_derive = "1.0.164"
-serde_json = "1.0.97"
+serde_json = "1.0.108"
 serde_yaml = "0.9.21"
 sled = "0.34.7"
 users = "0.11.0"
