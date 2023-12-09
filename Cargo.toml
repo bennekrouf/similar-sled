@@ -13,7 +13,7 @@ hex = "0.4.3"
 log = "0.4.20"
 rand = "0.8.5"
 rocket = "0.4.11"
-rocket_codegen = "0.4.11"
+rocket_codegen = "0.5.0"
 rocket_contrib = { version = "0.4.11", features = ["json"] }
 rocket_cors = "0.5.2"
 serde = { version = "1.0.193", features = ["derive"] }
