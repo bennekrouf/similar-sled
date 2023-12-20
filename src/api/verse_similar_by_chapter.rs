@@ -1,5 +1,5 @@
 use rocket::{get, State};
-use rocket_contrib::json::Json;
+use rocket::serde::{json::Json};
 use crate::models::SimilarOutputAdapted;
 use crate::models::Database;
 use crate::domain::similar::similars_by_chapter;
@@ -7,7 +7,7 @@ use crate::utils::parse_ranges::parse_ranges;
 
 #[get("/similars/<chapter_no>?<ranges>")]
 pub fn get_verse_similar_by_chapter_route(
-    dbs: State<Database>,
+    dbs: &State<Database>,
     chapter_no: u32,
     ranges: Option<String>,
 ) -> Json<Vec<SimilarOutputAdapted>>{

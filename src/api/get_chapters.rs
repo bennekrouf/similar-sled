@@ -1,5 +1,5 @@
 use rocket::{get, State};
-use rocket_contrib::json::Json;
+use rocket::serde::{json::Json};
 
 use crate::utils::parse_ranges::parse_ranges;
 use crate::models::Chapter;
@@ -9,7 +9,7 @@ use crate::domain::verse::count_verses_in_chapter::count_verses_in_chapter;
 use crate::utils::read_default_range_from_json::read_default_range_from_json;
 
 #[get("/chapters?<ranges>")]
-pub fn get_chapters(dbs: State<Database>, ranges: Option<String>) -> Json<Vec<Chapter>> {
+pub fn get_chapters(dbs: &State<Database>, ranges: Option<String>) -> Json<Vec<Chapter>> {
     let default_range = read_default_range_from_json().unwrap_or((1, 114));
     let parsed_ranges = match ranges.as_deref() {
         Some("undefined") | None => Some(parse_ranges(&format!("{}-{}", default_range.0, default_range.1))),

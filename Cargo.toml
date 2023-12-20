@@ -12,14 +12,12 @@ env_logger = "0.10.1"
 hex = "0.4.3"
 log = "0.4.20"
 rand = "0.8.5"
-rocket = "0.5.0"
-rocket_codegen = "0.4.11"
-rocket_contrib = { version = "0.4.11", features = ["json"] }
-rocket_cors = "0.6.0"
+rocket = { version = "=0.5.0-rc.4", features = ["json"] }
 serde = { version = "1.0.193", features = ["derive"] }
 serde_derive = "1.0.193"
 serde_json = "1.0.108"
 serde_yaml = "0.9.27"
 sled = "0.34.7"
+tokio = "1.35.1"
 users = "0.11.0"
 watch = "0.2.3"
