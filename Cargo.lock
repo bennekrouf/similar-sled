@@ -1187,8 +1187,8 @@ dependencies = [
 ]
 
 [[package]]
-name = "similars-sled"
-version = "0.1.0"
+name = "similar"
+version = "0.1.1"
 dependencies = [
  "bincode",
  "dirs",
