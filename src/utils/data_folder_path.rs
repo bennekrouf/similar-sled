@@ -13,6 +13,7 @@ pub fn get() -> PathBuf {
 
     if let Some(mut home_path) = home_dir() {
         home_path.push(&app_env);
+        home_path.push("similar");
         home_path.push("similarDB");
         return home_path;
     }
