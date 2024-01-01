@@ -1222,7 +1222,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "similars-sled"
+name = "similar"
 version = "0.1.0"
 dependencies = [
  "bincode",

@@ -1,5 +1,5 @@
 use rocket::{get, State};
-use rocket::serde::{json::Json};
+use rocket::serde::json::Json;
 
 use crate::xhr_guard::XHR;
 use crate::models::{Database, Exercise};
