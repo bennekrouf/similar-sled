@@ -1,3 +1,4 @@
 macos_path: '/Users/mb/code/similar-sled/data'
-debian_path: '/home/similar/similar-sled/data'
+# debian_path: '/home/similar/similar-sled/data'
+debian_path: /home/t5h0qo/code/poc/similar-sled/data
 port: 8001

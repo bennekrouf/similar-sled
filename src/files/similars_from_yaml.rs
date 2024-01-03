@@ -9,6 +9,7 @@ use log::info;
 
 pub fn load() -> Result<Vec<Similar>, Box<dyn Error>> {
     let data_folder_path = yml_path::get_data_folder_path();
+    info!("Data folder path: {:?}", data_folder_path);
 
     let similars_yaml_path = data_folder_path.join("similars");
 
@@ -51,6 +52,7 @@ fn traverse_directory(
                     }
                     Err(e) => {
                         // Return a new error that includes the path of the file that failed to deserialize
+                        info!("Failed to deserialize file at {:?}: {}", path, e);
                         return Err(format!("Failed to deserialize file at {:?}: {}", path, e).into());
                     }
                 }
