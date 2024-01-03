@@ -4,11 +4,13 @@ use crate::utils::yml_path;
 use crate::models::{Similar, YmlSimilar, VerseOutput};
 
 use std::path::Path;
-// use log::info;
+use log::info;
 use crate::utils::extract_parts::extract_parts;
 
 pub fn load() -> Result<Vec<Similar>, Box<dyn std::error::Error>> {
     let data_folder_path = yml_path::get_data_folder_path();
+    info!("Data folder path: {:?}", data_folder_path);
+
     let similars_yaml_path = data_folder_path.join("similars");
     let yml_similars: Vec<YmlSimilar> = Vec::new();  // Initialize this if needed.
 
@@ -55,6 +57,8 @@ fn traverse_directory(folder_path: &Path, yml_similars: Vec<YmlSimilar>) -> Resu
                         }
                     },
                     Err(e) => {
+                        // Return a new error that includes the path of the file that failed to deserialize
+                        info!("Failed to deserialize file at {:?}: {}", path, e);
                         return Err(format!("Failed to deserialize file at {:?}: {}", path, e).into());
                     }
                 }
