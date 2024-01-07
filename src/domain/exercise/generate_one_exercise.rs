@@ -48,7 +48,7 @@ pub fn generate_one_exercise(dbs: &Database, exercise: &mut ExerciseOutput, exer
             _ => unimplemented!(),
         }
     }).filter(|alt| alt.verse != Some(valid_verse.verse.clone())));
-
+    alternatives.truncate(4);
     // Add the correct answer
     // let valid_verse = exercise.verses.get(valid_verse_index).unwrap();
     // alternatives.push(Alternative { verse: Some(valid_verse.verse.clone()) });
