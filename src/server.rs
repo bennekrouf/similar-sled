@@ -4,6 +4,7 @@ use rocket::config::Config;
 use rocket::fairing::{Fairing, Info, Kind};
 use rocket::http::Header;
 use rocket::{Rocket, Build, Request, Response};
+use crate::api::ping::ping;
 
 use std::env;
 use log::LevelFilter;
@@ -79,6 +80,7 @@ fn rocket() -> Rocket<Build> {
             generate_exercise_list_endpoint,
             get_chapters,
             get_labels,
+            ping,
             get_verse_similar_by_chapter_route,
         ])
 }

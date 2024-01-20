@@ -20,8 +20,8 @@ pub fn generate_one_exercise(dbs: &Database, exercise: &mut ExerciseOutput, exer
     let mut incorrect_alternatives: Vec<Alternative> = extracted_values.into_iter().map(|value| {
     
     // Ensure the correct answer is added first
-    let valid_verse = exercise.verses.get(valid_verse_index).unwrap();
-    let mut alternatives = vec![Alternative { verse: Some(valid_verse.verse.clone()) }];
+    // let valid_verse = exercise.verses.get(valid_verse_index).unwrap();
+    // let mut alternatives = vec![Alternative { verse: Some(valid_verse.verse.clone()) }];
 
     // // Add random alternatives
     // alternatives.extend(extracted_values.into_iter().map(|value| {

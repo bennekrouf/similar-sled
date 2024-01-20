@@ -10,6 +10,7 @@ pub mod api {
         pub mod get_labels;
         pub mod verse_by_chapter;
         pub mod verse_similar_by_chapter;
+        pub mod ping;
 }
 pub mod domain {
     pub mod chapter {
