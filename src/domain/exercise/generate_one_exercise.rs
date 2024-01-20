@@ -13,20 +13,18 @@ pub fn generate_one_exercise(dbs: &Database, exercise: &mut ExerciseOutput, exer
     let exclude_verse = Some(exercise.verses[valid_verse_index].verse.clone());
     let extracted_values = extract_and_shuffle_options(&mut exercise.verses, exercise_type, &exclude_verse);
 
-<<<<<<< HEAD
     // Extract and keep the correct answer separate
     let correct_alternative = Alternative { verse: Some(exercise.verses[valid_verse_index].verse.clone()) };
 
     // Prepare incorrect alternatives and shuffle them
     let mut incorrect_alternatives: Vec<Alternative> = extracted_values.into_iter().map(|value| {
-=======
+    
     // Ensure the correct answer is added first
     let valid_verse = exercise.verses.get(valid_verse_index).unwrap();
     let mut alternatives = vec![Alternative { verse: Some(valid_verse.verse.clone()) }];
 
-    // Add random alternatives
-    alternatives.extend(extracted_values.into_iter().map(|value| {
->>>>>>> c6a5876cabcf450c486e9315cd3f5973dbcb37a3
+    // // Add random alternatives
+    // alternatives.extend(extracted_values.into_iter().map(|value| {
         match exercise_type {
             ExerciseType::FindDiscriminant => {
                 Alternative {
