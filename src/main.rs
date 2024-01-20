@@ -56,6 +56,7 @@ mod utils {
 mod validator;
 mod server;
 mod xhr_guard;
+mod cors;
 #[tokio::main]
 async fn main() {
     // Check deserialization of all files before starting the server

@@ -1,44 +1,21 @@
-use rocket::{routes};
-use rocket::config::Config;
-// use rocket::http::Method;
-use rocket::fairing::{Fairing, Info, Kind};
-use rocket::http::Header;
-use rocket::{Rocket, Build, Request, Response};
-use crate::api::ping::ping;
-
 use std::env;
 use log::LevelFilter;
+use rocket::routes;
+use rocket::config::Config;
+use rocket::{Rocket, Build};
 
+use crate::api::ping::ping;
 use crate::utils::data_folder_path;
+use crate::utils::yml_path::load_config;
 use crate::domain::all_db;
 
 use crate::api::verse_by_chapter::get_verse;
 use crate::api::get_chapters::get_chapters;
 use crate::api::get_labels::get_labels;
 use crate::api::generate_exercise_endpoint::generate_exercise_list_endpoint;
-
-// use crate::api::verse_similar_by_chapter::static_rocket_route_info_for_get_verse_similar_by_chapter_route;
 use crate::api::verse_similar_by_chapter::get_verse_similar_by_chapter_route;
-use crate::utils::yml_path::load_config;
 
-pub struct CORS;
-
-#[rocket::async_trait]
-impl Fairing for CORS {
-    fn info(&self) -> Info {
-        Info {
-            name: "Add CORS headers to responses",
-            kind: Kind::Response
-        }
-    }
-
-    async fn on_response<'r>(&self, _request: &'r Request<'_>, response: &mut Response<'r>) {
-        response.set_header(Header::new("Access-Control-Allow-Origin", "*"));
-        response.set_header(Header::new("Access-Control-Allow-Methods", "POST, GET, PATCH, OPTIONS"));
-        response.set_header(Header::new("Access-Control-Allow-Headers", "*"));
-        response.set_header(Header::new("Access-Control-Allow-Credentials", "true"));
-    }
-}
+use crate::cors::CORS;
 
 pub async fn start_server() {
     // Set the log level based on the RUST_LOG environment variable
