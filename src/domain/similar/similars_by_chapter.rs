@@ -1,10 +1,9 @@
 use super::similars_by_key;
 use log::info;
 
-use crate::models::{VerseOutput, SimilarOutputAdapted};
-use crate::models::Database;
+use crate::models::{Database, VerseOutput, SimilarOutputAdapted};
 use crate::domain::similar::sourate_from_verse::sourate_name_from_verse;
-use crate::utils::is_in_range::is_in_range;
+use crate::utils::is_chapter_in_range::is_chapter_in_range;
 
 pub fn get(dbs: &Database, chapter_no: u32, chapter_range: &Option<Vec<(u8, u8)>>) -> Vec<SimilarOutputAdapted> {
     // println!("Parsed Ranges: {:?}", chapter_range);
@@ -24,7 +23,7 @@ pub fn get(dbs: &Database, chapter_no: u32, chapter_range: &Option<Vec<(u8, u8)>
             let kalima = similar[0].kalima.clone();
 
             for mut verse_output in similar[0].verses.iter().cloned() {
-                if is_in_range(&verse_output.chapter_no, &chapter_range) {
+                if is_chapter_in_range(&verse_output.chapter_no, &chapter_range) {
                     verse_output.sourate = Some(sourate_name_from_verse(dbs, &verse_output));
                     if verse_output.chapter_no == chapter_no {
                         verses.push(verse_output);
@@ -36,7 +35,7 @@ pub fn get(dbs: &Database, chapter_no: u32, chapter_range: &Option<Vec<(u8, u8)>
 
             if let Some(opposite_verses) = &similar[0].opposites {
                 for mut verse_output in opposite_verses.iter().cloned() {
-                    if is_in_range(&verse_output.chapter_no, &chapter_range) {
+                    if is_chapter_in_range(&verse_output.chapter_no, &chapter_range) {
                         verse_output.sourate = Some(sourate_name_from_verse(dbs, &verse_output));
                         opposites.push(verse_output);
                     }

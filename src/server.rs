@@ -12,7 +12,7 @@ use crate::domain::all_db;
 use crate::api::verse_by_chapter::get_verse;
 use crate::api::get_chapters::get_chapters;
 use crate::api::get_labels::get_labels;
-use crate::api::generate_exercise_endpoint::generate_exercise_list_endpoint;
+use crate::api::generate_exercise_endpoint::generate_exercises_endpoint;
 use crate::api::verse_similar_by_chapter::get_verse_similar_by_chapter_route;
 
 use crate::cors::CORS;
@@ -54,7 +54,7 @@ fn rocket() -> Rocket<Build> {
         .manage(all_db.clone())
         .mount("/", routes![
             get_verse,
-            generate_exercise_list_endpoint,
+            generate_exercises_endpoint,
             get_chapters,
             get_labels,
             ping,

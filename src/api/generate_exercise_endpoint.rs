@@ -5,8 +5,8 @@ use crate::models::{Database, Exercise};
 use crate::domain::exercise::get_exercises::get_exercises;
 use crate::utils::parse_ranges::parse_ranges;
 
-#[get("/exercise_list?<ranges>")]
-pub fn generate_exercise_list_endpoint(
+#[get("/exercises?<ranges>")]
+pub fn generate_exercises_endpoint(
     dbs: &State<Database>,
     ranges: Option<String> ,
 ) -> Json<Vec<Exercise>> {

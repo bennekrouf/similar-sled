@@ -9,7 +9,7 @@ pub struct RangeEntry {
     pub section: String,
 }
 
-pub fn read_default_range_from_json() -> Option<(u8, u8)> {
+pub fn read_labels() -> Option<(u8, u8)> {
     let file_path = "static/labels.json";
     match fs::read_to_string(file_path) {
         Ok(contents) => {

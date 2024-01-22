@@ -1,4 +1,3 @@
-// cors.rs
 use rocket::{Request, Response};
 use rocket::fairing::{Fairing, Info, Kind};
 use rocket::http::Header;

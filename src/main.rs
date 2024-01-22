@@ -49,8 +49,8 @@ mod utils {
     pub mod extract_parts;
     pub mod insert_in_sled;
     pub mod parse_ranges;
-    pub mod is_in_range;
-    pub mod read_default_range_from_json;
+    pub mod is_chapter_in_range;
+    pub mod read_labels;
 }
 
 mod validator;

@@ -19,18 +19,12 @@ pub fn generate_one_exercise(dbs: &Database, exercise: &mut ExerciseOutput, exer
     // Prepare incorrect alternatives and shuffle them
     let mut incorrect_alternatives: Vec<Alternative> = extracted_values.into_iter().map(|value| {
     
-    // Ensure the correct answer is added first
-    // let valid_verse = exercise.verses.get(valid_verse_index).unwrap();
-    // let mut alternatives = vec![Alternative { verse: Some(valid_verse.verse.clone()) }];
-
-    // // Add random alternatives
-    // alternatives.extend(extracted_values.into_iter().map(|value| {
         match exercise_type {
             ExerciseType::FindDiscriminant => {
                 Alternative {
                     verse: Some(VerseOutput {
-                        chapter_no: 0,
-                        verse_no: 0,
+                        chapter_no: value.1.chapter_no,
+                        verse_no: value.1.verse_no,
                         sourate: value.1.sourate,
                         ungrouped_text: Some(UngroupedText {
                             discriminant: Some(value.0),
@@ -43,9 +37,9 @@ pub fn generate_one_exercise(dbs: &Database, exercise: &mut ExerciseOutput, exer
             ExerciseType::FindSourate => {
                 Alternative {
                     verse: Some(VerseOutput {
-                        sourate: Some(value.0),
                         chapter_no: value.1.chapter_no,
                         verse_no: value.1.verse_no,
+                        sourate: Some(value.0),
                         ungrouped_text: None,
                     }),
                 }
@@ -55,13 +49,9 @@ pub fn generate_one_exercise(dbs: &Database, exercise: &mut ExerciseOutput, exer
     }).filter(|alt| alt.verse != Some(exercise.verses[valid_verse_index].verse.clone()))
       .collect();
 
-    incorrect_alternatives.shuffle(&mut rand::thread_rng());
-
-    // Combine correct and incorrect alternatives, correct answer at the end
-    incorrect_alternatives.push(correct_alternative);
-
-    // Truncate the alternatives to the desired length (e.g., 4)
     incorrect_alternatives.truncate(4);
+    incorrect_alternatives.push(correct_alternative);
+    incorrect_alternatives.shuffle(&mut rand::thread_rng());
 
     // Use the combined and truncated list as the final alternatives
     let alternatives = incorrect_alternatives;
