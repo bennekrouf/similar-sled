@@ -1,62 +1,13 @@
-mod files {
-    pub mod chapters_from_yaml;
-    pub mod similars_from_yaml;
-}
-
-pub mod models;
-pub mod api {
-        pub mod generate_exercise_endpoint;
-        pub mod get_chapters;
-        pub mod get_labels;
-        pub mod verse_by_chapter;
-        pub mod verse_similar_by_chapter;
-        pub mod ping;
-}
-pub mod domain {
-    pub mod chapter {
-        pub mod chapter;
-        pub mod chapters_init;
-    }
-    pub mod similar {
-        pub mod similars_init;
-        pub mod similars_by_chapter;
-        pub mod similars_by_key;
-        pub mod similars_by_key_count;
-        pub mod sourate_from_verse;
-    }
-    pub mod exercise {
-        pub mod get_exercises;
-        pub mod generate_one_exercise;
-        pub mod exercise_type_impl;
-        pub mod convert_to_exercise;
-        pub mod get_solution;
-        pub mod extract_and_shuffle_options;
-        pub mod select_random_verse_index;
-        pub mod sort_exercises;
-        pub mod exercises_for_similar;
-    }
-    pub mod verse {
-        pub mod verses_by_chapter;
-        pub mod count_verses_in_chapter;
-    }
-    pub mod all_db;
-}
-
-mod utils {
-    pub mod data_folder_path;
-    pub mod yml_path;
-    pub mod sort;
-    pub mod extract_parts;
-    pub mod insert_in_sled;
-    pub mod parse_ranges;
-    pub mod is_chapter_in_range;
-    pub mod read_labels;
-}
-
+mod files;
+mod models;
+mod api;
+mod domain;
+mod utils;
 mod validator;
 mod server;
 mod xhr_guard;
 mod cors;
+
 #[tokio::main]
 async fn main() {
     // Check deserialization of all files before starting the server
