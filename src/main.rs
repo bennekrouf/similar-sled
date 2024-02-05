@@ -1,5 +1,5 @@
 mod files;
-// mod learning;
+mod learning;
 pub mod models;
 mod api;
 mod domain;
@@ -7,7 +7,6 @@ mod utils;
 mod validator;
 mod server;
 mod xhr_guard;
-mod cors;
 
 #[tokio::main]
 async fn main() {

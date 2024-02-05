@@ -112,7 +112,7 @@ impl Clone for Database {
     }
 }
 
-#[derive(Deserialize)]
+#[derive(Deserialize, Clone)]
 pub struct AppConfig {
     pub macos_path: String,
     pub debian_path: String,

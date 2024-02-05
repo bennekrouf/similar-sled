@@ -1,21 +1,42 @@
 use std::env;
 use log::LevelFilter;
-use rocket::routes;
-use rocket::config::Config;
-use rocket::{Rocket, Build};
+use rocket::{
+    http::Header, fairing::{Fairing, Info, Kind},
+    config::Config, routes,
+    Rocket, Build, Request, Response
+};
 
-use crate::api::ping::ping;
-use crate::utils::data_folder_path;
-use crate::utils::yml_path::load_config;
+use crate::utils::{data_folder_path, yml_path::{LEARNING, CONFIG}};
 use crate::domain::all_db;
 
-use crate::api::verse_by_chapter::get_verse;
-use crate::api::get_chapters::get_chapters;
-use crate::api::get_labels::get_labels;
-use crate::api::generate_exercise_endpoint::generate_exercises_endpoint;
-use crate::api::verse_similar_by_chapter::get_verse_similar_by_chapter_route;
+use crate::api::{
+    ping::ping,
+    verse_by_chapter::get_verse,
+    get_chapters::get_chapters,
+    get_labels::get_labels,
+    generate_exercise_endpoint::generate_exercises_endpoint,
+    verse_similar_by_chapter::get_verse_similar_by_chapter_route,
+    user_stats_analytics::user_stats_analytics,
+};
 
-use crate::cors::CORS;
+pub struct CORS;
+
+#[rocket::async_trait]
+impl Fairing for CORS {
+    fn info(&self) -> Info {
+        Info {
+            name: "Add CORS headers to responses",
+            kind: Kind::Response
+        }
+    }
+
+    async fn on_response<'r>(&self, _request: &'r Request<'_>, response: &mut Response<'r>) {
+        response.set_header(Header::new("Access-Control-Allow-Origin", "*"));
+        response.set_header(Header::new("Access-Control-Allow-Methods", "POST, GET, PATCH, OPTIONS"));
+        response.set_header(Header::new("Access-Control-Allow-Headers", "*"));
+        response.set_header(Header::new("Access-Control-Allow-Credentials", "true"));
+    }
+}
 
 pub async fn start_server() {
     // Set the log level based on the RUST_LOG environment variable
@@ -32,32 +53,28 @@ pub async fn start_server() {
 fn rocket() -> Rocket<Build> {
     let data_folder_path = data_folder_path::get();
     println!("Path to similarDB: {:?}", data_folder_path);
-
     let all_db = all_db::init(&data_folder_path);
 
-    // Get the APP_ENV environment variable
-    let app_env = env::var("APP_ENV").unwrap_or_else(|_| "local".to_string());
+    // Load both configurations
+    let app_config = CONFIG.lock().unwrap().clone();
+    let learning_config = LEARNING.lock().unwrap().clone();
 
-    // Load the config based on APP_ENV
-    let config_data = load_config(&app_env);
-
-    // let mut config = Config::figment().clone();
-    // config.set_port(config_data.port);
-
-    let figment = Config::figment()
-        .merge(("port", config_data.port));
+    let figment = Config::figment().merge(("port", app_config.port));
 
     // Start the Rocket application with the custom configuration
     rocket::build()
         .configure(figment)
         .attach(CORS)
         .manage(all_db.clone())
+        .manage(app_config)
+        .manage(learning_config)
         .mount("/", routes![
             get_verse,
             generate_exercises_endpoint,
             get_chapters,
             get_labels,
             ping,
+            user_stats_analytics,
             get_verse_similar_by_chapter_route,
         ])
 }
