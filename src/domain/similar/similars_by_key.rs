@@ -1,6 +1,6 @@
 use crate::models::{SimilarOutput, Similar, VerseOutput};
 use crate::models::Database;
-use crate::utils::sort;
+use crate::utils::sort_similars::sort_similars;
 
 pub fn get(dbs: &Database, kalima: &str) -> Vec<SimilarOutput> {
     let similar_db = &dbs.similar_db;
@@ -23,7 +23,7 @@ pub fn get(dbs: &Database, kalima: &str) -> Vec<SimilarOutput> {
         })
         .collect();
 
-    sort::sort_similars(&mut similars);
+    sort_similars(&mut similars);
 
     similars
 }

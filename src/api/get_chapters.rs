@@ -4,7 +4,7 @@ use rocket::serde::{json::Json};
 use crate::utils::parse_ranges::parse_ranges;
 use crate::models::Chapter;
 use crate::models::Database;
-use crate::domain::similar::similars_by_chapter;
+use crate::domain::similar::similars_by_chapter::similars_by_chapter;
 use crate::domain::verse::count_verses_in_chapter::count_verses_in_chapter;
 use crate::utils::read_labels::read_labels;
 
@@ -24,7 +24,7 @@ pub fn get_chapters(dbs: &State<Database>, ranges: Option<String>) -> Json<Vec<C
                 let chapter: Chapter = bincode::deserialize(&value).unwrap();
 
                 // Compute counts
-                let similar_objects = similars_by_chapter::get(&dbs, chapter.no as u32, &parsed_ranges);
+                let similar_objects = similars_by_chapter(&dbs, chapter.no as u32, &parsed_ranges);
                 let count = similar_objects.len() as u32;
                 let count_ayat = count_verses_in_chapter(&dbs, chapter.no as u32);
 
