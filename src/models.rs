@@ -49,7 +49,7 @@ pub struct SimilarOutput {
     pub kalima: String,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Hash)]
 pub struct SimilarOutputAdapted {
     pub verses: Vec<VerseOutput>,
     pub similars: Vec<VerseOutput>,

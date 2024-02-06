@@ -6,4 +6,3 @@ pub mod insert_in_sled;
 pub mod parse_ranges;
 pub mod is_chapter_in_range;
 pub mod read_labels;
-pub mod convert_to_analytic;
