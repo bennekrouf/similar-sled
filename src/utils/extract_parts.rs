@@ -1,4 +1,4 @@
-use crate::models::UngroupedText;
+use crate::models::ungrouped_text::UngroupedText;
 use std::borrow::Cow;
 
 // This function cleans the text by removing the "غغغ" pattern.

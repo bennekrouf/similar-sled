@@ -1,6 +1,6 @@
 use std::fs::File;
 use std::io::Read;
-use crate::models::Chapter;
+use crate::models::chapter::Chapter;
 
 pub fn load(file_path: &str) -> Vec<Chapter> {
     let mut file = File::open(file_path).expect("Unable to open file");

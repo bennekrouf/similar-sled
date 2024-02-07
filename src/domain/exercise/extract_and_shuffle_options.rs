@@ -1,6 +1,8 @@
 use rand::seq::SliceRandom;
 use std::collections::HashSet;
-use crate::models::{Statement, ExerciseType, VerseOutput};
+use crate::models::{
+    statement::Statement, exercise_type::ExerciseType, verse_output::VerseOutput
+};
 
 pub fn extract_and_shuffle_options(
     statements: &[Statement],

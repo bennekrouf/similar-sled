@@ -1,5 +1,5 @@
-use crate::models::VerseOutput;
-use crate::models::Database;
+use crate::models::verse_output::VerseOutput;
+use crate::models::database::Database;
 use crate::domain::chapter::chapter;
 
 pub fn sourate_name_from_verse(dbs: &Database, verse: &VerseOutput) -> String {

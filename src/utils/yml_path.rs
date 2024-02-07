@@ -5,7 +5,7 @@ use std::env;
 use lazy_static::lazy_static;
 use serde::de::DeserializeOwned;
 
-use crate::models::AppConfig;
+use crate::models::app_config::AppConfig;
 use crate::learning::models::learning_config::LearningConfig;
 
 pub trait Config {

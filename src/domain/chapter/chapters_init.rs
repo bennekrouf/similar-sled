@@ -1,7 +1,7 @@
 use crate::files::chapters_from_yaml::load;
 use crate::utils::insert_in_sled;
 
-use crate::models::Database;
+use crate::models::database::Database;
 use crate::utils::yml_path;
 
 pub fn init(dbs: &Database) {

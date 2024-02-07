@@ -1,6 +1,6 @@
 use std::path::PathBuf;
 
-use crate::models::Database;
+use crate::models::database::Database;
 use crate::domain::chapter::chapters_init;
 use crate::domain::similar::similars_init;
 

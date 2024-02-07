@@ -1,4 +1,4 @@
-use crate::models::SimilarOutput;
+use crate::models::similar_output::SimilarOutput;
 
 pub fn sort_similars(similars: &mut [SimilarOutput]) {
     similars.sort_by(|a, b| {

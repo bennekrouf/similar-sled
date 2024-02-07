@@ -1,4 +1,4 @@
-use crate::models::Database;
+use crate::models::database::Database;
 
 pub fn count_verses_in_chapter(dbs: &Database, chapter_no: u32) -> sled::Result<u32> {
     let verse_db = &dbs.verse_db;

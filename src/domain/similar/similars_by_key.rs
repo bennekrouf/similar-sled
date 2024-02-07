@@ -1,5 +1,7 @@
-use crate::models::{SimilarOutput, Similar, VerseOutput};
-use crate::models::Database;
+use crate::models::{
+    similar_output::SimilarOutput, similar::Similar, verse_output::VerseOutput
+};
+use crate::models::database::Database;
 use crate::utils::sort_similars::sort_similars;
 
 pub fn get(dbs: &Database, kalima: &str) -> Vec<SimilarOutput> {

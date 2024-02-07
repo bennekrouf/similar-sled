@@ -1,5 +1,5 @@
 use rocket::State;
-use crate::models::Database;
+use crate::models::database::Database;
 
 pub fn verses_by_chapter(dbs: &State<Database>, chapter_no: u8) -> sled::Result<Vec<(String, String)>> {
     let verse_db = &dbs.verse_db;

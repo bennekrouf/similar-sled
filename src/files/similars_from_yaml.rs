@@ -1,7 +1,9 @@
 use std::fs::{self, File};
 use std::io::Read;
 use crate::utils::yml_path;
-use crate::models::{Similar, YmlSimilar, VerseOutput};
+use crate::models::{
+    similar::Similar, yml_similar::YmlSimilar, verse_output::VerseOutput
+};
 
 use std::path::Path;
 use log::info;

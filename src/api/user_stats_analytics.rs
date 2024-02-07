@@ -7,7 +7,7 @@ use crate::learning::{
     },
     compute_user_stats_analytics::compute_user_stats_analytics
 };
-use crate::models::Database;
+use crate::models::database::Database;
 use crate::utils::parse_ranges::parse_ranges;
 use crate::domain::verse::analytics_by_chapter::analytics_by_chapter;
 

@@ -1,5 +1,5 @@
 use rocket::State;
-use crate::models::Database;
+use crate::models::database::Database;
 use sled::Result as SledResult;
 
 use crate::learning::models::analytic::Analytic;

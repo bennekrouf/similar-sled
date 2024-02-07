@@ -2,8 +2,8 @@ use rocket::{get, State};
 use rocket::serde::{json::Json};
 
 use crate::utils::parse_ranges::parse_ranges;
-use crate::models::Chapter;
-use crate::models::Database;
+use crate::models::chapter::Chapter;
+use crate::models::database::Database;
 use crate::domain::similar::similars_by_chapter::similars_by_chapter;
 use crate::domain::verse::count_verses_in_chapter::count_verses_in_chapter;
 use crate::utils::read_labels::read_labels;

@@ -1,4 +1,4 @@
-use crate::models::{ExerciseType, Exercise};
+use crate::models::{exercise_type::ExerciseType, exercise::Exercise};
 
 impl ExerciseType {
     pub fn hide_fields(&self, exercise: &mut Exercise) {

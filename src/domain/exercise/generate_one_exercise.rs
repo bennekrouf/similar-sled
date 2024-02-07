@@ -2,7 +2,10 @@ use rand::seq::SliceRandom;
 use crate::domain::exercise::extract_and_shuffle_options::extract_and_shuffle_options;
 use crate::domain::exercise::select_random_verse_index::select_random_verse_index;
 use crate::domain::similar::sourate_from_verse::sourate_name_from_verse;
-use crate::models::{ExerciseType, ExerciseOutput, Database, Alternative, Exercise, VerseOutput, UngroupedText};
+use crate::models::{
+    exercise_type::ExerciseType, exercise_output::ExerciseOutput, database::Database,
+    alternative::Alternative, exercise::Exercise, verse_output::VerseOutput, ungrouped_text::UngroupedText
+};
 
 pub fn generate_one_exercise(dbs: &Database, exercise: &mut ExerciseOutput, exercise_type: ExerciseType) -> Option<Exercise> {
     let valid_verse_index = select_random_verse_index(&exercise.verses);

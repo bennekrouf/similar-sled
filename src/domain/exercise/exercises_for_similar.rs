@@ -1,8 +1,11 @@
-use crate::models::{Database, Similar, VerseOutput, ExerciseOutput, Statement};
+use crate::models::{
+    database::Database, similar::Similar, verse_output::VerseOutput,
+    exercise_output::ExerciseOutput, statement::Statement
+};
 use crate::domain::similar::sourate_from_verse::sourate_name_from_verse;
 use crate::utils::is_chapter_in_range::is_chapter_in_range;
 
-pub fn create(dbs: &Database, similar: &Similar, ranges: &Option<Vec<(u8, u8)>>) -> ExerciseOutput {
+pub fn exercises_for_similar(dbs: &Database, similar: &Similar, ranges: &Option<Vec<(u8, u8)>>) -> ExerciseOutput {
     let similar_db = &dbs.similar_db;
 
     let verses_from_similar = similar.verses.iter()

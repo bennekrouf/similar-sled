@@ -1,7 +1,9 @@
 use super::similars_by_key;
 use log::info;
 
-use crate::models::{Database, VerseOutput, SimilarOutputAdapted};
+use crate::models::{
+    database::Database, verse_output::VerseOutput, similar_output_adapted::SimilarOutputAdapted
+};
 use crate::domain::similar::sourate_from_verse::sourate_name_from_verse;
 use crate::utils::is_chapter_in_range::is_chapter_in_range;
 

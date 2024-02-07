@@ -1,4 +1,4 @@
-use crate::models::ExerciseOutput;
+use crate::models::exercise_output::ExerciseOutput;
 
 pub fn sort_exercises(solutions: &mut [ExerciseOutput]) {
     use rand::seq::SliceRandom;

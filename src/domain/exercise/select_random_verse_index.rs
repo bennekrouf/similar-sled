@@ -1,6 +1,6 @@
 use rand::Rng;
 
-use crate::models::Statement;
+use crate::models::statement::Statement;
 
 // Instead of getting a mutable reference to the verse, just get its index
 pub fn select_random_verse_index(statements: &Vec<Statement>) -> usize {

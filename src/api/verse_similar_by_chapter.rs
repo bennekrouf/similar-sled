@@ -1,7 +1,7 @@
 use rocket::{get, State};
 use rocket::serde::{json::Json};
-use crate::models::SimilarOutputAdapted;
-use crate::models::Database;
+use crate::models::similar_output_adapted::SimilarOutputAdapted;
+use crate::models::database::Database;
 use crate::domain::similar::similars_by_chapter::similars_by_chapter;
 use crate::utils::parse_ranges::parse_ranges;
 

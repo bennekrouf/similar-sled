@@ -1,7 +1,7 @@
 use rocket::{get, State};
 use rocket::serde::{json::Json};
 
-use crate::models::Database;
+use crate::models::database::Database;
 use crate::domain::chapter::chapter;
 use crate::domain::verse::verses_by_chapter::verses_by_chapter;
 
