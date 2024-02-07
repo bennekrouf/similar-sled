@@ -33,7 +33,11 @@ pub fn load_config<T>(config_path: &str) -> T
     where T: DeserializeOwned,
 {
     let app_env = env::var("APP_ENV").unwrap_or_else(|_| "local".to_string());
+    println!("APP_ENV: {}", app_env);
+
     let config_path = format!("{}.{}.yml", config_path, app_env);
+    println!("Looking for config file at: {}", config_path);
+    
     let config_str = std::fs::read_to_string(&config_path)
         .expect("Failed to read config file");
     serde_yaml::from_str(&config_str).expect("Failed to parse config file")
