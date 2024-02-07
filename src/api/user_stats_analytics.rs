@@ -1,11 +1,12 @@
-use rocket::{post, State};
-use rocket::serde::json::Json;
-use crate::learning::models::{
-    user_stat::UserStat,
-    analytic::Analytic,
-    learning_config::LearningConfig
+use rocket::{post, State, serde::json::Json};
+use crate::learning::{
+    models::{
+        user_stat::UserStat,
+        analytic::Analytic,
+        learning_config::LearningConfig
+    },
+    compute_user_stats_analytics::compute_user_stats_analytics
 };
-use crate::learning::compute_user_stats_analytics::compute_user_stats_analytics;
 use crate::models::Database;
 use crate::utils::parse_ranges::parse_ranges;
 use crate::domain::verse::analytics_by_chapter::analytics_by_chapter;
@@ -29,23 +30,35 @@ pub fn user_stats_analytics(
         .map(|analytic| (analytic.id.clone(), analytic))
         .collect();
 
+    // for (id, analytic) in &analytics_map {
+    //     println!("ID: {:?}, Analytic: {:?}", id, analytic);
+    // }
+
     // Process each range and fetch analytics
     for range in parsed_ranges.iter() {
         let chapter_no_start = range.0;
         let chapter_no_end = range.1;
-
+    
         for chapter_no in chapter_no_start..=chapter_no_end {
             if let Ok(chapter_analytics) = analytics_by_chapter(dbs, chapter_no as u8) {
                 for analytic in chapter_analytics {
-                    // Insert analytics from chapters into the map, avoiding duplicates
-                    analytics_map.entry(analytic.id.clone()).or_insert(analytic);
+                    // println!("THE ID : {:?}", &analytic.id);
+                    // Check if the analytic already exists in the map
+                    if !analytics_map.contains_key(&analytic.id) {
+                        // println!("ADDING : {:?}", &analytic.id);
+
+                        // Insert analytics from chapters into the map if not already added by user progress
+                        analytics_map.insert(analytic.id.clone(), analytic);
+                    }
                 }
             }
         }
     }
 
     // Convert the map back into a vector of analytics
-    let result: Vec<Analytic> = analytics_map.into_values().collect();
+    let mut result: Vec<Analytic> = analytics_map.into_values().collect();
+    result.sort_by(|a, b| b.progress.partial_cmp(&a.progress).unwrap_or(std::cmp::Ordering::Equal));
+
 
     Json(result)
 }

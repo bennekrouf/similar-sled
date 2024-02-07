@@ -1,6 +1,6 @@
 mod files;
 mod learning;
-pub mod models;
+mod models;
 mod api;
 mod domain;
 mod utils;
