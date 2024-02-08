@@ -4,7 +4,7 @@ use sled::Result as SledResult;
 
 use crate::learning::models::analytic::Analytic;
 
-pub fn analytics_by_chapter(dbs: &State<Database>, chapter_no: u8) -> SledResult<Vec<Analytic>> {
+pub fn analytics_skel_by_chapter_verse(dbs: &State<Database>, chapter_no: u8) -> SledResult<Vec<Analytic>> {
     let verse_db = &dbs.verse_db;
     let prefix = format!("{}:", chapter_no);
     let mut analytics = Vec::new();

@@ -16,7 +16,7 @@ use crate::api::{
     get_labels::get_labels,
     generate_exercise_endpoint::generate_exercises_endpoint,
     verse_similar_by_chapter::get_verse_similar_by_chapter_route,
-    user_stats_analytics::user_stats_analytics,
+    verse_stats_analytics::verse_stats_analytics,
 };
 
 pub struct CORS;
@@ -74,7 +74,7 @@ fn rocket() -> Rocket<Build> {
             get_chapters,
             get_labels,
             ping,
-            user_stats_analytics,
+            verse_stats_analytics,
             get_verse_similar_by_chapter_route,
         ])
 }

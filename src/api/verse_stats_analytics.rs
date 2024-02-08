@@ -9,10 +9,10 @@ use crate::learning::{
 };
 use crate::models::database::Database;
 use crate::utils::parse_ranges::parse_ranges;
-use crate::domain::verse::analytics_by_chapter::analytics_by_chapter;
+use crate::domain::verse::analytics_skel_by_chapter_verse::analytics_skel_by_chapter_verse;
 
-#[post("/user-stats-analytics?<ranges>", format = "json", data = "<user_stats>")]
-pub fn user_stats_analytics(
+#[post("/verse_stats_analytics?<ranges>", format = "json", data = "<user_stats>")]
+pub fn verse_stats_analytics(
     dbs: &State<Database>,
     config: &State<LearningConfig>, 
     user_stats: Json<Vec<UserStat>>, 
@@ -40,7 +40,7 @@ pub fn user_stats_analytics(
         let chapter_no_end = range.1;
     
         for chapter_no in chapter_no_start..=chapter_no_end {
-            if let Ok(chapter_analytics) = analytics_by_chapter(dbs, chapter_no as u8) {
+            if let Ok(chapter_analytics) = analytics_skel_by_chapter_verse(dbs, chapter_no as u8) {
                 for analytic in chapter_analytics {
                     // println!("THE ID : {:?}", &analytic.id);
                     // Check if the analytic already exists in the map
