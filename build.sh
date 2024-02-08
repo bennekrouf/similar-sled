@@ -20,3 +20,4 @@ else
     echo "Source and destination are the same. Skipping move operation."
 fi
 cp -r config.${ENV}.yml /home/similar/${ENV}/similar/
+cp -r learning.${ENV}.yml /home/similar/${ENV}/similar/
