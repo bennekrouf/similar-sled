@@ -13,7 +13,7 @@ use crate::models::database::Database;
 use crate::utils::parse_ranges::parse_ranges;
 use crate::domain::verse::analytics_skel_by_chapter_verse::analytics_skel_by_chapter_verse;
 
-#[post("/chapter-stats-analytics?<ranges>", format = "json", data = "<user_stats>")]
+#[post("/chapter_stats_analytics?<ranges>", format = "json", data = "<user_stats>")]
 pub fn chapter_stats_analytics(
     dbs: &State<Database>,
     config: &State<LearningConfig>, 
