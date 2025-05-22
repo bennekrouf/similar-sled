@@ -1,36 +1,31 @@
-use rocket::{routes, Rocket};
-use rocket::config::{Config, Environment};
 use rocket::http::Method;
+use rocket::Config;
+use rocket::{routes, Build, Rocket};
 use rocket_cors::{AllowedHeaders, AllowedOrigins, CorsOptions};
 
-use std::env;
 use log::LevelFilter;
+use std::env;
 
-use crate::utils::data_folder_path;
 use crate::db::all_db;
+use crate::utils::data_folder_path;
 
-use crate::api::verse_by_chapter::static_rocket_route_info_for_get_verse;
-use crate::api::get_chapters::static_rocket_route_info_for_get_chapters;
-use crate::api::get_solutions::static_rocket_route_info_for_get_solutions;
-use crate::api::check_discriminant::static_rocket_route_info_for_check_discriminant;
-use crate::api::generate_exercise_endpoint::static_rocket_route_info_for_generate_exercise_endpoint;
-
-use crate::api::verse_similar_by_chapter::static_rocket_route_info_for_get_verse_similar_by_chapter_route;
+use crate::api::check_discriminant::check_discriminant_endpoint;
+use crate::api::generate_exercise_endpoint::generate_exercise_endpoint;
+use crate::api::get_chapters::get_chapters;
+use crate::api::get_solutions::get_solutions;
+use crate::api::verse_by_chapter::get_verse;
+use crate::api::verse_similar_by_chapter::get_verse_similar_by_chapter_route;
 use crate::utils::yml_path::load_config;
 
-pub fn start_server() {
+pub fn rocket() -> Rocket<Build> {
     // Set the log level based on the RUST_LOG environment variable
-    env::set_var("RUST_LOG", "info"); // Adjust log level as needed: error, warn, info, debug, trace
+    env::set_var("RUST_LOG", "info");
     env_logger::Builder::from_env(env_logger::Env::default())
-        .format_timestamp(None) // Disable timestamp
+        .format_timestamp(None)
         .format_module_path(false)
         .filter(None, LevelFilter::Info)
         .init();
 
-    rocket().launch();
-}
-
-fn rocket() -> Rocket {
     let data_folder_path = data_folder_path::get();
     println!("Path to similarDB: {:?}", data_folder_path);
 
@@ -56,28 +51,23 @@ fn rocket() -> Rocket {
 
     // Use the port from the config_data
     let port = config_data.port;
-    let rocket_env = match app_env.as_str() {
-        "local" => Environment::Development,
-        "staging" => Environment::Staging,
-        "production" => Environment::Production,
-        _ => Environment::Development, // default to Development if none of the above
+
+    // Create a custom configuration
+    let config = Config {
+        port,
+        address: "0.0.0.0".parse().expect("Valid address"),
+        ..Config::default()
     };
 
-    let config = Config::build(rocket_env)
-        .port(port)
-        .finalize()
-        .unwrap();
-
-    // Start the Rocket application with the custom configuration
-    rocket::custom(config)
-        .attach(cors)
-        .manage(all_db.clone())
-        .mount("/", routes![
+    rocket::custom(config).attach(cors).manage(all_db).mount(
+        "/",
+        routes![
             get_verse,
             get_solutions,
-            check_discriminant,
+            check_discriminant_endpoint,
             generate_exercise_endpoint,
             get_chapters,
             get_verse_similar_by_chapter_route,
-        ])
+        ],
+    )
 }

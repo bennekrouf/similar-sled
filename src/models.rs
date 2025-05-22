@@ -1,16 +1,20 @@
+use rocket::serde::{Deserialize, Serialize};
 use sled::Db;
-use serde::{Serialize, Deserialize};
+
 #[derive(Serialize, Deserialize, Debug)]
+#[serde(crate = "rocket::serde")]
 pub struct Chapter {
     pub name: String,
     pub no: u8,
     pub mekka: bool,
-    pub backgroundColor: String,
+    #[serde(rename = "backgroundColor")]
+    pub background_color: String,
     pub color: String,
     pub count: Option<u32>,
 }
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Clone)]
+#[serde(crate = "rocket::serde")]
 pub struct Verse {
     pub chapter_no: u32,
     pub ayah: u32,
@@ -18,6 +22,7 @@ pub struct Verse {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
+#[serde(crate = "rocket::serde")]
 pub struct VerseOutput {
     pub chapter_no: u32,
     pub sourate: String,
@@ -25,6 +30,7 @@ pub struct VerseOutput {
 }
 
 #[derive(Serialize, Deserialize, Debug, PartialEq)]
+#[serde(crate = "rocket::serde")]
 pub struct Similar {
     pub kalima: String,
     pub opposite_similars: Option<Vec<String>>,
@@ -32,6 +38,7 @@ pub struct Similar {
 }
 
 #[derive(Serialize, Deserialize, Debug)]
+#[serde(crate = "rocket::serde")]
 pub struct SimilarOutput {
     pub verses: Vec<VerseOutput>,
     pub opposites: Option<Vec<VerseOutput>>,
@@ -39,13 +46,16 @@ pub struct SimilarOutput {
 }
 
 #[derive(Serialize, Deserialize, Debug)]
+#[serde(crate = "rocket::serde")]
 pub struct SimilarOutputAdapted {
     pub verses: Vec<VerseOutput>,
     pub similars: Vec<VerseOutput>,
     pub opposites: Vec<VerseOutput>,
     pub kalima: String,
 }
+
 #[derive(Serialize, Deserialize, Debug, Clone)]
+#[serde(crate = "rocket::serde")]
 pub struct VerseUngrouped {
     pub kalima: String,
     pub chapter_no: u32,
@@ -58,10 +68,12 @@ pub struct VerseUngrouped {
 }
 
 #[derive(Serialize, Deserialize, Debug)]
+#[serde(crate = "rocket::serde")]
 pub struct ExerciseOutput {
     pub kalima: String,
     pub verses: Vec<VerseUngrouped>,
 }
+
 #[derive(Debug)]
 pub struct Database {
     pub chapter_db: Db,
@@ -82,8 +94,10 @@ impl Clone for Database {
 }
 
 #[derive(Deserialize)]
+#[serde(crate = "rocket::serde")]
 pub struct AppConfig {
     pub macos_path: String,
     pub debian_path: String,
     pub port: u16,
 }
+

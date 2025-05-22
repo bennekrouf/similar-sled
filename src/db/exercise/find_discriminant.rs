@@ -1,33 +1,33 @@
-use std::collections::HashSet;
 use rand::seq::SliceRandom;
 use rand::Rng;
+use std::collections::HashSet;
 
 use crate::db::exercise::get_solution::get_solution;
-use crate::models::VerseUngrouped;
 use crate::models::Database;
+use crate::models::VerseUngrouped;
 
 pub fn generate(dbs: &Database, kalima: String) -> Option<(VerseUngrouped, Vec<String>)> {
     let mut exercises = get_solution(dbs, &kalima);
-    
+
     if exercises.is_empty() {
         return None;
     }
-    
+
     // Get a random ExerciseOutput
     let exercise = &mut exercises[0]; // assume we always have at least one ExerciseOutput
 
     // Get a random VerseUngrouped and hide its discriminant
-    let selected_verse_index = rand::thread_rng().gen_range(0..exercise.verses.len());
+    let selected_verse_index = rand::rng().random_range(0..exercise.verses.len());
 
     // Temporarily remove the selected verse
     let mut selected_verse = exercise.verses.remove(selected_verse_index);
     let selected_discriminant = selected_verse.discriminant.take(); // hide the discriminant
-    // let _selected_kalima = selected_verse.kalima.clear(); // hide the kalima
 
     // Extract discriminants from verses, handling whether or not verse has opposites
-    let other_discriminants: Vec<String> = exercise.verses.iter()
-    .filter_map(|verse| {
-        match &verse.discriminant {
+    let other_discriminants: Vec<String> = exercise
+        .verses
+        .iter()
+        .filter_map(|verse| match &verse.discriminant {
             Some(discriminant) => {
                 if Some(discriminant) != selected_discriminant.as_ref() {
                     Some(discriminant.clone())
@@ -36,9 +36,8 @@ pub fn generate(dbs: &Database, kalima: String) -> Option<(VerseUngrouped, Vec<S
                 }
             }
             None => None,
-        }
-    })
-    .collect();
+        })
+        .collect();
 
     // Convert to HashSet to remove duplicates
     let other_discriminants: HashSet<_> = other_discriminants.into_iter().collect();
@@ -47,7 +46,9 @@ pub fn generate(dbs: &Database, kalima: String) -> Option<(VerseUngrouped, Vec<S
     let mut other_discriminants: Vec<_> = other_discriminants.into_iter().collect();
 
     // Add the selected verse back into the exercise
-    exercise.verses.insert(selected_verse_index, selected_verse.clone());
+    exercise
+        .verses
+        .insert(selected_verse_index, selected_verse.clone());
     // Ensure the list has a maximum of 2 items
     other_discriminants.truncate(2);
 
@@ -57,7 +58,7 @@ pub fn generate(dbs: &Database, kalima: String) -> Option<(VerseUngrouped, Vec<S
     }
 
     // Shuffle the other_discriminants vector
-    let mut rng = rand::thread_rng();
+    let mut rng = rand::rng();
     other_discriminants.shuffle(&mut rng);
 
     Some((selected_verse, other_discriminants))

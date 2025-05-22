@@ -1,7 +1,8 @@
-use crate::models::{Similar, ExerciseOutput, VerseUngrouped};
-use crate::models::Database;
-use crate::utils::extract_parts::extract_parts;
 use crate::db::chapter::chapter_name;
+use crate::models::Database;
+use crate::models::{ExerciseOutput, Similar, VerseUngrouped};
+use crate::utils::extract_parts::extract_parts;
+use rand::rng;
 
 pub fn get_solution(dbs: &Database, kalima: &String) -> Vec<ExerciseOutput> {
     let similar_db = &dbs.similar_db;
@@ -38,9 +39,9 @@ pub fn convert_to_exercise(dbs: &Database, similar: &Similar) -> ExerciseOutput 
 
         let chapter_name_result = chapter_name::get(dbs, verse.chapter_no as u8);
         let chapter_name = match chapter_name_result {
-                Ok(Some(name)) => name,
-                Ok(None) | Err(_) => String::from("No found"),
-            };
+            Ok(Some(name)) => name,
+            Ok(None) | Err(_) => String::from("No found"),
+        };
 
         all_verses.push(VerseUngrouped {
             // text: verse.text.clone(),
@@ -63,12 +64,11 @@ pub fn convert_to_exercise(dbs: &Database, similar: &Similar) -> ExerciseOutput 
             if let Ok(Some(data)) = similar_db.get(kalima) {
                 if let Ok(similar) = bincode::deserialize::<Similar>(&data) {
                     for verse in &similar.verses {
-
                         let chapter_name_result = chapter_name::get(dbs, verse.chapter_no as u8);
                         let chapter_name = match chapter_name_result {
-                                Ok(Some(name)) => name,
-                                Ok(None) | Err(_) => String::from("No found"),
-                            };
+                            Ok(Some(name)) => name,
+                            Ok(None) | Err(_) => String::from("No found"),
+                        };
 
                         let (pre, discriminant, post) = extract_parts(&verse.text);
                         all_verses.push(VerseUngrouped {
@@ -95,11 +95,11 @@ pub fn convert_to_exercise(dbs: &Database, similar: &Similar) -> ExerciseOutput 
 
 pub fn sort_exercises(solutions: &mut [ExerciseOutput]) {
     use rand::seq::SliceRandom;
-    use rand::thread_rng;
 
-    let mut rng = thread_rng();
+    let mut rng = rng();
 
     for exercise in solutions {
         exercise.verses.shuffle(&mut rng);
     }
 }
+
