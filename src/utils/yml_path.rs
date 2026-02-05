@@ -6,7 +6,7 @@ use crate::models::AppConfig;
 pub fn load_config(app_env: &str) -> AppConfig {
     let config_path = format!("config.{}.yml", app_env);
     let config_str = std::fs::read_to_string(&config_path)
-        .expect("Failed to read config file");
+        .unwrap_or_else(|_| panic!("Failed to read config file at: {}", config_path));
     serde_yaml::from_str(&config_str).expect("Failed to parse config file")
 }
 
@@ -25,6 +25,8 @@ pub fn get_data_folder_path() -> PathBuf {
     } else {
         path.push(config.debian_path);
     }
+
+    println!("Resolved data folder path: {:?}", path);
 
     path
 }
