@@ -1,8 +1,7 @@
 module.exports = {
   apps: [{
     name: "similar-service",
-    cwd: "/home/similar/production/similar",
-    script: "./similar",
+    script: "./target/release/similar",
     watch: false,
     autorestart: true,
     max_restarts: 10,
