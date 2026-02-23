@@ -73,7 +73,11 @@ sudo -u "$APP_USER" HOME=/var/www bash -c "
   source /var/www/.cargo/env
   cd $APP_DIR
   cargo build --release
-  \$(which pm2) start ecosystem.config.js
+  if [ -f ecosystem.config.js ]; then
+    \$(which pm2) start ecosystem.config.js
+  else
+    echo \"[!] ecosystem.config.js not found in \$APP_DIR yet. You may need to git push it first!\"
+  fi
   \$(which pm2) save
 "
 log "similar-sled compiled and started on PM2"
@@ -126,7 +130,7 @@ step "5/5 — SSL with Certbot"
 
 read -p "Have you configured DNS A records for $DOMAIN? (y/n) " dns_ready
 
-if [ "\$dns_ready" != "y" ]; then
+if [ "\$dns_ready" != "y" ] && [ "\$dns_ready" != "Y" ]; then
   warn "Skipping certbot. Run this later when DNS is ready:"
   warn "  sudo certbot --nginx -d $DOMAIN --non-interactive --agree-tos -m your@email.com"
 else
