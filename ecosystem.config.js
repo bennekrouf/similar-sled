@@ -13,6 +13,8 @@ module.exports = {
     env: {
       APP_ENV: 'production',
       PORT: 8000
-    }
+    },
+    error_file: './logs/similar-error.log',
+    out_file: './logs/similar-out.log'
   }]
 };
